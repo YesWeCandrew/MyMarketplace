@@ -11,6 +11,14 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * This activity creates a login screen for the user
+ * Only valid users may proceed to the marketplace
+ * Author: Vincent Tanumihardja
+ * References:
+ * - Code Structure: Week 7 Lecture Login Activity
+ * - Background image: https://wallpaperaccess.com/android-gradient
+ */
 public class LoginActivity extends AppCompatActivity {
 
     private EditText et_username;
@@ -27,13 +35,13 @@ public class LoginActivity extends AppCompatActivity {
         // setting the contents of login
         setContentView(R.layout.activity_login);
 
-        // get the views by id
+        // get the views by their id
         EditText et_username = (EditText) findViewById(R.id.username);
         EditText et_password = (EditText) findViewById(R.id.password);
         Button button_login = (Button) findViewById(R.id.button);
         button_login.setOnClickListener(buttonListener);
 
-        Log.i(LoginActivity.class.getName(), "created");
+        Log.i(LoginActivity.class.getName(), "created.");
     }
 
     /**
@@ -50,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
         et_username.setText("");
         et_password.setText("");
 
-        Log.i(LoginActivity.class.getName(), "started");
+        Log.i(LoginActivity.class.getName(), "started.");
     }
 
     /**
@@ -59,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Log.i(LoginActivity.class.getName(), "resumed");
+        Log.i(LoginActivity.class.getName(), "resumed.");
     }
 
     /**
@@ -68,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        Log.i(LoginActivity.class.getName(), "restarted");
+        Log.i(LoginActivity.class.getName(), "restarted.");
     }
 
     /**
@@ -77,7 +85,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        Log.i(LoginActivity.class.getName(), "paused");
+        Log.i(LoginActivity.class.getName(), "paused.");
     }
 
     /**
@@ -86,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        Log.i(LoginActivity.class.getName(), "stopped");
+        Log.i(LoginActivity.class.getName(), "stopped.");
     }
 
     /**
@@ -95,11 +103,11 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.i(LoginActivity.class.getName(), "destroyed");
+        Log.i(LoginActivity.class.getName(), "destroyed.");
     }
 
     /**
-     * Creates a button click listener and check whther login credentials are valid
+     * Creates a button click listener and check whether login credentials are valid
      */
     private View.OnClickListener buttonListener = new View.OnClickListener() {
         @Override
@@ -125,13 +133,13 @@ public class LoginActivity extends AppCompatActivity {
             // get the resources object
             Resources resources = getResources();
 
-            // check the validity of the credentials which are comp2100 and comp6442 users. Show a warning message if is invalid.
+            // check the validity of the credentials of either comp2100 or comp6442 user. Show a warning message if it is invalid.
             if (!checkUserCredential1(username, password) && !checkUserCredential2(username,password)) {
                 showWarning(resources.getString(R.string.warning_invalid_credential));
                 return;
             }
 
-            // start a new activity which is searching through the marketplace when the credentials are valid
+            // start a new activity, which is searching through the marketplace, when the credentials are valid.
             Intent intent = new Intent(LoginActivity.this, SearchActivity.class);
             startActivity(intent);
         }
@@ -154,7 +162,7 @@ public class LoginActivity extends AppCompatActivity {
      * Check if username and password matches username: comp2100@anu.au with password: comp2100
      * @param username
      * @param password
-     * @return
+     * @return true or false
      */
     private boolean checkUserCredential1(String username, String password) {
         username = username.trim();
@@ -166,10 +174,11 @@ public class LoginActivity extends AppCompatActivity {
      * Check if username and password matches username: comp6442@anu.au with password: comp6442
      * @param username
      * @param password
-     * @return
+     * @return true or false
      */
     private boolean checkUserCredential2(String username, String password) {
-        username = username.trim().toLowerCase();
+        username = username.trim();
+        password = password.trim();
         return username.equals("comp6442@anu.au") && password.equals("comp6442");
     }
 
@@ -186,7 +195,7 @@ public class LoginActivity extends AppCompatActivity {
      * Check whether the string inputs are valid and return the first input that is invalid
      * @param username
      * @param password
-     * @return a WarningResult
+     * @return a WarningResult when input is empty
      */
     private WarningResult checkInputsAndGetWarning(String username,  String password) {
 
