@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">My Marketplace</string>
+    <string name="title_activity_login">My Marketplace Login</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="warning_invalid_credential">Invalid username/password</string>
+    <string name="warning_empty_credential">%1$s cannot be empty.</string>
+</resources>
