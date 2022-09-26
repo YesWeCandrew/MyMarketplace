@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ga-22s2-comp2100-6442.iml" filepath="$PROJECT_DIR$/ga-22s2-comp2100-6442.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/My_Marketplace.iml" filepath="$PROJECT_DIR$/.idea/modules/My_Marketplace.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/My_Marketplace.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/My_Marketplace.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/My_Marketplace.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/My_Marketplace.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/My_Marketplace.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/My_Marketplace.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/My_Marketplace.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/My_Marketplace.app.unitTest.iml" />
     </modules>
   </component>
 </project>
