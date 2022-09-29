@@ -54,7 +54,7 @@ Choose database
 The following dictates who will be scribe in this and the next meeting.
 | Name |
 | :---: |
-| Long Vu |
 | Andrew Howes |
 | Matthew Cawley |
 | Vincent T |
+| Long Vu |
