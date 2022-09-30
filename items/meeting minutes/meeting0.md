@@ -15,14 +15,13 @@ The aim of this meeting is to set up a project schedule to keep track of the pro
 | :--- | ---: |
 | 1 | Assign roles |
 | 2 | Create project schedule |
-| 3 | [item name] |
-| 4 | [item name] |
+
 
 ## Meeting Minutes
 - The meeting started with the group collaboratively looking through the assignment specifications and discussing the features of the application.
     - The group agreed that the first aim should be to start implementing just basic features of the app. Once those features are implemented, then additional features will be added on.
     - Tasks delegation for a functional baseline app:
-        - Login - Matthew
+        - Login - Vincent T
         - Items import and streaming to Java objects - Andrew
         - Views of all items (UI) - Long
         - Search complete - Matthew
@@ -55,7 +54,7 @@ Choose database
 The following dictates who will be scribe in this and the next meeting.
 | Name |
 | :---: |
-| Long Vu |
 | Andrew Howes |
 | Matthew Cawley |
 | Vincent T |
+| Long Vu |
