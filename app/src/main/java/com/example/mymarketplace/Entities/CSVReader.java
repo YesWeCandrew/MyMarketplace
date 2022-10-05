@@ -53,6 +53,9 @@ public class CSVReader {
                 }
         }
 
+        // Removing headers
+        csvList.remove(0);
+
         return csvList;
     }
 

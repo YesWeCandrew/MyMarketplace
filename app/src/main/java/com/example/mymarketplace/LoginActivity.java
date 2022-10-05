@@ -167,7 +167,7 @@ public class LoginActivity extends AppCompatActivity {
     private boolean checkUserCredential1(String username, String password) {
         username = username.trim();
         password = password.trim();
-        return username.equals("comp2100@anu.au") && password.equals("comp2100");
+        return username.equals("comp2100@anu.edu.au") && password.equals("comp2100");
     }
 
     /**

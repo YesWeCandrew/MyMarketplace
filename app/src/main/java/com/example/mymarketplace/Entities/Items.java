@@ -45,7 +45,7 @@ public class Items {
                     row.get(2),
                     Integer.parseInt(row.get(3)),
                     row.get(4),
-                    Integer.parseInt(row.get(5)),
+                    Double.parseDouble(row.get(5)),
                     row.get(6),
                     row.get(7),
                     row.get(8),
