@@ -140,7 +140,7 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             // start a new activity, which is searching through the marketplace, when the credentials are valid.
-            Intent intent = new Intent(LoginActivity.this, SearchActivity.class);
+            Intent intent = new Intent(LoginActivity.this, ItemsViewActivity.class);
             startActivity(intent);
         }
     };

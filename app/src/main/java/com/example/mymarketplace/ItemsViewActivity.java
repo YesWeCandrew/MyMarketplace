@@ -10,6 +10,7 @@ import com.example.mymarketplace.Entities.Items;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 public class ItemsViewActivity extends AppCompatActivity {
 
@@ -17,9 +18,6 @@ public class ItemsViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_items_view);
-
-        // Creating items.
-        Items items = Items.getInstance();
 
         AssetManager am = this.getAssets();
         try {
@@ -29,6 +27,10 @@ public class ItemsViewActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        System.out.println(items);
+        // The array list to display
+        ArrayList<Items.Item> items = Items.getItems();
+
+        // demo code to get the productName of the first item.
+        // items.get(0).productName
     }
 }
