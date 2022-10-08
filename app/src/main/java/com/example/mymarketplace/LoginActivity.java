@@ -167,7 +167,7 @@ public class LoginActivity extends AppCompatActivity {
     private boolean checkUserCredential1(String username, String password) {
         username = username.trim();
         password = password.trim();
-        return username.equals("comp2100@anu.edu.au") && password.equals("comp2100");
+        return username.equals("comp2100@anu.au") && password.equals("comp2100");
     }
 
     /**
@@ -207,7 +207,7 @@ public class LoginActivity extends AppCompatActivity {
             warning = resources.getString(R.string.warning_empty_credential, resources.getString(R.string.username));
             isInvalid = true;
         }
-        if (isEmpty(password)) {
+        else if (isEmpty(password)) {
             warning = resources.getString(R.string.warning_empty_credential, resources.getString(R.string.password));
             isInvalid = true;
         }
