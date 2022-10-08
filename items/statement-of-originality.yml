@@ -16,10 +16,10 @@ collaboration:
 
 # add as many "url+licence+comment" entries as necessary
 # (or remove it altogether if you haven't used any external code)
-code:
-  - comment:
-    url:
-    licence:
+code: CSVReader
+  - comment: Creates a list of list from an input stream of a CSV.
+    url: http://www.java2s.com/example/java-utility-method/csv-file-parse/parsecsv-inputstream-csvinput-3765b.html
+    licence: Open Source License (GNU)
 
 
 # add as many "url+licence+comment" entries as necessary

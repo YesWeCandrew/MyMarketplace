@@ -1,0 +1,11 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# Recommended ignored files for Android Studio
+*.iml
+.idea
+.gradle
+build/
+.navigation
+captures/
+output.json
