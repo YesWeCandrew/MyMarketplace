@@ -19,6 +19,7 @@ public class AVLTree {
     }
 
     // gets the height of the tree
+    // height is -1 to distinguish root node and no node
     int height(Node node) {
         if (node == null) {
             return -1;
@@ -56,7 +57,7 @@ public class AVLTree {
         return r;
     }
 
-    // adjust the nodes so that the tree is balance
+    // adjust the nodes so that the tree is balance by rotating the tree
     Node balance(Node node) {
         updateHeight(node);
         int balanceFactor = getBalanceFactor(node);
@@ -86,11 +87,14 @@ public class AVLTree {
     Node insert(Node node, int price, ArrayList<String> others) {
         if (node == null) {
             return new Node(price, others);
-        } else if (node.price > price) {
+        }
+        else if (node.price > price) {
             node.left = insert(node.left, price, others);
-        } else if (node.price < price) {
+        }
+        else if (node.price < price) {
             node.right = insert(node.right, price, others);
-        } else {
+        }
+        else {
             insertDuplicates(node,others);
         }
         return balance(node);
@@ -99,5 +103,25 @@ public class AVLTree {
     // insert the values to the node with the same price
     void insertDuplicates (Node node, ArrayList<String> others) {
         node.others.add(others);
+    }
+
+    // return a list of items with the searched price, null if there is none
+    ArrayList<ArrayList<String>> search (int price) {
+        Node current = root;
+        while (current != null) {
+            if (current.price == price) {
+                break;
+            }
+            if (current.price < price){
+                current = current.right;
+            }
+            else {
+                current = current.left;
+            }
+        }
+        if (current.price != price) {
+            return null;
+        }
+        return current.others;
     }
 }
