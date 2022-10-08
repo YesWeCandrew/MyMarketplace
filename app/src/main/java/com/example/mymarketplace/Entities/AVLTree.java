@@ -106,7 +106,7 @@ public class AVLTree {
     }
 
     // return a list of items with the searched price, null if there is none
-    ArrayList<ArrayList<String>> search (int price) {
+    ArrayList<ArrayList<String>> search(int price) {
         Node current = root;
         while (current != null) {
             if (current.price == price) {
