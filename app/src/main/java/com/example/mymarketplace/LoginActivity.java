@@ -1,6 +1,7 @@
 package com.example.mymarketplace;
 
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,10 +12,16 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.mymarketplace.Entities.CSVReader;
+import com.example.mymarketplace.Entities.Users;
+import com.example.mymarketplace.Helpers.Hasher;
+
+import java.io.IOException;
+import java.io.InputStream;
 /**
  * This activity creates a login screen for the user
  * Only valid users may proceed to the marketplace
- * Author: Vincent Tanumihardja
+ * @author: Vincent Tanumihardja
  * References:
  * - Code Structure: Week 7 Lecture Login Activity
  * - Background image: https://wallpaperaccess.com/android-gradient
@@ -42,6 +49,15 @@ public class LoginActivity extends AppCompatActivity {
         button_login.setOnClickListener(buttonListener);
 
         Log.i(LoginActivity.class.getName(), "created.");
+
+        // Loads all users
+        AssetManager am = this.getAssets();
+        try {
+            InputStream is = am.open("Users.csv");
+            Users.usersFromCSV(CSVReader.parseCsv(is));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -117,10 +133,6 @@ public class LoginActivity extends AppCompatActivity {
             String username = et_username.getText().toString();
             String password = et_password.getText().toString();
 
-            // print logs
-            Log.i("Username:", username);
-            Log.i("Password:", password);
-
             // check the validity of the inputs
             WarningResult warningResult = checkInputsAndGetWarning(username, password);
 
@@ -134,13 +146,16 @@ public class LoginActivity extends AppCompatActivity {
             Resources resources = getResources();
 
             // check the validity of the credentials of either comp2100 or comp6442 user. Show a warning message if it is invalid.
-            if (!checkUserCredential1(username, password) && !checkUserCredential2(username,password)) {
+            Integer userID = Users.userLoginValid(username,Hasher.hash(password));
+
+            if (userID == null) {
                 showWarning(resources.getString(R.string.warning_invalid_credential));
                 return;
             }
 
             // start a new activity, which is searching through the marketplace, when the credentials are valid.
             Intent intent = new Intent(LoginActivity.this, ItemsViewActivity.class);
+            intent.putExtra("userID",userID);
             startActivity(intent);
         }
     };
@@ -156,30 +171,6 @@ public class LoginActivity extends AppCompatActivity {
             this.isInvalid = isInvalid;
             this.text = text;
         }
-    }
-
-    /**
-     * Check if username and password matches username: comp2100@anu.au with password: comp2100
-     * @param username
-     * @param password
-     * @return true or false
-     */
-    private boolean checkUserCredential1(String username, String password) {
-        username = username.trim();
-        password = password.trim();
-        return username.equals("comp2100@anu.edu.au") && password.equals("comp2100");
-    }
-
-    /**
-     * Check if username and password matches username: comp6442@anu.au with password: comp6442
-     * @param username
-     * @param password
-     * @return true or false
-     */
-    private boolean checkUserCredential2(String username, String password) {
-        username = username.trim();
-        password = password.trim();
-        return username.equals("comp6442@anu.au") && password.equals("comp6442");
     }
 
     /**

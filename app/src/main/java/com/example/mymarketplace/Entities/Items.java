@@ -5,8 +5,10 @@ import java.util.List;
 
 public class Items {
 
+    // Singleton instance of Items
     private static Items instance;
-    private ArrayList<Item> items;
+
+    private final ArrayList<Item> items;
 
 
     /**
@@ -15,7 +17,7 @@ public class Items {
      * @author Andrew Howes
      */
     private Items() {
-        items = new ArrayList<Item>();
+        items = new ArrayList<>();
     }
 
     /**
@@ -45,17 +47,16 @@ public class Items {
                     row.get(2),
                     Integer.parseInt(row.get(3)),
                     row.get(4),
-                    Double.parseDouble(row.get(5)),
+                    Integer.parseInt(row.get(5)),
                     row.get(6),
                     row.get(7),
-                    row.get(8),
-                    row.get(9)
+                    row.get(8)
             ));
         }
     }
 
     /**
-     * @return the singleton instance's LinkedList of Item.
+     * @return the singleton instance's array list of Item.
      *
      * @author Andrew Howes
      */
@@ -67,25 +68,52 @@ public class Items {
      * Adds an item to the singleton's item list
      * @param item the item to add
      * @return if the item was successfully added
+     * @author Andrew Howes
      */
     public static boolean addItem(Item item) {
         return getInstance().items.add(item);
     }
 
+    /**
+     * Reads the currentStock for the item from the Stock singleton and stores it within the class
+     *
+     * @author Andrew Howes
+     */
+    public static void updateQuantity() {
+        for (Item item : getItems()) {
+            item.quantity = Stocks.getCurrentStock(item.itemID);
+        }
+    }
+
+    /**
+     * The item class. Every item is represented as an instance of this object.
+     */
     public static class Item {
         public int itemID;
         public String productName;
         public String sellerName;
         public int sellerID;
         public String color;
-        public double price;
+        public int price;
         public String subcategory;
         public String category;
         public String description;
-        public String image;
         public int quantity;
 
-        public Item(int itemID, String productName, String sellerName, int sellerID, String color, double price, String subcategory, String category, String description, String image) {
+        /**
+         * The internal constructor for an item
+         * @param itemID the itemsID
+         * @param productName the name of the product
+         * @param sellerName the name of the seller
+         * @param sellerID the sellers ID
+         * @param color the colour of the product
+         * @param price the price of the product
+         * @param subcategory the subcategory of the product
+         * @param category the category of the product
+         * @param description the description of the product
+         * @author Andrew Howes
+         */
+        private Item(int itemID, String productName, String sellerName, int sellerID, String color, int price, String subcategory, String category, String description) {
             this.itemID = itemID;
             this.productName = productName;
             this.sellerName = sellerName;
@@ -95,18 +123,7 @@ public class Items {
             this.subcategory = subcategory;
             this.category = category;
             this.description = description;
-            this.image = image;
-            setQuantity();
-        }
-
-        /**
-         * Will read the relevant entries in Stock and return the current quantity, but for now
-         * Just returns 10
-         *
-         * @Author Andrew Howes
-         */
-        public void setQuantity() {
-            this.quantity = 10;
+            this.quantity = 0;
         }
     }
 }
