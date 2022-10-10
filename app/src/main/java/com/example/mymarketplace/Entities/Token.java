@@ -1,14 +1,16 @@
 package com.example.mymarketplace.Entities;
 
 import java.util.Objects;
+
+/** The token class that defines what types
+ *  of data the user can search for, and is
+ *  used by the tokenizer and the searchActivity
+ * @author: Matthew Cawley
+ */
 public class Token {
     // The following enum defines different types of tokens. Example of accessing these: Token.Type.INT
     public enum Type {PNAME, SNAME, CAT, SUBCAT, PRICEMAX, PRICEMIN}
 
-    /**
-     * The following exception should be thrown if a tokenizer attempts to tokenize something that is not of one
-     * of the types of tokens.
-     */
     public static class IllegalTokenException extends IllegalArgumentException {
         public IllegalTokenException(String errorMessage) {
             super(errorMessage);
@@ -30,22 +32,5 @@ public class Token {
 
     public Type getType() {
         return type;
-    }
-
-    @Override
-    public String toString() {
-        return "";
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        if (this == other) return true; // Same hashcode.
-        if (!(other instanceof Token)) return false; // Null or not the same type.
-        return this.type == ((Token) other).getType() && this.token.equals(((Token) other).getToken()); // Values are the same.
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(token, type);
     }
 }

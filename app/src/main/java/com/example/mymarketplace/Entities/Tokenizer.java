@@ -2,6 +2,11 @@ package com.example.mymarketplace.Entities;
 
 import java.util.ArrayList;
 
+/** This class takes a string search input and
+ *  turn it into a list of tokens
+ *  @author: Matthew Cawley
+ */
+
 public class Tokenizer {
     private String buffer;          // String to be transformed into tokens each time next() is called.
     public ArrayList<Token> tokens;
@@ -61,8 +66,6 @@ public class Tokenizer {
         tokens.add(currentToken);
         // Remove the extracted token from buffer
         buffer = buffer.substring(tokenLength);
-        if(buffer.length() > 0){
-            next();
-        }
+        next();
     }
 }
