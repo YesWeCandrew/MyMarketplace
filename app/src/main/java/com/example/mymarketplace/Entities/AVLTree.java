@@ -1,17 +1,15 @@
 package com.example.mymarketplace.Entities;
 
-import java.util.ArrayList;
-
 /**
  * This class creates a AVL Tree based on the price of the item listed
  * Items with similar price will be stored in the same node
- * Author: Vincent Tanumihardja
+ * @author: Vincent Tanumihardja, Matthew Cawley
  * References:
  * - Code Structure: https://www.baeldung.com/java-avl-trees
  */
 public class AVLTree {
 
-    private Node root;
+    public static Node root;
 
     // updates the height of the tree
     void updateHeight(Node node) {
@@ -84,44 +82,37 @@ public class AVLTree {
 
     // insert a new node if there is no matching price, insert on the left of the node if price is lower,
     // insert on right of the node if price is higher and only insert the attributes when price is similar
-    Node insert(Node node, int price, ArrayList<String> others) {
+    // You are supposed to call this function with the root node originally, it will recurse down the tree
+    Node insert(Node node, Items.Item item) {
         if (node == null) {
-            return new Node(price, others);
+            return new Node(item);
         }
-        else if (node.price > price) {
-            node.left = insert(node.left, price, others);
+        else if (node.getProductName().compareTo(item.productName) < 0) {
+            node.left = insert(node.left, item);
         }
-        else if (node.price < price) {
-            node.right = insert(node.right, price, others);
-        }
-        else {
-            insertDuplicates(node,others);
+        else if (node.getProductName().compareTo(item.productName) > 0) {
+            node.right = insert(node.right, item);
         }
         return balance(node);
     }
 
-    // insert the values to the node with the same price
-    void insertDuplicates (Node node, ArrayList<String> others) {
-        node.others.add(others);
-    }
-
-    // return a list of items with the searched price, null if there is none
-    ArrayList<ArrayList<String>> search(int price) {
+    // return a list of items with the searched name, null if there is none
+    public static Node search(String name) {
         Node current = root;
         while (current != null) {
-            if (current.price == price) {
+            if (current.item.productName.equals(name)) {
                 break;
             }
-            if (current.price < price){
+            if (current.getProductName().compareTo(name) < 0){
                 current = current.right;
             }
-            else {
+            else if (current.getProductName().compareTo(name) > 0){
                 current = current.left;
             }
         }
-        if (current.price != price) {
+        if (!current.item.productName.equals(name)) {
             return null;
         }
-        return current.others;
+        return current;
     }
 }

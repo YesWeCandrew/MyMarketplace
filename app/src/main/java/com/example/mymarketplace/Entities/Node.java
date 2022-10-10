@@ -1,20 +1,20 @@
 package com.example.mymarketplace.Entities;
 
-import java.util.ArrayList;
-
 /**
  * This class creates a node of an AVL Tree
- * Author: Vincent Tanumihardja
+ * @author: Vincent Tanumihardja, Matthew Cawley
  */
 public class Node {
-    int price;
-    int height;
-    ArrayList<ArrayList<String>> others;
     Node left;
     Node right;
+    int height;
+    Items.Item item;
 
-    public Node(int price,ArrayList<String> others) {
-        this.price = price;
-        this.others.add(others);
+    public Node(Items.Item item) {
+        this.item = item;
     }
+
+    public String getProductName(){return item.productName;}
+
+    public Items.Item getItem(){return item;}
 }

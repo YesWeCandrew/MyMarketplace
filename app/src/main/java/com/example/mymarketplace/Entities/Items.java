@@ -70,9 +70,7 @@ public class Items {
      * @return if the item was successfully added
      * @author Andrew Howes
      */
-    public static boolean addItem(Item item) {
-        return getInstance().items.add(item);
-    }
+    public static boolean addItem(Item item) {return getInstance().items.add(item);}
 
     /**
      * Reads the currentStock for the item from the Stock singleton and stores it within the class
