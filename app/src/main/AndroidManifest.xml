@@ -12,8 +12,11 @@
         android:theme="@style/Theme.MyMarketplace"
         tools:targetApi="31">
         <activity
-            android:name=".ItemsViewActivity"
+            android:name=".ItemInfo"
             android:exported="false" />
+        <activity
+            android:name=".ItemsViewActivity"
+            android:exported="true"></activity>
         <activity
             android:name=".SearchActivity"
             android:exported="false">
