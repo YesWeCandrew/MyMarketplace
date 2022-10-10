@@ -5,4 +5,7 @@
     <string name="password">Password</string>
     <string name="warning_invalid_credential">Invalid username/password</string>
     <string name="warning_empty_credential">%1$s cannot be empty.</string>
+    <string name="listViewText">Hi</string>
+    <string name="welcomeToMarket">Welcome to MyMarketplace</string>
+    <string name="singleItem">Display Single Item Info</string>
 </resources>
