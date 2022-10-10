@@ -174,6 +174,30 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     /**
+     * Check if username and password matches username: comp2100@anu.au with password: comp2100
+     * @param username
+     * @param password
+     * @return true or false
+     */
+    private boolean checkUserCredential1(String username, String password) {
+        username = username.trim();
+        password = password.trim();
+        return username.equals("comp2100@anu.au") && password.equals("comp2100");
+    }
+
+    /**
+     * Check if username and password matches username: comp6442@anu.au with password: comp6442
+     * @param username
+     * @param password
+     * @return true or false
+     */
+    private boolean checkUserCredential2(String username, String password) {
+        username = username.trim();
+        password = password.trim();
+        return username.equals("comp6442@anu.au") && password.equals("comp6442");
+    }
+
+    /**
      * Show a toast warning based on the given input text
      * @param text
      */
@@ -198,7 +222,7 @@ public class LoginActivity extends AppCompatActivity {
             warning = resources.getString(R.string.warning_empty_credential, resources.getString(R.string.username));
             isInvalid = true;
         }
-        if (isEmpty(password)) {
+        else if (isEmpty(password)) {
             warning = resources.getString(R.string.warning_empty_credential, resources.getString(R.string.password));
             isInvalid = true;
         }
