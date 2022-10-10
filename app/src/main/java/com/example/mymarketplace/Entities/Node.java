@@ -7,14 +7,22 @@ import java.util.ArrayList;
  * Author: Vincent Tanumihardja
  */
 public class Node {
+    String productName;
+    String sellerName;
+    Category category;
+    Subcategory subcategory;
     int price;
     int height;
-    ArrayList<ArrayList<String>> others;
     Node left;
     Node right;
 
-    public Node(int price,ArrayList<String> others) {
+    public Node(String pname, String sname, Category cat, Subcategory subcat, int price) {
+        this.productName = pname;
+        this.sellerName = sname;
+        this.category = cat;
+        this.subcategory = subcat;
         this.price = price;
-        this.others.add(others);
     }
+
+    public String getProductName(){return productName;}
 }

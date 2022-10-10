@@ -84,27 +84,20 @@ public class AVLTree {
 
     // insert a new node if there is no matching price, insert on the left of the node if price is lower,
     // insert on right of the node if price is higher and only insert the attributes when price is similar
-    Node insert(Node node, int price, ArrayList<String> others) {
+    // You are supposed to call this function with the root node originally, it will recurse down the tree
+    Node insert(Node node, String pname, String sname, Category cat, Subcategory subcat, int price) {
         if (node == null) {
-            return new Node(price, others);
+            return new Node(pname, sname, cat, subcat, price);
         }
-        else if (node.price > price) {
-            node.left = insert(node.left, price, others);
+        else if (node.getProductName().compareTo(pname) < 0) {
+            node.left = insert(node.left, pname, sname, cat, subcat, price);
         }
-        else if (node.price < price) {
-            node.right = insert(node.right, price, others);
-        }
-        else {
-            insertDuplicates(node,others);
+        else if (node.getProductName().compareTo(pname) > 0) {
+            node.right = insert(node.right, pname, sname, cat, subcat, price);
         }
         return balance(node);
     }
-
-    // insert the values to the node with the same price
-    void insertDuplicates (Node node, ArrayList<String> others) {
-        node.others.add(others);
-    }
-
+/*
     // return a list of items with the searched price, null if there is none
     ArrayList<ArrayList<String>> search(int price) {
         Node current = root;
@@ -123,5 +116,5 @@ public class AVLTree {
             return null;
         }
         return current.others;
-    }
+    } */
 }
