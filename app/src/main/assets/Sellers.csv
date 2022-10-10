@@ -1,7 +1,7 @@
 SellerID,Name,Address,Suburb,Postcode,State,Country,Latitude,Longitude
-1,Reverto,19 Barrier St,Fyshwick,2609,ACT,Australia,-35.32829,149.17065
-2,Smithington Cress,22 Pirie St,Fyshwick,2609,ACT,Australia,-35.32571,149.17064
-3,Northwind Traders,18 Meredith St,Queanbeyan,2620,NSW,Australia,-35.35186,149.22734
-4,Adventure Works,6-8 Huddart Ct,Micthell,2911,ACT,Australia,-35.21599,149.13961
-5,Fabrikam,9 Yallourn St,Fyshwick,2609,ACT,Australia,-35.33267,149.16942
-6,A. Datum,24 Southbar Rd,Karabar,2620,NSW,Australia,-35.37195,149.23072
+0,Reverto,19 Barrier St,Fyshwick,2609,ACT,Australia,-35.32829,149.17065
+1,Smithington Cress,22 Pirie St,Fyshwick,2609,ACT,Australia,-35.32571,149.17064
+2,Northwind Traders,18 Meredith St,Queanbeyan,2620,NSW,Australia,-35.35186,149.22734
+3,Adventure Works,6-8 Huddart Ct,Micthell,2911,ACT,Australia,-35.21599,149.13961
+4,Fabrikam,9 Yallourn St,Fyshwick,2609,ACT,Australia,-35.33267,149.16942
+5,A. Datum,24 Southbar Rd,Karabar,2620,NSW,Australia,-35.37195,149.23072
