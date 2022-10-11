@@ -30,7 +30,7 @@ public class ItemsViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_items_view);
 
-        int userID = getIntent().getIntExtra("userID",100);
+        Users.User user = getIntent().getSerializableExtra("user", Users.User.class);
 
         // Load all assets to the correct classes
         AssetManager am = this.getAssets();
@@ -57,7 +57,7 @@ public class ItemsViewActivity extends AppCompatActivity {
          * Display User's name
          */
 
-        ((TextView)findViewById(R.id.name)).setText(Users.getUsers().get(userID).givenName);
+        ((TextView)findViewById(R.id.name)).setText(user.givenName);
 
 
 
@@ -83,32 +83,12 @@ public class ItemsViewActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(ItemsViewActivity.this, ItemInfo.class);
+
+                //TODO: LONG to change below and array list above so when clicked it passes the item
+                // in the intent ie. replace Items.getItems().get(0) with code that passes the item clicked)
+                intent.putExtra("item",Items.getItems().get(0));
                 startActivity(intent);
             }
         });
-
-
-
-
-
-//        Toast toast = Toast.makeText(getApplicationContext(), "Welcome, " + Users.getUsers().get(userID).givenName, Toast.LENGTH_LONG);
-//        toast.show();
-//
-//        toast = Toast.makeText(
-//                getApplicationContext(),
-//                "First item:" + item0.productName + " has quantity " + item0.quantity,
-//                Toast.LENGTH_LONG);
-//        toast.show();
-//
-//        // UPDATING QUANTITY WITH THE NEXT BATCH OF DATA. WE CAN CALL THIS WHEN SOMEONE HITS A REFRESH BUTTON
-//        Stocks.addBatch();
-//
-//        toast = Toast.makeText(
-//                getApplicationContext(),
-//                "After update, first item has quantity " + item0.quantity,
-//                Toast.LENGTH_LONG);
-//        toast.show();
-
-        
     }
 }

@@ -1,5 +1,6 @@
 package com.example.mymarketplace.Entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,7 +78,7 @@ public class Sellers {
     /**
      * The seller class. Every seller is represented as an instance of this object.
      */
-    public static class Seller {
+    public static class Seller implements Serializable {
         public int sellerID;
         public String name;
         public String address;

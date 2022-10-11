@@ -1,5 +1,6 @@
 package com.example.mymarketplace.Entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,7 +87,7 @@ public class Items {
     /**
      * The item class. Every item is represented as an instance of this object.
      */
-    public static class Item {
+    public static class Item implements Serializable {
         public int itemID;
         public String productName;
         public String sellerName;
@@ -97,6 +98,8 @@ public class Items {
         public String category;
         public String description;
         public int quantity;
+        public double averageRating;
+        public String photoDirectory;
 
         /**
          * The internal constructor for an item
@@ -121,7 +124,9 @@ public class Items {
             this.subcategory = subcategory;
             this.category = category;
             this.description = description;
-            this.quantity = 0;
+            this.quantity = 0; // Quantity equal to zero at initialisation, updated by updateQuantity().
+            this.averageRating = 0; // Average rating set to zero, will be updated by updateRating()
+            this.photoDirectory = "item" + itemID;
         }
     }
 }

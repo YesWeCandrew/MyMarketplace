@@ -146,16 +146,16 @@ public class LoginActivity extends AppCompatActivity {
             Resources resources = getResources();
 
             // check the validity of the credentials of either comp2100 or comp6442 user. Show a warning message if it is invalid.
-            Integer userID = Users.userLoginValid(username,Hasher.hash(password));
+            Users.User user = Users.userLoginValid(username,Hasher.hash(password));
 
-            if (userID == null) {
+            if (user == null) {
                 showWarning(resources.getString(R.string.warning_invalid_credential));
                 return;
             }
 
             // start a new activity, which is searching through the marketplace, when the credentials are valid.
             Intent intent = new Intent(LoginActivity.this, ItemsViewActivity.class);
-            intent.putExtra("userID",userID);
+            intent.putExtra("user",user);
             startActivity(intent);
         }
     };
