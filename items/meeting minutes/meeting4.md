@@ -1,7 +1,7 @@
 # HD Believers
 
 
-## Team Meeting 2 - Week 10 - 11 October 2022 (1:30pm-2:00pm time)
+## Team Meeting 4 - Week 10 - 11 October 2022 (1:30pm-2:00pm time)
 **Absent: None**
 <br>
 **Lead/scribe: Vincent Tanumihardja (u7145408))**
@@ -20,7 +20,7 @@ The aim of this meeting is to complete a quick catch-up on the development activ
 ## Meeting Minutes
 - The meeting started by reviewing the week 9 development schedule. Most tasks were completed in time. The basic application is working as intended.
 - Andrew began by asking for the list of additional features that the team wants to implement.
-- Vincent and Matthew give suggestion on the list of additional features to implement until conclusion is reached.
+- Vincent, Long and Matthew give suggestion on the list of additional features to implement until conclusion is reached.
 - The list of additional features are: 
   - Adding items into a cart (micro-interaction)
   - Adding images to user profile
