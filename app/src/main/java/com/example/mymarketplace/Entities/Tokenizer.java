@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /** This class takes a string search input and
  *  turn it into a list of tokens
- *  @author: Matthew Cawley
+ *  @author Matthew Cawley
  */
 
 public class Tokenizer {

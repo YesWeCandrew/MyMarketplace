@@ -5,7 +5,7 @@ import java.util.Objects;
 /** The token class that defines what types
  *  of data the user can search for, and is
  *  used by the tokenizer and the searchActivity
- * @author: Matthew Cawley
+ * @author Matthew Cawley
  */
 public class Token {
     // The following enum defines different types of tokens. Example of accessing these: Token.Type.INT
