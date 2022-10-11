@@ -1,28 +1,35 @@
 # HD Believers
 
 
-## Team Meeting 2 - Week 8 - 27 September 2022 (1:30pm-2:00pm time)
+## Team Meeting 2 - Week 10 - 11 October 2022 (1:30pm-2:00pm time)
 **Absent: None**
 <br>
-**Lead/scribe: Andrew Howes (u1058852)**
+**Lead/scribe: Vincent Tanumihardja (u7145408))**
 
 ## Agreed Procedure
-The aim of this meeting is to complete a quick catch-up on the development activities to date, to see our progress to the week 8 goals
+The aim of this meeting is to complete a quick catch-up on the development activities to date, to see our progress compared to the week 10 goals. In addition, in this meeting, the team will decide on what additional features to implement.
 
 
 ## Agenda Items
 | Number | Item |
 | :--- | ---: |
 | 1 | Review progress |
-| 2 | Determine if changes to schedule are necessary |
+| 2 | Determine the additional features to implement |
 
 
 ## Meeting Minutes
-- The meeting started by reviewing the week 7 development schedule. All tasks planned for week 7 were completed in time. Next the group examined week 8 development.
-- Andrew began by demonstrating the data backend and example data he had created. He showed that the data structure and data points were complete, but that there was some difficulty importing the data into Java through Android Studio. He felt this would still get done by the end of the week.
-- Vincent showed the log in screen. The development on this has been complete, but work with Matthew still needs to be done to implement search.
-- Long discussed feedback from the lab checkpoint. They reviewers suggested that we prepare our report and presentation earlier.
-- The group discussed the development schedule. We agreed that the deadlines for Week 8 could be pushed out to Monday/Tuesday of Week 9, but that further revisions weren't necessary.
+- The meeting started by reviewing the week 9 development schedule. Most tasks were completed in time. The basic application is working as intended.
+- Andrew began by asking for the list of additional features that the team wants to implement.
+- Vincent and Matthew give suggestion on the list of additional features to implement until conclusion is reached.
+- The list of additional features are: 
+  - Adding items into a cart (micro-interaction)
+  - Adding images to user profile
+  - Adding GPS information on seller's page
+  - User registration
+  - Sorting a list of products
+  - Filtering a list of products
+  - Surprise feature (scam alert)
+- The group discussed the development schedule for week 11. We agreed that we should be able to complete the implementation of the additional features by next Thursday, Week 11.
 
     <br>
 
@@ -33,17 +40,27 @@ In line with the development schedule the following will be completed:
 ## TODO Items
 | Task | Assignee |
 | :--- | ---: |
-| Have basic data streaming to Java objects | Andrew |
-| Login complete | Vincent |
-| View of items | Long |
-| Search complete | Matthew |
-| AVL tree for sorting items | Vincent |
+| Adding items to cart | Matthew |
+| Sorting | Matthew |
+| Filtering | Matthew |
+| Displaying user profile image | Vincent |
+| User registration | Vincent |
+| GPS information on seller's page | Andrew |
+| Pictures of the items | Andrew |
+| Pictures of the users | Andrew |
+| Items in DisplayView class | Andrew |
+| Sellers in DisplayView class | Andrew |
+| Scam warning | Andrew |
+| Change the listview to include the photo, title, average star rating and seller name of each product | Long |
+
+
+
 
 ## Scribe Rotation
 The following dictates who will be scribe in this and the next meeting.
 | Name |
 | :---: |
-| Matthew Cawley |
-| Vincent T |
 | Long Vu |
 | Andrew Howes |
+| Matthew Cawley |
+| Vincent T |
