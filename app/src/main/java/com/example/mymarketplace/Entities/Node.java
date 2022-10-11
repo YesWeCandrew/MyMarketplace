@@ -2,7 +2,7 @@ package com.example.mymarketplace.Entities;
 
 /**
  * This class creates a node of an AVL Tree
- * @author: Vincent Tanumihardja, Matthew Cawley
+ * @author Vincent Tanumihardja, Matthew Cawley
  */
 public class Node {
     Node left;

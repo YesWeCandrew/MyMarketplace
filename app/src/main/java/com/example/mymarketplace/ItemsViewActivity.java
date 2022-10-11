@@ -64,8 +64,6 @@ public class ItemsViewActivity extends AppCompatActivity {
         /**
          * ListView of all the product names
          */
-        Items.Item item0 = Items.getItems().get(0);
-
         ListView itemListView = (ListView) findViewById(R.id.itemsListView);
         ArrayList<Items.Item> itemList = Items.getItems();
         ArrayList<String> productName = new ArrayList<>();
