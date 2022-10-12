@@ -83,10 +83,7 @@ public class ItemsViewActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(ItemsViewActivity.this, ItemInfo.class);
-
-                //TODO: LONG to change below and array list above so when clicked it passes the item
-                // in the intent ie. replace Items.getItems().get(0) with code that passes the item clicked)
-                intent.putExtra("item",Items.getItems().get(0));
+                intent.putExtra("item",Items.getItems().get(position));
                 startActivity(intent);
             }
         });

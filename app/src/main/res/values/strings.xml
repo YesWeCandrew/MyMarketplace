@@ -8,7 +8,7 @@
     <string name="listViewText">Hi</string>
     <string name="welcomeToMarket">Welcome to MyMarketplace</string>
 
-<!--    ItemView Strings-->
+    <!--    ItemView Strings-->
     <string name="singleItem">Display Single Item Info</string>
     <string name="itemImageViewDescription">An image of the item.</string>
     <string name="CartButton">Add to cart</string>
@@ -16,4 +16,5 @@
     <string name="ItemDescription">About item</string>
     <string name="ItemPrice">$12.00</string>
     <string name="ItemStock">5 available</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>
