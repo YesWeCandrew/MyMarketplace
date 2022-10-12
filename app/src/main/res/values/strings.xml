@@ -7,6 +7,13 @@
     <string name="warning_empty_credential">%1$s cannot be empty.</string>
     <string name="listViewText">Hi</string>
     <string name="welcomeToMarket">Welcome to MyMarketplace</string>
+
+<!--    ItemView Strings-->
     <string name="singleItem">Display Single Item Info</string>
     <string name="itemImageViewDescription">An image of the item.</string>
+    <string name="CartButton">Add to cart</string>
+    <string name="LearnMoreSeller">Learn more about seller</string>
+    <string name="ItemDescription">About item</string>
+    <string name="ItemPrice">$12.00</string>
+    <string name="ItemStock">5 available</string>
 </resources>

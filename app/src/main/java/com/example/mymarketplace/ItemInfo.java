@@ -24,14 +24,18 @@ public class ItemInfo extends AppCompatActivity {
         Button buttonLearnMoreSeller = (Button) findViewById(R.id.buttonLearnMoreSeller);
         TextView textViewDescription = (TextView) findViewById(R.id.textViewDescription);
         TextView textPricing = (TextView) findViewById(R.id.textPricing);
+        TextView textStock = (TextView) findViewById(R.id.textViewStock);
         // Getting photo dir:
         int itemPhotoDir = getResources().getIdentifier(item.photoDirectory,"drawable", getPackageName());
+
+        String sellerButtonText = "Sold by: " + item.sellerName;
 
         // Setting values
         itemImageView.setImageResource(itemPhotoDir);
         textViewProductName.setText(item.productName);
-        buttonLearnMoreSeller.setText(item.sellerName);
+        buttonLearnMoreSeller.setText(sellerButtonText);
         textViewDescription.setText(item.description);
-        textPricing.setText("$" + item.price+ ".00");
+        textPricing.setText(item.priceAsText);
+        textStock.setText(item.quantityAsText);
     }
 }

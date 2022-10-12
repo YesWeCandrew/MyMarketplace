@@ -81,6 +81,11 @@ public class Items {
     public static void updateQuantity() {
         for (Item item : getItems()) {
             item.quantity = Stocks.getCurrentStock(item.itemID);
+            if (item.quantity > 0) {
+                item.quantityAsText = item.quantity + " in stock";
+            } else {
+                item.quantityAsText = "Out of stock!";
+            }
         }
     }
 
@@ -100,6 +105,8 @@ public class Items {
         public int quantity;
         public double averageRating;
         public String photoDirectory;
+        public String priceAsText;
+        public String quantityAsText;
 
         /**
          * The internal constructor for an item
@@ -127,6 +134,8 @@ public class Items {
             this.quantity = 0; // Quantity equal to zero at initialisation, updated by updateQuantity().
             this.averageRating = 0; // Average rating set to zero, will be updated by updateRating()
             this.photoDirectory = "item" + itemID;
+            this.priceAsText = "$"+price+".00";
+            this.quantityAsText = "Out of stock!";
         }
     }
 }
