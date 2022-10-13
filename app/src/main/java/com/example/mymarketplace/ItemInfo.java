@@ -20,8 +20,6 @@ import com.example.mymarketplace.Helpers.Hasher;
 public class ItemInfo extends AppCompatActivity {
 
     private Items.Item item;
-    private TextView textStock;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,12 +28,14 @@ public class ItemInfo extends AppCompatActivity {
 
         item = getIntent().getSerializableExtra("item", Items.Item.class);
 
+        // Getting the TextViews of the item
         ImageView itemImageView = (ImageView) findViewById(R.id.itemImageView);
         TextView textViewProductName = (TextView) findViewById(R.id.textViewProductName);
         Button buttonLearnMoreSeller = (Button) findViewById(R.id.buttonLearnMoreSeller);
         TextView textViewDescription = (TextView) findViewById(R.id.textViewDescription);
         TextView textPricing = (TextView) findViewById(R.id.textPricing);
-        textStock = (TextView) findViewById(R.id.textViewStock);
+        TextView textReviews = (TextView) findViewById(R.id.textViewReviews);
+        TextView textStock = (TextView) findViewById(R.id.textViewStock);
 
         // Getting photo dir:
         int itemPhotoDir = getResources().getIdentifier(item.photoDirectory,"drawable", getPackageName());
@@ -49,14 +49,14 @@ public class ItemInfo extends AppCompatActivity {
         textViewDescription.setText(item.description);
         textPricing.setText(item.priceAsText);
         textStock.setText(item.quantityAsText);
+        textReviews.setText(item.averageRatingAsText);
 
         // Setting Seller button listener
-        Button buttonSeller = (Button) findViewById(R.id.buttonLearnMoreSeller);
-        buttonSeller.setOnClickListener(sellerButtonListener);
+        buttonLearnMoreSeller.setOnClickListener(sellerButtonListener);
     }
 
     // Listener for the seller button
-    private View.OnClickListener sellerButtonListener = new View.OnClickListener() {
+    private final View.OnClickListener sellerButtonListener = new View.OnClickListener() {
         @Override
         public void onClick (View view) {
             // start a new activity, which is searching through the marketplace, when the credentials are valid.

@@ -9,11 +9,11 @@ public class Stocks {
     // Singleton instance of Stock
     private static Stocks instance;
 
-    // The instances that need access
-    private ArrayList<Stock> stock;
-    private ArrayList<Stock> stockStream;
-    private HashMap<Integer, Integer> currentStock;
-    private int batchNumber = 0;
+    private final ArrayList<Stock> stock; // Holds all the records from the CSV as Stock objects
+
+    // A summary of all the read stock objects so far. Maps ItemIDs to current Stock
+    private final HashMap<Integer, Integer> currentStock;
+    private int batchNumber = 0; // The number of batches (50 records) processed into currentStock
 
     /**
      * Private constructor for use internally. Create an empty LinkedList of users.
@@ -22,8 +22,7 @@ public class Stocks {
      */
     private Stocks() {
         stock = new ArrayList<>();
-        stockStream = new ArrayList<>();
-        currentStock = new HashMap<Integer, Integer>();
+        currentStock = new HashMap<>();
         // instantiates the hash map with 0 stock for every item from IDs 0 to 49)
         for (int i = 0; i < 50; i++) {
             currentStock.put(i,0);
@@ -72,9 +71,10 @@ public class Stocks {
 
         for (int i = start; i < end; i++) {
             Stock stock = getInstance().stock.get(i);
-            getInstance().stockStream.add(stock);
-            int prevStock = getInstance().currentStock.get(stock.itemID);
-            getInstance().currentStock.put(stock.itemID,prevStock + stock.stockChange);
+            if (getInstance().currentStock.containsKey(stock.itemID)) {
+                int prevStock = getInstance().currentStock.get(stock.itemID);
+                getInstance().currentStock.put(stock.itemID,prevStock + stock.stockChange);
+            }
         }
 
         getInstance().batchNumber += 50;

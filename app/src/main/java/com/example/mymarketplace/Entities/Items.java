@@ -90,6 +90,22 @@ public class Items {
     }
 
     /**
+     * Reads the currentReview for the item from the Stock singleton and stores it within the class
+     *
+     * @author Andrew Howes
+     */
+    public static void updateReview() {
+        for (Item item : getItems()) {
+            item.averageRating = Reviews.getCurrentReview(item.itemID);
+            if (item.averageRating > 0) {
+                item.averageRatingAsText = "Average rating of " + Math.round(item.averageRating) + "/5";
+            } else {
+                item.averageRatingAsText = "No reviews yet.";
+            }
+        }
+    }
+
+    /**
      * The item class. Every item is represented as an instance of this object.
      */
     public static class Item implements Serializable {
@@ -107,6 +123,7 @@ public class Items {
         public String photoDirectory;
         public String priceAsText;
         public String quantityAsText;
+        public String averageRatingAsText;
 
         /**
          * The internal constructor for an item
@@ -136,6 +153,7 @@ public class Items {
             this.photoDirectory = "item" + itemID;
             this.priceAsText = "$"+price+".00";
             this.quantityAsText = "Out of stock!";
+            this.averageRatingAsText = "No reviews yet.";
         }
     }
 }

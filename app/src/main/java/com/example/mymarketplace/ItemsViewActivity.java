@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.example.mymarketplace.Entities.Reviews;
 import com.example.mymarketplace.Helpers.CSVReader;
 import com.example.mymarketplace.Entities.Items;
 import com.example.mymarketplace.Entities.Sellers;
@@ -49,8 +50,15 @@ public class ItemsViewActivity extends AppCompatActivity {
             is = am.open("Stock.csv");
             Stocks.stockFromCSV(CSVReader.parseCsv(is));
 
+            // Inputting
+            is = am.open("Reviews.csv");
+            Reviews.reviewsFromCSV(CSVReader.parseCsv(is));
+
             // Getting the first batch of stock data and updating item stock
             Stocks.addBatch();
+            Reviews.addBatch();
+
+            is.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -95,6 +103,7 @@ public class ItemsViewActivity extends AppCompatActivity {
             @Override
             public void onRefresh() {
                 Stocks.addBatch();
+                Reviews.addBatch();
                 myListAdapter.notifyDataSetChanged();
                 swiperefresh.setRefreshing(false);
             }

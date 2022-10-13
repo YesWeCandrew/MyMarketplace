@@ -55,6 +55,7 @@ public class LoginActivity extends AppCompatActivity {
         try {
             InputStream is = am.open("Users.csv");
             Users.usersFromCSV(CSVReader.parseCsv(is));
+            is.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
