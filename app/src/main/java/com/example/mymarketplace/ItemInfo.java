@@ -1,10 +1,9 @@
 package com.example.mymarketplace;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,9 +12,6 @@ import android.widget.TextView;
 
 import com.example.mymarketplace.Entities.Items;
 import com.example.mymarketplace.Entities.Sellers;
-import com.example.mymarketplace.Entities.Stocks;
-import com.example.mymarketplace.Entities.Users;
-import com.example.mymarketplace.Helpers.Hasher;
 
 public class ItemInfo extends AppCompatActivity {
 
@@ -29,13 +25,13 @@ public class ItemInfo extends AppCompatActivity {
         item = getIntent().getSerializableExtra("item", Items.Item.class);
 
         // Getting the TextViews of the item
-        ImageView itemImageView = (ImageView) findViewById(R.id.itemImageView);
-        TextView textViewProductName = (TextView) findViewById(R.id.textViewProductName);
-        Button buttonLearnMoreSeller = (Button) findViewById(R.id.buttonLearnMoreSeller);
-        TextView textViewDescription = (TextView) findViewById(R.id.textViewDescription);
-        TextView textPricing = (TextView) findViewById(R.id.textPricing);
-        TextView textReviews = (TextView) findViewById(R.id.textViewReviews);
-        TextView textStock = (TextView) findViewById(R.id.textViewStock);
+        ImageView itemImageView = findViewById(R.id.itemImageView);
+        TextView textViewProductName = findViewById(R.id.textViewProductName);
+        Button buttonLearnMoreSeller = findViewById(R.id.buttonLearnMoreSeller);
+        TextView textViewDescription = findViewById(R.id.textViewDescription);
+        TextView textPricing = findViewById(R.id.textPricing);
+        TextView textReviews = findViewById(R.id.textViewReviews);
+        TextView textStock = findViewById(R.id.textViewStock);
 
         // Getting photo dir:
         int itemPhotoDir = getResources().getIdentifier(item.photoDirectory,"drawable", getPackageName());
@@ -53,6 +49,19 @@ public class ItemInfo extends AppCompatActivity {
 
         // Setting Seller button listener
         buttonLearnMoreSeller.setOnClickListener(sellerButtonListener);
+
+        // Checking if item is a scam
+        if (ScamChecker.isScam(item)) {
+
+            // If there is scam show a warning to the user, but still let them proceed.
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+            builder.setMessage(R.string.ScamWarningMessage)
+                    .setTitle(R.string.ScamWarningTitle);
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
     }
 
     // Listener for the seller button

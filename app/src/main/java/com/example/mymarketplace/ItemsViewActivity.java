@@ -66,7 +66,6 @@ public class ItemsViewActivity extends AppCompatActivity {
         /**
          * Display User's name
          */
-
         ((TextView)findViewById(R.id.name)).setText(user.givenName);
 
 
@@ -99,14 +98,11 @@ public class ItemsViewActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        swiperefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                Stocks.addBatch();
-                Reviews.addBatch();
-                myListAdapter.notifyDataSetChanged();
-                swiperefresh.setRefreshing(false);
-            }
+        swiperefresh.setOnRefreshListener(() -> {
+            Stocks.addBatch();
+            Reviews.addBatch();
+            myListAdapter.notifyDataSetChanged();
+            swiperefresh.setRefreshing(false);
         });
 
     }

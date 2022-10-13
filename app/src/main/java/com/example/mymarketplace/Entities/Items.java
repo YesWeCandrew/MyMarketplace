@@ -1,6 +1,8 @@
 package com.example.mymarketplace.Entities;
 
 import java.io.Serializable;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,10 +70,9 @@ public class Items {
     /**
      * Adds an item to the singleton's item list
      * @param item the item to add
-     * @return if the item was successfully added
      * @author Andrew Howes
      */
-    public static boolean addItem(Item item) {return getInstance().items.add(item);}
+    public static void addItem(Item item) {getInstance().items.add(item);}
 
     /**
      * Reads the currentStock for the item from the Stock singleton and stores it within the class
@@ -98,7 +99,9 @@ public class Items {
         for (Item item : getItems()) {
             item.averageRating = Reviews.getCurrentReview(item.itemID);
             if (item.averageRating > 0) {
-                item.averageRatingAsText = "Average rating of " + Math.round(item.averageRating) + "/5";
+                DecimalFormat df = new DecimalFormat("0.0");
+                df.setRoundingMode(RoundingMode.UP);
+                item.averageRatingAsText = "Average rating of " + df.format(item.averageRating) + "/5";
             } else {
                 item.averageRatingAsText = "No reviews yet.";
             }

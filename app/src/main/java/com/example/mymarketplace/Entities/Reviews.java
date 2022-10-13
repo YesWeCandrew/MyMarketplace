@@ -6,9 +6,9 @@ import java.util.List;
 
 public class Reviews {
 
+    // Singleton class
     private static Reviews instance;
 
-    // The instances that need access
     private final ArrayList<Reviews.Review> review; // Stores the list of all reviews, past and future
     private final HashMap<Integer, ReviewSummary> currentReviews; // Stores a summary of loaded reviews.
     private int batchNumber = 0;
@@ -45,6 +45,7 @@ public class Reviews {
      * Constructor that adds all of the review in the list of list from the csv
      * to the Review parameter. Does not load any stock into currentStock.
      * @param csvAsListOfLists the output of CSVReader for the Stock file.
+     * @author Andrew Howes
      */
     public static void reviewsFromCSV(List<List<String>> csvAsListOfLists) {
         for (List<String> row : csvAsListOfLists) {
@@ -91,14 +92,21 @@ public class Reviews {
         assert reviewSummary != null;
         if (reviewSummary.countOfReviews <= 0) {
             return 0;
-        } else return Math.floorDiv(reviewSummary.sumReviews,reviewSummary.countOfReviews);
+        } else return reviewSummary.sumReviews / (float) reviewSummary.countOfReviews;
     }
 
-    // the user class that holds all stock data
+    /**
+     * The class that holds individual review entities from the CSV file.
+     */
     public static class Review {
         public int itemID;
         public int review;
 
+        /**
+         * The review constructor
+         * @param itemID The item reviewed
+         * @param review the review given (from 1 to 5)
+         */
         public Review(int itemID, int review) {
             this.itemID = itemID;
             this.review = review;
@@ -114,6 +122,12 @@ public class Reviews {
         public int sumReviews;
         public int countOfReviews;
 
+        /**
+         * A summary of all past reviews. Can be used to calculate average reviews to date.
+         * @param sumReviews the sum of all reviews (from 1 to 5)
+         * @param countOfReviews the number of reviews
+         * @author Andrew Howes
+         */
         public ReviewSummary(int sumReviews, int countOfReviews) {
             this.sumReviews = sumReviews;
             this.countOfReviews = countOfReviews;
