@@ -1,4 +1,4 @@
-package com.example.mymarketplace.Entities;
+package com.example.mymarketplace.Search;
 
 import java.util.Objects;
 

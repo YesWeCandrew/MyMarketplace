@@ -1,4 +1,6 @@
-package com.example.mymarketplace.Entities;
+package com.example.mymarketplace.Search;
+
+import com.example.mymarketplace.Entities.Items;
 
 /**
  * This class creates a AVL Tree based on the price of the item listed

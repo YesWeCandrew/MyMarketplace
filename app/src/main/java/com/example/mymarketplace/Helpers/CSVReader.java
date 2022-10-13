@@ -1,4 +1,4 @@
-package com.example.mymarketplace.Entities;
+package com.example.mymarketplace.Helpers;
 
 import java.io.BufferedReader;
 import java.io.IOException;

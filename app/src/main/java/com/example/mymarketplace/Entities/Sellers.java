@@ -88,6 +88,7 @@ public class Sellers {
         public String country;
         public double latitude;
         public double longitude;
+        public String addressAsText;
 
         /**
          * Internal constructor of a seller
@@ -112,6 +113,7 @@ public class Sellers {
             this.country = country;
             this.latitude = latitude;
             this.longitude = longitude;
+            this.addressAsText = address + ", " + suburb + ", " + state;
         }
     }
 }
