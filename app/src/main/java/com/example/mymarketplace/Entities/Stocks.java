@@ -77,6 +77,8 @@ public class Stocks {
             getInstance().currentStock.put(stock.itemID,prevStock + stock.stockChange);
         }
 
+        getInstance().batchNumber += 50;
+
         Items.updateQuantity();
     }
 

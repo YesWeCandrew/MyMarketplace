@@ -2,18 +2,16 @@ package com.example.mymarketplace;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
 import android.widget.EditText;
 
-import com.example.mymarketplace.Entities.AVLTree;
+import com.example.mymarketplace.Search.AVLTree;
 import com.example.mymarketplace.Entities.Items;
-import com.example.mymarketplace.Entities.Token;
-import com.example.mymarketplace.Entities.Tokenizer;
+import com.example.mymarketplace.Search.Token;
+import com.example.mymarketplace.Search.Tokenizer;
 
 import java.util.ArrayList;
 

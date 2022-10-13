@@ -26,7 +26,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        seller = getIntent().getSerializableExtra("seller", Sellers.Seller.class);
+        seller = Sellers.getSellers().get(0);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -49,7 +49,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         // Add a marker in Sydney and move the camera
         LatLng sellerLocation = new LatLng(seller.latitude, seller.longitude);
-        mMap.addMarker(new MarkerOptions().position(sellerLocation).title(seller.name));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sellerLocation));
+        mMap.addMarker(new MarkerOptions().position(sellerLocation).title(seller.name).snippet(seller.addressAsText));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sellerLocation,13f));
     }
 }

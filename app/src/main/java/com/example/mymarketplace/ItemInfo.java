@@ -1,6 +1,7 @@
 package com.example.mymarketplace;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.content.res.Resources;
@@ -12,12 +13,15 @@ import android.widget.TextView;
 
 import com.example.mymarketplace.Entities.Items;
 import com.example.mymarketplace.Entities.Sellers;
+import com.example.mymarketplace.Entities.Stocks;
 import com.example.mymarketplace.Entities.Users;
 import com.example.mymarketplace.Helpers.Hasher;
 
 public class ItemInfo extends AppCompatActivity {
 
     private Items.Item item;
+    private TextView textStock;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +35,8 @@ public class ItemInfo extends AppCompatActivity {
         Button buttonLearnMoreSeller = (Button) findViewById(R.id.buttonLearnMoreSeller);
         TextView textViewDescription = (TextView) findViewById(R.id.textViewDescription);
         TextView textPricing = (TextView) findViewById(R.id.textPricing);
-        TextView textStock = (TextView) findViewById(R.id.textViewStock);
+        textStock = (TextView) findViewById(R.id.textViewStock);
+
         // Getting photo dir:
         int itemPhotoDir = getResources().getIdentifier(item.photoDirectory,"drawable", getPackageName());
 
@@ -55,7 +60,7 @@ public class ItemInfo extends AppCompatActivity {
         @Override
         public void onClick (View view) {
             // start a new activity, which is searching through the marketplace, when the credentials are valid.
-            Intent intent = new Intent(ItemInfo.this, MapsActivity.class);
+            Intent intent = new Intent(ItemInfo.this, SellerInfo.class);
             intent.putExtra("seller", Sellers.getSellers().get(item.sellerID));
             startActivity(intent);
         }

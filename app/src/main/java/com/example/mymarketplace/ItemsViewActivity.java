@@ -8,11 +8,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.example.mymarketplace.Entities.CSVReader;
+import com.example.mymarketplace.Helpers.CSVReader;
 import com.example.mymarketplace.Entities.Items;
 import com.example.mymarketplace.Entities.Sellers;
 import com.example.mymarketplace.Entities.Stocks;
@@ -21,9 +21,11 @@ import com.example.mymarketplace.Entities.Users;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class ItemsViewActivity extends AppCompatActivity {
+
+    private SwipeRefreshLayout swiperefresh;
+    private ArrayAdapter myListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +67,8 @@ public class ItemsViewActivity extends AppCompatActivity {
          * ListView of all the product names
          */
         ListView itemListView = (ListView) findViewById(R.id.itemsListView);
+        swiperefresh = (SwipeRefreshLayout) findViewById(R.id.swiperefresh);
+
         ArrayList<Items.Item> itemList = Items.getItems();
         ArrayList<String> productName = new ArrayList<>();
 
@@ -74,9 +78,9 @@ public class ItemsViewActivity extends AppCompatActivity {
             productName.add(itemVal);
         }
 
-        ArrayAdapter myListAddapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, productName);
+        myListAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, productName);
 
-        itemListView.setAdapter(myListAddapter);
+        itemListView.setAdapter(myListAdapter);
         itemListView.setDivider(null);
         itemListView.setClickable(true);
         itemListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -87,5 +91,15 @@ public class ItemsViewActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        swiperefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Stocks.addBatch();
+                myListAdapter.notifyDataSetChanged();
+                swiperefresh.setRefreshing(false);
+            }
+        });
+
     }
+
 }
