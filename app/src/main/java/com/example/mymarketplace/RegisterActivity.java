@@ -14,6 +14,13 @@ import android.widget.Toast;
 import com.example.mymarketplace.Entities.Users;
 import com.example.mymarketplace.Helpers.Hasher;
 
+/**
+ * This activity creates a registration screen for the user
+ * @author: Vincent Tanumihardja
+ * References:
+ * - Code Structure: Week 7 Lecture Login Activity
+ * - Background image: https://wallpaperaccess.com/android-gradient
+ */
 public class RegisterActivity extends AppCompatActivity {
 
     private EditText et_username;
