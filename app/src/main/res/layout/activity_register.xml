@@ -4,23 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
-    tools:context=".LoginActivity">
+    tools:context=".RegisterActivity">
 
     <TextView
-        android:id="@+id/welcomeMessage"
+        android:id="@+id/welcomeMessage2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="115dp"
         android:gravity="center"
-        android:text="Welcome to My Marketplace!"
+        android:text="Register a My Marketplace Account"
         android:textSize="35dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/username"
+        android:id="@+id/username2"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
@@ -30,11 +29,11 @@
         android:padding="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcomeMessage" />
+        app:layout_constraintTop_toBottomOf="@+id/welcomeMessage2" />
 
 
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/password2"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
@@ -42,30 +41,20 @@
         android:drawablePadding="15dp"
         android:hint="Password"
         android:padding="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/login"
+        app:layout_constraintBottom_toTopOf="@+id/register2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username" />
+        app:layout_constraintTop_toBottomOf="@+id/username2" />
 
     <Button
-        android:id="@+id/login"
+        android:id="@+id/register2"
         android:layout_width="250dp"
         android:layout_height="40dp"
         android:layout_marginTop="35dp"
-        android:text="Login"
+        android:text="Register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password" />
-
-    <Button
-        android:id="@+id/register"
-        android:layout_width="250dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:text="Register Now"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login" />
+        app:layout_constraintTop_toBottomOf="@+id/password2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

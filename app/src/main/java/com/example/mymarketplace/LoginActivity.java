@@ -31,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText et_username;
     private EditText et_password;
     private Button button_login;
+    private Button button_register;
 
     /**
      * This method creates the login screen activity
@@ -45,8 +46,10 @@ public class LoginActivity extends AppCompatActivity {
         // get the views by their id
         EditText et_username = (EditText) findViewById(R.id.username);
         EditText et_password = (EditText) findViewById(R.id.password);
-        Button button_login = (Button) findViewById(R.id.button);
+        Button button_login = (Button) findViewById(R.id.login);
+        Button button_register = (Button) findViewById(R.id.register);
         button_login.setOnClickListener(buttonListener);
+        button_register.setOnClickListener(buttonListener);
 
         Log.i(LoginActivity.class.getName(), "created.");
 
@@ -124,40 +127,48 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     /**
-     * Creates a button click listener and check whether login credentials are valid
+     * Creates a button click listener for the buttons
+     * If the button clicked is the register button, go to the user registration page
+     * Else check whether login credentials are valid
      */
     private View.OnClickListener buttonListener = new View.OnClickListener() {
         @Override
         public void onClick (View view) {
 
-            // get the string text from the text editors
-            String username = et_username.getText().toString();
-            String password = et_password.getText().toString();
-
-            // check the validity of the inputs
-            WarningResult warningResult = checkInputsAndGetWarning(username, password);
-
-            // show a warning message if the inputs are empty.
-            if (warningResult.isInvalid) {
-                showWarning(warningResult.text);
-                return;
+            if (view.getId() == R.id.register) {
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
             }
+            else {
+                // get the string text from the text editors
+                String username = et_username.getText().toString();
+                String password = et_password.getText().toString();
 
-            // get the resources object
-            Resources resources = getResources();
+                // check the validity of the inputs
+                WarningResult warningResult = checkInputsAndGetWarning(username, password);
 
-            // check the validity of the credentials of either comp2100 or comp6442 user. Show a warning message if it is invalid.
-            Users.User user = Users.userLoginValid(username,Hasher.hash(password));
+                // show a warning message if the inputs are empty.
+                if (warningResult.isInvalid) {
+                    showWarning(warningResult.text);
+                    return;
+                }
 
-            if (user == null) {
-                showWarning(resources.getString(R.string.warning_invalid_credential));
-                return;
+                // get the resources object
+                Resources resources = getResources();
+
+                // check the validity of the credentials of either comp2100 or comp6442 user. Show a warning message if it is invalid.
+                Users.User user = Users.userLoginValid(username, Hasher.hash(password));
+
+                if (user == null) {
+                    showWarning(resources.getString(R.string.warning_invalid_credential));
+                    return;
+                }
+
+                // start a new activity, which is searching through the marketplace, when the credentials are valid.
+                Intent intent = new Intent(LoginActivity.this, ItemsViewActivity.class);
+                intent.putExtra("user", user);
+                startActivity(intent);
             }
-
-            // start a new activity, which is searching through the marketplace, when the credentials are valid.
-            Intent intent = new Intent(LoginActivity.this, ItemsViewActivity.class);
-            intent.putExtra("user",user);
-            startActivity(intent);
         }
     };
 
