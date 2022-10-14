@@ -68,11 +68,10 @@ public class Users {
     /**
      * Adds an user to the singleton's user list
      * @param user the user to add
-     * @return if the user was successfully added
      * @author Andrew Howes
      */
-    public static boolean addUser(User user) {
-        return getInstance().users.add(user);
+    public static void addUser(User user) {
+        getInstance().users.add(user);
     }
 
     // the user class that holds all user data

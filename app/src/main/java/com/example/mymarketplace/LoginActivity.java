@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.mymarketplace.Entities.CSVReader;
+import com.example.mymarketplace.Helpers.CSVReader;
 import com.example.mymarketplace.Entities.Users;
 import com.example.mymarketplace.Helpers.Hasher;
 
@@ -55,6 +55,7 @@ public class LoginActivity extends AppCompatActivity {
         try {
             InputStream is = am.open("Users.csv");
             Users.usersFromCSV(CSVReader.parseCsv(is));
+            is.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

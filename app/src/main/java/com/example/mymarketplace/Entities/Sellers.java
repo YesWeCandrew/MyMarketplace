@@ -68,11 +68,10 @@ public class Sellers {
     /**
      * Adds an seller to the singleton's seller list
      * @param seller the seller to add
-     * @return if the seller was successfully added
      * @author Andrew Howes
      */
-    public static boolean addSeller(Seller seller) {
-        return getInstance().sellers.add(seller);
+    public static void addSeller(Seller seller) {
+        getInstance().sellers.add(seller);
     }
 
     /**
@@ -88,6 +87,7 @@ public class Sellers {
         public String country;
         public double latitude;
         public double longitude;
+        public String addressAsText;
 
         /**
          * Internal constructor of a seller
@@ -112,6 +112,7 @@ public class Sellers {
             this.country = country;
             this.latitude = latitude;
             this.longitude = longitude;
+            this.addressAsText = address + ", " + suburb + ", " + state;
         }
     }
 }
