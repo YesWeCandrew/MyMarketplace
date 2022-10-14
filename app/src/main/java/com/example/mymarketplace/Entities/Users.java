@@ -1,5 +1,6 @@
 package com.example.mymarketplace.Entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,7 +76,7 @@ public class Users {
     }
 
     // the user class that holds all user data
-    public static class User {
+    public static class User implements Serializable {
         public int userID;
         public String gender;
         public String title;
@@ -85,6 +86,7 @@ public class Users {
         public int zipCode;
         public String username;
         public String hashedPassword;
+        public String photoDirectory;
 
         private User(int userID, String gender, String title, String givenName, String surname, String state, int zipCode, String username, String hashedPassword) {
             this.userID = userID;
@@ -96,6 +98,7 @@ public class Users {
             this.zipCode = zipCode;
             this.username = username;
             this.hashedPassword = hashedPassword;
+            this.photoDirectory = "user" + userID;
         }
     }
 
@@ -107,7 +110,7 @@ public class Users {
      * @return the user ID if the username and hashed password is valid.
      * @author Andrew Howes
      */
-    public static Integer userLoginValid(String username, String hashedPassword) {
+    public static User userLoginValid(String username, String hashedPassword) {
         username = username.trim();
         hashedPassword = hashedPassword.trim();
 
@@ -116,7 +119,7 @@ public class Users {
             if (user.username.equals(username)) {
                 // If there is a matching username, check that the hashes match
                 if (user.hashedPassword.equals(hashedPassword)) {
-                    return user.userID;
+                    return user;
                 } else {return null;}
             }
         }

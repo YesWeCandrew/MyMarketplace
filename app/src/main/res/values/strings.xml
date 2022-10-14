@@ -8,4 +8,5 @@
     <string name="listViewText">Hi</string>
     <string name="welcomeToMarket">Welcome to MyMarketplace</string>
     <string name="singleItem">Display Single Item Info</string>
+    <string name="itemImageViewDescription">An image of the item.</string>
 </resources>
