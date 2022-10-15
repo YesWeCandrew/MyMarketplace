@@ -16,6 +16,7 @@ import com.example.mymarketplace.Helpers.Hasher;
 
 /**
  * This activity creates a registration screen for the user
+ * Saves the user information for login validation
  * @author: Vincent Tanumihardja
  * References:
  * - Code Structure: Week 7 Lecture Login Activity
