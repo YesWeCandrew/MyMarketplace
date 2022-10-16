@@ -156,7 +156,7 @@ public class LoginActivity extends AppCompatActivity {
                 // get the resources object
                 Resources resources = getResources();
 
-                // check the validity of the credentials of either comp2100 or comp6442 user. Show a warning message if it is invalid.
+                // check the validity of the user credentials. Show a warning message if it is invalid.
                 Users.User user = Users.userLoginValid(username, Hasher.hash(password));
 
                 if (user == null) {

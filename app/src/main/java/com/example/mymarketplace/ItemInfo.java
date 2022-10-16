@@ -28,6 +28,7 @@ public class ItemInfo extends AppCompatActivity {
         ImageView itemImageView = findViewById(R.id.itemImageView);
         TextView textViewProductName = findViewById(R.id.textViewProductName);
         Button buttonLearnMoreSeller = findViewById(R.id.buttonLearnMoreSeller);
+        Button buttonPayment = findViewById(R.id.payment);
         TextView textViewDescription = findViewById(R.id.textViewDescription);
         TextView textPricing = findViewById(R.id.textPricing);
         TextView textReviews = findViewById(R.id.textViewReviews);
@@ -49,6 +50,7 @@ public class ItemInfo extends AppCompatActivity {
 
         // Setting Seller button listener
         buttonLearnMoreSeller.setOnClickListener(sellerButtonListener);
+        buttonPayment.setOnClickListener(paymentButtonListener);
 
         // Checking if item is a scam
         if (ScamChecker.isScam(item)) {
@@ -63,6 +65,17 @@ public class ItemInfo extends AppCompatActivity {
             dialog.show();
         }
     }
+
+    // Listener for the payment button
+    private final View.OnClickListener paymentButtonListener = new View.OnClickListener() {
+        @Override
+        public void onClick (View view) {
+            // start a new activity, which is making a payment, when the user decides to buy a single item.
+            Intent intent = new Intent(ItemInfo.this, PaymentActivity.class);
+            intent.putExtra("item", item);
+            startActivity(intent);
+        }
+    };
 
     // Listener for the seller button
     private final View.OnClickListener sellerButtonListener = new View.OnClickListener() {

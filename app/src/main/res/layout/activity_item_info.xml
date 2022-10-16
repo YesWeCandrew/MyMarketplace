@@ -27,9 +27,9 @@
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:layout_marginStart="70dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="25dp"
         android:layout_marginEnd="70dp"
-        android:layout_marginBottom="400dp"
+        android:layout_marginBottom="460dp"
         android:contentDescription="@string/itemImageViewDescription"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -42,7 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="25dp"
         android:layout_marginEnd="32dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintEnd_toEndOf="parent"
@@ -56,12 +56,13 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="185dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="24dp"
         android:text="@string/CartButton"
-        app:layout_constraintBottom_toTopOf="@+id/buttonLearnMoreSeller"
+        app:layout_constraintBottom_toTopOf="@+id/payment"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDescription" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewDescription"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/buttonLearnMoreSeller"
@@ -74,14 +75,15 @@
         android:text="@string/LearnMoreSeller"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/payment"/>
 
     <TextView
         android:id="@+id/textViewDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
         android:text="@string/ItemDescription"
@@ -120,5 +122,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textPricing"
         app:layout_constraintVertical_bias="0.125" />
+
+    <Button
+        android:id="@+id/payment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:text="BUY NOW"
+        app:layout_constraintBottom_toTopOf="@+id/buttonLearnMoreSeller"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ButtonAddToCart"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,9 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.mymarketplace.Entities.Users;
-import com.example.mymarketplace.Helpers.Hasher;
-
 /**
  * This activity creates a registration screen for the user
  * Saves the user information for login validation
@@ -24,9 +21,16 @@ import com.example.mymarketplace.Helpers.Hasher;
  */
 public class RegisterActivity extends AppCompatActivity {
 
+    private EditText et_gender;
+    private EditText et_title;
+    private EditText et_name;
+    private EditText et_surname;
+    private EditText et_state;
+    private EditText et_zip;
     private EditText et_username;
     private EditText et_password;
     private Button button_register;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,12 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         // get the views by their id
+        EditText et_gender = (EditText) findViewById(R.id.gender);
+        EditText et_title = (EditText) findViewById(R.id.title);
+        EditText et_name = (EditText) findViewById(R.id.name);
+        EditText et_surname = (EditText) findViewById(R.id.surname);
+        EditText et_state = (EditText) findViewById(R.id.state);
+        EditText et_zip = (EditText) findViewById(R.id.zip);
         EditText et_username = (EditText) findViewById(R.id.username2);
         EditText et_password = (EditText) findViewById(R.id.password2);
         Button button_register = (Button) findViewById(R.id.register2);
@@ -52,9 +62,21 @@ public class RegisterActivity extends AppCompatActivity {
         super.onStart();
 
         // clear all values in username and password edit text box when the activity starts
-        et_username = findViewById(R.id.username2);
-        et_password = findViewById(R.id.password2);
-        et_username.requestFocus();
+        EditText et_gender = (EditText) findViewById(R.id.gender);
+        EditText et_title = (EditText) findViewById(R.id.title);
+        EditText et_name = (EditText) findViewById(R.id.name);
+        EditText et_surname = (EditText) findViewById(R.id.surname);
+        EditText et_state = (EditText) findViewById(R.id.state);
+        EditText et_zip = (EditText) findViewById(R.id.zip);
+        EditText et_username = (EditText) findViewById(R.id.username2);
+        EditText et_password = (EditText) findViewById(R.id.password2);
+        et_gender.requestFocus();
+        et_gender.setText("");
+        et_title.setText("");
+        et_name.setText("");
+        et_surname.setText("");
+        et_state.setText("");
+        et_zip.setText("");
         et_username.setText("");
         et_password.setText("");
 
@@ -116,6 +138,12 @@ public class RegisterActivity extends AppCompatActivity {
         public void onClick (View view) {
 
             // get the string text from the text editors
+            String gender = et_gender.getText().toString();
+            String title = et_title.getText().toString();
+            String name = et_name.getText().toString();
+            String surname = et_surname.getText().toString();
+            String state = et_state.getText().toString();
+            String zip = et_zip.getText().toString();
             String username = et_username.getText().toString();
             String password = et_password.getText().toString();
 

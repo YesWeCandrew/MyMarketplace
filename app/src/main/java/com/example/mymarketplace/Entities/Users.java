@@ -98,6 +98,7 @@ public class Users {
             this.username = username;
             this.hashedPassword = hashedPassword;
             this.photoDirectory = "user" + userID;
+
         }
     }
 
