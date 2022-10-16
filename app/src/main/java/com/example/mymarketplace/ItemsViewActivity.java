@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -68,6 +69,14 @@ public class ItemsViewActivity extends AppCompatActivity {
          */
         ((TextView)findViewById(R.id.name)).setText(user.givenName);
 
+        // Getting ImageView for the user profile picture
+        ImageView sellerImageView = findViewById(R.id.userImageView);
+
+        // Getting photo directory of the user
+        int userPhotoDir = getResources().getIdentifier(user.photoDirectory,"drawable", getPackageName());
+
+        // Set the user image
+        sellerImageView.setImageResource(userPhotoDir);
 
 
         /**

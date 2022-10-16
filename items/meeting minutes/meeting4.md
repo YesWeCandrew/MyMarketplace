@@ -25,7 +25,7 @@ The aim of this meeting is to complete a quick catch-up on the development activ
   - Adding items into a cart (micro-interaction)
   - Adding images to user profile
   - Adding GPS information on seller's page
-  - User registration
+  - Payment process with different payment methods
   - Sorting a list of products
   - Filtering a list of products
   - Surprise feature (scam alert)
@@ -44,7 +44,7 @@ In line with the development schedule the following will be completed:
 | Sorting | Matthew |
 | Filtering | Matthew |
 | Displaying user profile image | Vincent |
-| User registration | Vincent |
+| Payment process with different payment methods | Vincent |
 | GPS information on seller's page | Andrew |
 | Pictures of the items | Andrew |
 | Pictures of the users | Andrew |
