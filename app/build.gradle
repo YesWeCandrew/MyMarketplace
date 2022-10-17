@@ -39,6 +39,11 @@ android {
                 srcDirs 'src/test/assets'
             }
         }
+        debug {
+            res {
+                srcDirs 'src/debug/res', 'src/test/resources'
+            }
+        }
     }
     buildFeatures {
         viewBinding true
