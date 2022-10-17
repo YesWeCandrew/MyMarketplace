@@ -20,7 +20,12 @@ code: CSVReader
   - comment: Creates a list of list from an input stream of a CSV.
     url: http://www.java2s.com/example/java-utility-method/csv-file-parse/parsecsv-inputstream-csvinput-3765b.html
     licence: Open Source License (GNU)
-
+  - comment: AVL Tree Code Structure
+    url: https://www.baeldung.com/java-avl-trees
+    license: Company Use License (Allowing to copy for personal use)
+  - comment: Login Activity Code Structure
+    url: Week 7 Lecture
+    license: N/A
 
 # add as many "url+licence+comment" entries as necessary
 # (or remove it altogether if you haven't used any external assets)
@@ -29,12 +34,15 @@ assets:
   - comment: "_Bliss_ by Charles O'Rear"
     url: https://en.wikipedia.org/wiki/Bliss_(image)
     licence: fair use
+  - comment: "Android Gradient Wallpapers"
+    url: https://wallpaperaccess.com/android-gradient
+    license: free culture license
 
 # for each member, write your name and uid here
 # remove any empty "name+uid" entries
 members:
-  - name:
-    uid:
+  - name: Vincent Tanumihardja
+    uid: u7145408
   - name:
     uid:
   - name:
