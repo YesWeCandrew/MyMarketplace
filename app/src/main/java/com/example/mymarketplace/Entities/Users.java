@@ -40,7 +40,7 @@ public class Users {
      * to the users instance.
      * @param csvAsListOfLists the output of CSVReader for the Users file.
      */
-    public static void usersFromCSV(List<List<String>> csvAsListOfLists) {
+    static void usersFromCSV(List<List<String>> csvAsListOfLists) {
         for (List<String> row : csvAsListOfLists) {
             Users.addUser(new User(
                     Integer.parseInt(row.get(0)),
@@ -70,7 +70,7 @@ public class Users {
      * @param user the user to add
      * @author Andrew Howes
      */
-    public static void addUser(User user) {
+     private static void addUser(User user) {
         getInstance().users.add(user);
     }
 

@@ -11,7 +11,7 @@ public class Reviews {
 
     private final ArrayList<Reviews.Review> review; // Stores the list of all reviews, past and future
     private final HashMap<Integer, ReviewSummary> currentReviews; // Stores a summary of loaded reviews.
-    private int batchNumber = 0;
+    public int batchNumber = 0;
 
     /**
      * Private constructor for use internally. Create an empty HashMap of items to average ratings.
@@ -47,7 +47,7 @@ public class Reviews {
      * @param csvAsListOfLists the output of CSVReader for the Stock file.
      * @author Andrew Howes
      */
-    public static void reviewsFromCSV(List<List<String>> csvAsListOfLists) {
+    static void reviewsFromCSV(List<List<String>> csvAsListOfLists) {
         for (List<String> row : csvAsListOfLists) {
             Reviews.getInstance().review.add(new Review(
                     Integer.parseInt(row.get(0)),
@@ -77,7 +77,7 @@ public class Reviews {
             getInstance().currentReviews.put(review.itemID,updatedReviewSummary);
         }
 
-        getInstance().batchNumber += 50;
+        getInstance().batchNumber += 1;
 
         Items.updateReview();
     }
