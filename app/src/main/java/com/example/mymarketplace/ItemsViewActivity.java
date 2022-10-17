@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.example.mymarketplace.Entities.Database;
 import com.example.mymarketplace.Entities.Reviews;
 import com.example.mymarketplace.Helpers.CSVReader;
 import com.example.mymarketplace.Entities.Items;
@@ -41,23 +42,22 @@ public class ItemsViewActivity extends AppCompatActivity {
         try {
             // Inputting items
             InputStream is = am.open("Items.csv");
-            Items.itemsFromCSV(CSVReader.parseCsv(is));
+            Database.importData(is, Database.DataType.Items);
 
             // Inputting sellers
             is = am.open("Sellers.csv");
-            Sellers.sellersFromCSV(CSVReader.parseCsv(is));
+            Database.importData(is, Database.DataType.Sellers);
 
             // Inputting stock
             is = am.open("Stock.csv");
-            Stocks.stockFromCSV(CSVReader.parseCsv(is));
+            Database.importData(is, Database.DataType.Stock);
 
             // Inputting
             is = am.open("Reviews.csv");
-            Reviews.reviewsFromCSV(CSVReader.parseCsv(is));
+            Database.importData(is, Database.DataType.Reviews);
 
             // Getting the first batch of stock data and updating item stock
-            Stocks.addBatch();
-            Reviews.addBatch();
+            Database.updateData();
 
             is.close();
         } catch (IOException e) {
@@ -108,8 +108,7 @@ public class ItemsViewActivity extends AppCompatActivity {
             }
         });
         swiperefresh.setOnRefreshListener(() -> {
-            Stocks.addBatch();
-            Reviews.addBatch();
+            Database.updateData();
             myListAdapter.notifyDataSetChanged();
             swiperefresh.setRefreshing(false);
         });

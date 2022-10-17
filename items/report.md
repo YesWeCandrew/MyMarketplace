@@ -1,18 +1,5 @@
-# [Team Name] Report
+# HD-Believers Report
 
-The following is a report template to help your team successfully provide all the details necessary for your report in a structured and organised manner. Please give a straightforward and concise report that best demonstrates your project. Note that a good report will give a better impression of your project to the reviewers.
-
-*Here are some tips to write a good report:*
-
-* *Try to summarise and list the `bullet points` of your project as many as possible rather than give long, tedious paragraphs that mix up everything together.*
-
-* *Try to create `diagrams` instead of text descriptions, which are more straightforward and explanatory.*
-
-* *Try to make your report `well structured`, which is easier for the reviewers to capture the necessary information.*
-
-*We give instructions enclosed in square brackets [...] and examples for each sections to demonstrate what are expected for your project report.*
-
-*Please remove the instructions or examples in `italic` in your final report.*
 
 ## Table of Contents
 
@@ -31,12 +18,41 @@ The following is a report template to help your team successfully provide all th
 
 | UID | Name | Role |
 | :--- | :----: | ---: |
-| [uid] | [name] | [role] |
-| [uid] | [name] | [role] |
-| [uid] | [name] | [role] |
-| [uid] | [name] | [role] |
+| u1058852 | Andrew Howes | Backend and Data Lead  |
+| u6699146 | Long Vu | GUI Lead |
+| u7313113 | Matthew Cawley | Search and Filter Lead |
+| u7145408 | Vincent Tanumihardja | UI & Data Structure Lead  |
 
 ## Summary of Individual Contributions
+
+----------
+u1058852, Andrew Howes
+
+I contributed about 30% of the code. Here are the classes that I contributed:
+* Users
+* Sellers
+* Database
+* Items
+* Stock
+* Reviews
+* ItemView
+* SellerView
+* SpamChecker
+* Hasher
+* ImportingFromCSVTests
+* StreamingDataTests
+* UserLoginTests
+
+In addition, I also created the data that runs the system, based off of a open source data mining dataset. I generated the stock and review dataset from scratch.
+I also collated and edited the photos to match the items.
+
+I proposed and implemented the Singleton design pattern and the Facade design pattern. These were implemented in classes that I created, (Database, Users, Sellers, Items, Stock, Reviews). I proposed the streaming dataset functionality that refreshes when the user triggers a refresh. I also proposed storing data in CSV files and treating it as a Relational Database within Java using IDs to reference other objects.
+
+I assisted with the UI design of ItemView and ItemListView. For ItemListView I implemented the refresh functionality I created ItemView.
+
+I prepared the slides for our presentation.
+
+---------
 
 *[Summarise the contributions made by each member to the project, e.g. code implementation, code design, UI design, report writing, etc.]*
 
@@ -132,11 +148,15 @@ The following is a report template to help your team successfully provide all th
 
 **Data Structures**
 
-*[What data structures did your team utilise? Where and why?]*
+Our group used local CSV files to load the data into memory from. This was chosen for their easily processable format and editing. While JSON or XML provide more flexibility, CSV worked well for our very strucuted data format.
+
+The data was then read into the app and stored as Singleton objects in Users, Sellers and Items. Additional media, like photos, were stored in the drawable file. 
 
 **Design Patterns**
 
-*[What design patterns did your team utilise? Where and why?]*
+1. Singleton
+
+The singleton design pattern was used to ensure that the there was only ever one instance of the data objects of Users, Items and Sellers. This ensures that there were not multiple representations of these objects which is vital to ensuring that the app was not working on different data.
 
 **Grammar(s)**
 
@@ -155,7 +175,12 @@ Production Rules:
 
 **Surprise Item**
 
-*[If you implement the surprise item, explain how your solution addresses the surprise task. What decisions do your team make in addressing the problem?]*
+We succesfully implemented the surprise item.
+* We created a ScamChecker class that runs a series of tests over an object to produce a ScamScore. This scam score takes into account the following:
+   * If an item has very poor reviews it recieves a higher ScamScore
+   * If an item has no reviews it recieves a higher ScamScore
+   * If the Items has a seller name that is not the same as the seller name associated with the seller's ID it recieves a higher ScamScore. This could prevent people pretending to be reputable brands
+* If the ScamScore is above an arbitrary threshold, it marks the item as potential scam and notifies the user, as shown below.
 
 **Other**
 
@@ -179,17 +204,14 @@ Production Rules:
 
 ## Testing Summary
 
-*[What features have you tested? What is your testing coverage?]*
+We have done extensive testing to accomplish a high quality app. Unit tests have been created to test the implementation of the backend logic of the app.
 
-*Here is an example:*
+* Testing covers the Entities directory with 100% method coverage. This ensures that the data is rendered from the CSV files correctly
+* User login tests ensure that the hashing function works correctly and that users can login successfully
+* Additional methods test extreme cases to ensure the app can still operate. For instance, StreamingDataTests ensures that the app loops through the streaming data in the unlikely case that the user refreshes the app hundred of times.
 
-- *Number of test cases: ...*
+![CodeCoverageImage](./images/CodeCoverage.png) <br>
 
-- *Code coverage: ...*
-
-- *Types of tests created: ...*
-
-*Please provide some screenshots of your testing summary, showing the achieved testing coverage. Feel free to provide further details on your tests.*
 
 ## Implemented Features
 

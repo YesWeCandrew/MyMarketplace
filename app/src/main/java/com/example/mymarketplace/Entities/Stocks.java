@@ -48,7 +48,7 @@ public class Stocks {
      * to the Stock parameter. Does not load any stock into currentStock.
      * @param csvAsListOfLists the output of CSVReader for the Stock file.
      */
-    public static void stockFromCSV(List<List<String>> csvAsListOfLists) {
+    static void stockFromCSV(List<List<String>> csvAsListOfLists) {
         for (List<String> row : csvAsListOfLists) {
             Stocks.getInstance().stock.add(new Stock(
                     Integer.parseInt(row.get(0)),
@@ -72,12 +72,12 @@ public class Stocks {
         for (int i = start; i < end; i++) {
             Stock stock = getInstance().stock.get(i);
             if (getInstance().currentStock.containsKey(stock.itemID)) {
-                int prevStock = getInstance().currentStock.get(stock.itemID);
+                int prevStock =  getInstance().currentStock.get(stock.itemID);
                 getInstance().currentStock.put(stock.itemID,prevStock + stock.stockChange);
             }
         }
 
-        getInstance().batchNumber += 50;
+        getInstance().batchNumber += 1;
 
         Items.updateQuantity();
     }

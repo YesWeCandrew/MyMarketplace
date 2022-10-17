@@ -42,7 +42,7 @@ public class Items {
      * to the items instance.
      * @param csvAsListOfLists the output of CSVReader for the Items file.
      */
-    public static void itemsFromCSV(List<List<String>> csvAsListOfLists) {
+    static void itemsFromCSV(List<List<String>> csvAsListOfLists) {
         for (List<String> row : csvAsListOfLists) {
             addItem(new Item(
                     Integer.parseInt(row.get(0)),
