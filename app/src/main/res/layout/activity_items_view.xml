@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ItemsViewActivity">
+    tools:context=".ItemsViewActivity"
+    android:background="#d9d9d9">
 
     <!--    Implements the pull to refresh feature that will update stock and reviews -->
 
@@ -12,22 +13,24 @@
         android:id="@+id/swiperefresh"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcomeToMarket">
+        app:layout_constraintTop_toTopOf="parent">
 
         <ListView
             android:id="@+id/itemsListView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="100dp"
+            android:background="#fff"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/individual_list_item" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
@@ -35,13 +38,13 @@
         android:id="@+id/listViewText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
         android:text="@string/listViewText"
         android:textColor="#000000"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:typeface="monospace"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        android:typeface="sans"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -49,37 +52,43 @@
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="10dp"
         android:text=""
         android:textColor="#000000"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:typeface="monospace"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        android:typeface="sans"
         app:layout_constraintStart_toEndOf="@+id/listViewText"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/welcomeToMarket"
+        android:id="@+id/happyBrowsing"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/welcomeToMarket"
+        android:layout_marginTop="10dp"
+        android:text="@string/happybrowsing"
         android:textColor="#000000"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:typeface="monospace"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listViewText" />
+        android:textSize="14sp"
+        android:textStyle="normal"
+        android:typeface="sans"
+        app:layout_constraintStart_toEndOf="@+id/name"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/userImageView"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="32dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:src="@drawable/user0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/user0" />
+        app:civ_border_width="1dp"
+        app:civ_border_color="#000000">
+    </de.hdodenhof.circleimageview.CircleImageView>
+
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
