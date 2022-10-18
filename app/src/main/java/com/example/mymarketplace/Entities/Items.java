@@ -6,6 +6,10 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class stores the item data type
+ * @author: Andrew Howes
+ */
 public class Items {
 
     // Singleton instance of Items
@@ -42,7 +46,7 @@ public class Items {
      * to the items instance.
      * @param csvAsListOfLists the output of CSVReader for the Items file.
      */
-    public static void itemsFromCSV(List<List<String>> csvAsListOfLists) {
+    static void itemsFromCSV(List<List<String>> csvAsListOfLists) {
         for (List<String> row : csvAsListOfLists) {
             addItem(new Item(
                     Integer.parseInt(row.get(0)),

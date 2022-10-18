@@ -16,6 +16,10 @@ import android.widget.TextView;
 import com.example.mymarketplace.Entities.Items;
 import com.example.mymarketplace.Entities.Sellers;
 
+/**
+ * This activity creates a page with specific item descriptions for the selected item
+ * @author: Andrew Howes
+ */
 public class ItemInfo extends AppCompatActivity {
 
     private Items.Item item;

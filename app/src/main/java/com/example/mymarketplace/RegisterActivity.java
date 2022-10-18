@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 /**
  * This activity creates a registration screen for the user
- * Saves the user information for login validation
+ * Saves the user information for login validation (currently not implemented)
  * @author: Vincent Tanumihardja
  * References:
  * - Code Structure: Week 7 Lecture Login Activity

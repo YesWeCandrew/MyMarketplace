@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.mymarketplace.Entities.Database;
 import com.example.mymarketplace.Helpers.CSVReader;
 import com.example.mymarketplace.Entities.Users;
 import com.example.mymarketplace.Helpers.Hasher;
@@ -21,7 +22,7 @@ import java.io.InputStream;
 /**
  * This activity creates a login screen for the user
  * Only valid users may proceed to the marketplace
- * @author: Vincent Tanumihardja
+ * @author: Vincent Tanumihardja, Andrew Howes
  * References:
  * - Code Structure: Week 7 Lecture Login Activity
  * - Background image: https://wallpaperaccess.com/android-gradient
@@ -57,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
         AssetManager am = this.getAssets();
         try {
             InputStream is = am.open("Users.csv");
-            Users.usersFromCSV(CSVReader.parseCsv(is));
+            Database.importData(is, Database.DataType.Users);
             is.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -164,6 +165,7 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
 
+
                 // start a new activity, which is searching through the marketplace, when the credentials are valid.
                 Intent intent = new Intent(LoginActivity.this, ItemsViewActivity.class);
                 intent.putExtra("user", user);
@@ -183,30 +185,6 @@ public class LoginActivity extends AppCompatActivity {
             this.isInvalid = isInvalid;
             this.text = text;
         }
-    }
-
-    /**
-     * Check if username and password matches username: comp2100@anu.au with password: comp2100
-     * @param username
-     * @param password
-     * @return true or false
-     */
-    private boolean checkUserCredential1(String username, String password) {
-        username = username.trim();
-        password = password.trim();
-        return username.equals("comp2100@anu.au") && password.equals("comp2100");
-    }
-
-    /**
-     * Check if username and password matches username: comp6442@anu.au with password: comp6442
-     * @param username
-     * @param password
-     * @return true or false
-     */
-    private boolean checkUserCredential2(String username, String password) {
-        username = username.trim();
-        password = password.trim();
-        return username.equals("comp6442@anu.au") && password.equals("comp6442");
     }
 
     /**

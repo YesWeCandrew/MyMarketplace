@@ -15,10 +15,12 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.example.mymarketplace.Entities.Database;
 import com.example.mymarketplace.Entities.Reviews;
 import com.example.mymarketplace.Helpers.CSVReader;
 import com.example.mymarketplace.Entities.Items;
@@ -36,6 +38,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * This activity creates a list of items sold on the marketplace for the user
+ * This class implements state design pattern where only logged in users may proceed to view item details
+ * @author: Andrew Howes,Vincent Tanumihardja
+ */
 public class ItemsViewActivity extends AppCompatActivity {
 
     private SwipeRefreshLayout swiperefresh;
@@ -62,32 +69,30 @@ public class ItemsViewActivity extends AppCompatActivity {
         try {
             // Inputting items
             InputStream is = am.open("Items.csv");
-            Items.itemsFromCSV(CSVReader.parseCsv(is));
+            Database.importData(is, Database.DataType.Items);
 
             // Inputting sellers
             is = am.open("Sellers.csv");
-            Sellers.sellersFromCSV(CSVReader.parseCsv(is));
+            Database.importData(is, Database.DataType.Sellers);
 
             // Inputting stock
             is = am.open("Stock.csv");
-            Stocks.stockFromCSV(CSVReader.parseCsv(is));
+            Database.importData(is, Database.DataType.Stock);
 
             // Inputting
             is = am.open("Reviews.csv");
-            Reviews.reviewsFromCSV(CSVReader.parseCsv(is));
+            Database.importData(is, Database.DataType.Reviews);
 
             // Getting the first batch of stock data and updating item stock
-            Stocks.addBatch();
-            Reviews.addBatch();
+            Database.updateData();
 
             is.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        /**
-         * Display User's name
-         */
+
+        // Display User's name
         ((TextView)findViewById(R.id.name)).setText(user.givenName);
 
         // Getting ImageView for the user profile picture
@@ -143,14 +148,19 @@ public class ItemsViewActivity extends AppCompatActivity {
         itemListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(ItemsViewActivity.this, ItemInfo.class);
-                intent.putExtra("item",Items.getItems().get(position));
-                startActivity(intent);
+                if (user.loggedIn) {
+                    Intent intent = new Intent(ItemsViewActivity.this, ItemInfo.class);
+                    intent.putExtra("item", Items.getItems().get(position));
+                    startActivity(intent);
+                }
+                else {
+                    Toast toast = Toast.makeText(getApplicationContext(), "You are not logged in. Please login to continue.", Toast.LENGTH_LONG);
+                    toast.show();
+                }
             }
         });
         swiperefresh.setOnRefreshListener(() -> {
-            Stocks.addBatch();
-            Reviews.addBatch();
+            Database.updateData();
             myListAdapter.notifyDataSetChanged();
             swiperefresh.setRefreshing(false);
         });

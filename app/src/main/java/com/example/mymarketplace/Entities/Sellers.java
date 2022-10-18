@@ -4,6 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class stores the seller data type
+ * @author: Andrew Howes
+ */
 public class Sellers {
 
     // Singleton instance of Sellers
@@ -40,7 +44,7 @@ public class Sellers {
      * to the sellers instance.
      * @param csvAsListOfLists the output of CSVReader for the Sellers file.
      */
-    public static void sellersFromCSV(List<List<String>> csvAsListOfLists) {
+    static void sellersFromCSV(List<List<String>> csvAsListOfLists) {
         for (List<String> row : csvAsListOfLists) {
             Sellers.addSeller(new Seller(
                     Integer.parseInt(row.get(0)),
