@@ -1,15 +1,21 @@
 package com.example.mymarketplace;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.AssetManager;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -50,12 +56,31 @@ public class ItemsViewActivity extends AppCompatActivity implements AdapterView.
     private String[] sortByTypes = {"Price (Low to High)", "Price (High to Low)", "Name"};
     private Users.User user;
     private ArrayList<Items.Item> currDisplayedItems; //the current list of items the view is displaying
+    private int[] images = {R.drawable.item0, R.drawable.item1, R.drawable.item2, R.drawable.item3, R.drawable.item4, R.drawable.item5,
+            R.drawable.item6, R.drawable.item7, R.drawable.item8, R.drawable.item9, R.drawable.item10, R.drawable.item11,
+            R.drawable.item12, R.drawable.item13,R.drawable.item14, R.drawable.item15, R.drawable.item16, R.drawable.item17,
+            R.drawable.item18, R.drawable.item19, R.drawable.item20, R.drawable.item21, R.drawable.item22, R.drawable.item23,
+            R.drawable.item24, R.drawable.item25, R.drawable.item26, R.drawable.item27, R.drawable.item28, R.drawable.item29,
+            R.drawable.item30, R.drawable.item31, R.drawable.item32, R.drawable.item33, R.drawable.item34, R.drawable.item35,
+            R.drawable.item36, R.drawable.item37, R.drawable.item38, R.drawable.item39, R.drawable.item40, R.drawable.item41,
+            R.drawable.item42, R.drawable.item43, R.drawable.item44, R.drawable.item45, R.drawable.item46, R.drawable.item47,
+            R.drawable.item48, R.drawable.item49};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_items_view);
 
+
+        // Change Colour of Action Bar & Status Bar
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.ocean)));
+        Window window = this.getWindow();
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(this.getResources().getColor(R.color.ocean));
+
+
+        Users.User user = getIntent().getSerializableExtra("user", Users.User.class);
         searchBox = (EditText) findViewById(R.id.editTextTextPersonName2);
         searchBox.setText("");
         searchButton = (Button) findViewById(R.id.button);
@@ -97,6 +122,7 @@ public class ItemsViewActivity extends AppCompatActivity implements AdapterView.
             e.printStackTrace();
         }
 
+
         // Display User's name
         ((TextView)findViewById(R.id.name)).setText(user.givenName);
 
@@ -109,11 +135,15 @@ public class ItemsViewActivity extends AppCompatActivity implements AdapterView.
         // Set the user image
         sellerImageView.setImageResource(userPhotoDir);
 
+
+        /**
+         * Displaying Products in ListView
+         */
+
+        ArrayList<Items.Item> itemList = Items.getItems(); // List of Items
         //ListView of all the product names
         itemListView = (ListView) findViewById(R.id.itemsListView);
         swiperefresh = (SwipeRefreshLayout) findViewById(R.id.swiperefresh);
-
-        ArrayList<Items.Item> itemList = Items.getItems();
         currDisplayedItems = itemList;
         updateListView(currDisplayedItems);
     }
@@ -123,18 +153,32 @@ public class ItemsViewActivity extends AppCompatActivity implements AdapterView.
      */
     public void updateListView(ArrayList<Items.Item> items){
         ArrayList<String> productName = new ArrayList<>();
+        ArrayList<String> itemName = new ArrayList<>();
+        ArrayList<String> sellerName = new ArrayList<>();
+        ArrayList<String> averageRating = new ArrayList<>();
 
         for(Items.Item i : items) {
             String itemVal = i.productName;
             productName.add(itemVal);
         }
+        for(Items.Item i : items) {
+            String itemName2 = i.productName;
+            String sellerName2 = i.sellerName;
+            String averageRating2 = i.averageRatingAsText;
 
-        myListAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, productName);
+            itemName.add(itemName2);
+            sellerName.add(sellerName2);
+            averageRating.add(averageRating2);
+        }
 
-        itemListView.setAdapter(myListAdapter);
-        itemListView.setDivider(null);
-        itemListView.setClickable(true);
-        // only proceed to item info when the user is logged in
+        ListView itemListView = (ListView) findViewById(R.id.itemsListView);
+
+        CustomListViewAdapter customListViewAdapter = new CustomListViewAdapter(this, images, itemName, sellerName, averageRating);
+        itemListView.setAdapter(customListViewAdapter);
+
+        // Swipe Refresh
+        swiperefresh = (SwipeRefreshLayout) findViewById(R.id.swiperefresh);
+
         itemListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
