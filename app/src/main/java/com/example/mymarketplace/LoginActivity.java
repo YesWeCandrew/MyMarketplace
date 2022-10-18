@@ -13,7 +13,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mymarketplace.Entities.Database;
-import com.example.mymarketplace.Helpers.CSVReader;
 import com.example.mymarketplace.Entities.Users;
 import com.example.mymarketplace.Helpers.Hasher;
 
@@ -33,6 +32,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText et_password;
     private Button button_login;
     private Button button_register;
+    private LoginState state;
+    private int logInAttempts;
 
     /**
      * This method creates the login screen activity
@@ -45,12 +46,16 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         // get the views by their id
-        EditText et_username = (EditText) findViewById(R.id.username);
-        EditText et_password = (EditText) findViewById(R.id.password);
-        Button button_login = (Button) findViewById(R.id.login);
-        Button button_register = (Button) findViewById(R.id.register);
+        et_username = findViewById(R.id.username);
+        et_password = findViewById(R.id.password);
+        button_login = findViewById(R.id.login);
+        button_register = findViewById(R.id.register);
         button_login.setOnClickListener(buttonListener);
         button_register.setOnClickListener(buttonListener);
+
+        // Setting initial STATE and number of log in attempts
+        state = LoginState.BEFORE;
+        logInAttempts = 0;
 
         Log.i(LoginActivity.class.getName(), "created.");
 
@@ -132,7 +137,7 @@ public class LoginActivity extends AppCompatActivity {
      * If the button clicked is the register button, go to the user registration page
      * Else check whether login credentials are valid
      */
-    private View.OnClickListener buttonListener = new View.OnClickListener() {
+    private final View.OnClickListener buttonListener = new View.OnClickListener() {
         @Override
         public void onClick (View view) {
 
@@ -140,7 +145,16 @@ public class LoginActivity extends AppCompatActivity {
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
             }
+
             else {
+                logInAttempts ++;
+
+                if (logInAttempts > 5) {
+                    state = LoginState.LOCKED;
+                    showWarning("Too many log in attempts! Restart the app to try again.");
+                    return;
+                }
+
                 // get the string text from the text editors
                 String username = et_username.getText().toString();
                 String password = et_password.getText().toString();
@@ -161,14 +175,17 @@ public class LoginActivity extends AppCompatActivity {
                 Users.User user = Users.userLoginValid(username, Hasher.hash(password));
 
                 if (user == null) {
+                    state = LoginState.FAILED;
                     showWarning(resources.getString(R.string.warning_invalid_credential));
                     return;
                 }
 
-
+                // Otherwise, the user must be correct so LoginState = SUCCESS
+                state = LoginState.SUCCESS;
                 // start a new activity, which is searching through the marketplace, when the credentials are valid.
                 Intent intent = new Intent(LoginActivity.this, ItemsViewActivity.class);
                 intent.putExtra("user", user);
+                intent.putExtra("state",state);
                 startActivity(intent);
             }
         }
@@ -178,8 +195,8 @@ public class LoginActivity extends AppCompatActivity {
      * Define a warning result object which is returned by checkInputsAndGetWarning() method
      */
     private static class WarningResult {
-        private boolean isInvalid;
-        private String text;
+        private final boolean isInvalid;
+        private final String text;
 
         public WarningResult(boolean isInvalid, String text){
             this.isInvalid = isInvalid;
@@ -189,7 +206,7 @@ public class LoginActivity extends AppCompatActivity {
 
     /**
      * Show a toast warning based on the given input text
-     * @param text
+     * @param text the text to display
      */
     private void showWarning(String text) {
         Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG);
@@ -198,8 +215,8 @@ public class LoginActivity extends AppCompatActivity {
 
     /**
      * Check whether the string inputs are valid and return the first input that is invalid
-     * @param username
-     * @param password
+     * @param username the user name of the user
+     * @param password the password of the user
      * @return a WarningResult when input is empty
      */
     private WarningResult checkInputsAndGetWarning(String username,  String password) {
@@ -222,7 +239,7 @@ public class LoginActivity extends AppCompatActivity {
 
     /**
      * Check whether a string is empty or null
-     * @param text
+     * @param text the text to check
      * @return true or false
      */
     private boolean isEmpty(String text){

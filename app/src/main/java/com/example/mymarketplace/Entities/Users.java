@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * This class stores the user data type
- * @author: Andrew Howes, Vincent Tanumihardja
+ * @author: Andrew Howes
  */
 public class Users {
 
@@ -41,7 +41,7 @@ public class Users {
      * Constructor that adds all of the users in the list of list from the csv
      * to the users instance.
      * @param csvAsListOfLists the output of CSVReader for the Users file.
-     * @author Andrew Howes, Vincent Tanumihardja
+     * @author Andrew Howes
      */
     static void usersFromCSV(List<List<String>> csvAsListOfLists) {
         for (List<String> row : csvAsListOfLists) {
@@ -54,8 +54,7 @@ public class Users {
                     row.get(5),
                     Integer.parseInt(row.get(6)),
                     row.get(7),
-                    row.get(8),
-                    Boolean.parseBoolean(row.get(9))
+                    row.get(8)
             ));
         }
     }
@@ -72,7 +71,7 @@ public class Users {
     /**
      * Adds an user to the singleton's user list
      * @param user the user to add
-     * @author Andrew Howes, Vincent Tanumihardja
+     * @author Andrew Howes
      */
      private static void addUser(User user) {
         getInstance().users.add(user);
@@ -90,9 +89,8 @@ public class Users {
         public String username;
         public String hashedPassword;
         public String photoDirectory;
-        public boolean loggedIn;
 
-        private User(int userID, String gender, String title, String givenName, String surname, String state, int zipCode, String username, String hashedPassword, boolean loggedIn) {
+        private User(int userID, String gender, String title, String givenName, String surname, String state, int zipCode, String username, String hashedPassword) {
             this.userID = userID;
             this.gender = gender;
             this.title = title;
@@ -103,7 +101,6 @@ public class Users {
             this.username = username;
             this.hashedPassword = hashedPassword;
             this.photoDirectory = "user" + userID;
-            this.loggedIn = false;
         }
     }
 
@@ -113,7 +110,7 @@ public class Users {
      * @param username the username to find
      * @param hashedPassword the SHA-256 hashed password of the user
      * @return the user ID if the username and hashed password is valid.
-     * @author Andrew Howes, Vincent Tanumihardja
+     * @author Andrew Howes
      */
     public static User userLoginValid(String username, String hashedPassword) {
         username = username.trim();
@@ -124,7 +121,6 @@ public class Users {
             if (user.username.equals(username)) {
                 // If there is a matching username, check that the hashes match
                 if (user.hashedPassword.equals(hashedPassword)) {
-                    user.loggedIn = true;
                     return user;
                 } else {return null;}
             }

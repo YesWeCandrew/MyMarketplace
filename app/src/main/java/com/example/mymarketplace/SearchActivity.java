@@ -37,7 +37,7 @@ public class SearchActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        searchBox = (EditText) findViewById(R.id.editTextTextPersonName2);
+        searchBox = (EditText) findViewById(R.id.editTextSearch);
         searchBox.setText("");
         searchButton = (Button) findViewById(R.id.button);
         searchButton.setText("Search");

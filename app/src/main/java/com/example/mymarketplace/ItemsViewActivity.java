@@ -1,12 +1,9 @@
 package com.example.mymarketplace;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -15,21 +12,15 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.mymarketplace.Entities.Database;
-import com.example.mymarketplace.Entities.Reviews;
-import com.example.mymarketplace.Helpers.CSVReader;
 import com.example.mymarketplace.Entities.Items;
-import com.example.mymarketplace.Entities.Sellers;
-import com.example.mymarketplace.Entities.Stocks;
 import com.example.mymarketplace.Entities.Users;
 import com.example.mymarketplace.Search.AVLTree;
 import com.example.mymarketplace.Search.Token;
@@ -43,7 +34,7 @@ import java.util.Collections;
 /**
  * This activity creates a list of items sold on the marketplace for the user
  * This class implements state design pattern where only logged in users may proceed to view item details
- * @author: Andrew Howes, Vincent Tanumihardja, Matthew Cawley
+ * @author: Andrew Howes, Vincent Tanumihardja, Matthew Cawley, Long Vu
  */
 public class ItemsViewActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -71,6 +62,20 @@ public class ItemsViewActivity extends AppCompatActivity implements AdapterView.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_items_view);
 
+        // Getting the user and ensuring state is successful
+        Users.User user = getIntent().getSerializableExtra("user", Users.User.class);
+        LoginState state = getIntent().getSerializableExtra("state", LoginState.class);
+
+        // Checking the application state
+        if (!(state.equals(LoginState.SUCCESS))) {
+            Toast toast = Toast.makeText(getApplicationContext(), "You are not logged in!", Toast.LENGTH_LONG);
+            toast.show();
+            finish();
+        } else {
+            // Display User's name
+            Toast toast = Toast.makeText(getApplicationContext(), "Hi, " + user.givenName, Toast.LENGTH_LONG);
+            toast.show();
+        }
 
         // Change Colour of Action Bar & Status Bar
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.ocean)));
@@ -79,12 +84,9 @@ public class ItemsViewActivity extends AppCompatActivity implements AdapterView.
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(this.getResources().getColor(R.color.ocean));
 
-
-        Users.User user = getIntent().getSerializableExtra("user", Users.User.class);
-        searchBox = (EditText) findViewById(R.id.editTextTextPersonName2);
+        searchBox = (EditText) findViewById(R.id.editTextSearch);
         searchBox.setText("");
         searchButton = (Button) findViewById(R.id.button);
-        searchButton.setText("Search");
         searchButton.setOnClickListener(searchButtonPress);
         user = getIntent().getSerializableExtra("user", Users.User.class);
 
@@ -93,7 +95,7 @@ public class ItemsViewActivity extends AppCompatActivity implements AdapterView.
         ArrayAdapter aa = new ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, sortByTypes);
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sortByMenu.setAdapter(aa);
-        sortByMenu.setOnItemClickListener((AdapterView.OnItemClickListener) this);
+//        sortByMenu.setOnItemClickListener((AdapterView.OnItemClickListener) this);
 
         // Load all assets to the correct classes
         AssetManager am = this.getAssets();
@@ -121,10 +123,6 @@ public class ItemsViewActivity extends AppCompatActivity implements AdapterView.
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-        // Display User's name
-        ((TextView)findViewById(R.id.name)).setText(user.givenName);
 
         // Getting ImageView for the user profile picture
         ImageView sellerImageView = findViewById(R.id.userImageView);
@@ -182,15 +180,9 @@ public class ItemsViewActivity extends AppCompatActivity implements AdapterView.
         itemListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (user.loggedIn) {
-                    Intent intent = new Intent(ItemsViewActivity.this, ItemInfo.class);
-                    intent.putExtra("item", Items.getItems().get(position));
-                    startActivity(intent);
-                }
-                else {
-                    Toast toast = Toast.makeText(getApplicationContext(), "You are not logged in. Please login to continue.", Toast.LENGTH_LONG);
-                    toast.show();
-                }
+                Intent intent = new Intent(ItemsViewActivity.this, ItemInfo.class);
+                intent.putExtra("item", Items.getItems().get(position));
+                startActivity(intent);
             }
         });
         swiperefresh.setOnRefreshListener(() -> {
