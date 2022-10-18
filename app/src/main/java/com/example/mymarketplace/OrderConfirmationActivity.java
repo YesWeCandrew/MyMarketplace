@@ -9,9 +9,9 @@ import android.widget.Button;
 
 /**
  * This activity creates order confirmation page
+ * User can click on buy again item to purchase the same item again
  * @author: Vincent Tanumihardja
  * References:
- * - Background image: https://wallpaperaccess.com/android-gradient
  * - Tick image: https://blog.stylingandroid.com/animatedicons-radio-button/
  */
 public class OrderConfirmationActivity extends AppCompatActivity {

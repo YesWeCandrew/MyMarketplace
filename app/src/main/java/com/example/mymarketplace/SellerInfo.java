@@ -14,6 +14,10 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+/**
+ * This activity creates a page with more information about the seller
+ * @author: Andrew Howes
+ */
 public class SellerInfo extends AppCompatActivity implements OnMapReadyCallback  {
 
     private Sellers.Seller seller;

@@ -11,6 +11,11 @@ import android.widget.TextView;
 
 import com.example.mymarketplace.Entities.Items;
 
+/**
+ * This activity creates a payment page where user can choose the preferred payment method to buy the item
+ * Items paid by card will have a 0.5% surcharge and paypal have a 3% surcharge
+ * @author: Vincent Tanumihardja
+ */
 public class PaymentActivity extends AppCompatActivity {
 
     private Items.Item item;

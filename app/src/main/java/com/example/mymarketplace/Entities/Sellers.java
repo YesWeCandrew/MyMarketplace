@@ -4,6 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class stores the seller data type
+ * @author: Andrew Howes
+ */
 public class Sellers {
 
     // Singleton instance of Sellers
