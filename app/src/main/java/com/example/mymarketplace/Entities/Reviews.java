@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * This class stores the review data type
+ * @author: Andrew Howes
+ */
 public class Reviews {
 
     // Singleton class

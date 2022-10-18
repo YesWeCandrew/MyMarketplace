@@ -7,6 +7,7 @@ import com.example.mymarketplace.Entities.Sellers;
 /**
  * This class evaluates an Items.Item object and returns a scam score or scam boolean. An item is
  * marked as a scam when it has a ScamScore >= SCAM_THRESHOLD, which is arbitrarily set.
+ * @author Andrew Howes
  */
 public class ScamChecker {
 

@@ -12,6 +12,7 @@ import java.util.List;
  *  http://www.java2s.com/example/java-utility-method/csv-file-parse/parsecsv-inputstream-csvinput-3765b.html
  *  licence: Open Source License (GNU)
  *  This is acknowledged in the statement-of-originality.
+ * @author Andrew Howes
  */
 public class CSVReader {
     private static final char DEFAULT_CSV_SEPARATOR = ',';

@@ -4,6 +4,10 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * This class is used to hash passwords
+ * @author: Andrew Howes
+ */
 public class Hasher {
 
     private static String hashBytesToHexadecimal(byte[] hashBytes) {

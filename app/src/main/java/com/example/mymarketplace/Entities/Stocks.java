@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * This class stores the stock data type
+ * @author: Andrew Howes
+ */
 public class Stocks {
 
     // Singleton instance of Stock

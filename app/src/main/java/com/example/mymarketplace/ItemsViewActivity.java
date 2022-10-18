@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -25,6 +26,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
+/**
+ * This activity creates a list of items sold on the marketplace for the user
+ * This class implements state design pattern where only logged in users may proceed to view item details
+ * @author: Andrew Howes,Vincent Tanumihardja
+ */
 public class ItemsViewActivity extends AppCompatActivity {
 
     private SwipeRefreshLayout swiperefresh;
@@ -64,9 +70,8 @@ public class ItemsViewActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        /**
-         * Display User's name
-         */
+
+        // Display User's name
         ((TextView)findViewById(R.id.name)).setText(user.givenName);
 
         // Getting ImageView for the user profile picture
@@ -79,9 +84,8 @@ public class ItemsViewActivity extends AppCompatActivity {
         sellerImageView.setImageResource(userPhotoDir);
 
 
-        /**
-         * ListView of all the product names
-         */
+
+        //ListView of all the product names
         ListView itemListView = (ListView) findViewById(R.id.itemsListView);
         swiperefresh = (SwipeRefreshLayout) findViewById(R.id.swiperefresh);
 
@@ -99,12 +103,19 @@ public class ItemsViewActivity extends AppCompatActivity {
         itemListView.setAdapter(myListAdapter);
         itemListView.setDivider(null);
         itemListView.setClickable(true);
+        // only proceed to item info when the user is logged in
         itemListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(ItemsViewActivity.this, ItemInfo.class);
-                intent.putExtra("item",Items.getItems().get(position));
-                startActivity(intent);
+                if (user.loggedIn) {
+                    Intent intent = new Intent(ItemsViewActivity.this, ItemInfo.class);
+                    intent.putExtra("item", Items.getItems().get(position));
+                    startActivity(intent);
+                }
+                else {
+                    Toast toast = Toast.makeText(getApplicationContext(), "You are not logged in. Please login to continue.", Toast.LENGTH_LONG);
+                    toast.show();
+                }
             }
         });
         swiperefresh.setOnRefreshListener(() -> {

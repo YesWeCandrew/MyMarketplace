@@ -5,6 +5,10 @@ import com.example.mymarketplace.Helpers.CSVReader;
 import java.io.InputStream;
 import java.util.List;
 
+/**
+ * This class stores the enum data type used for the marketplace app
+ * @author: Andrew Howes
+ */
 public class Database {
 
     public enum DataType {
