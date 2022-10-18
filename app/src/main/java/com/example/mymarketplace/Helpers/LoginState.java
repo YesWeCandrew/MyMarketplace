@@ -1,4 +1,4 @@
-package com.example.mymarketplace;
+package com.example.mymarketplace.Helpers;
 
 public enum LoginState {
     BEFORE,

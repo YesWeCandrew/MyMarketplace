@@ -1,4 +1,4 @@
-package com.example.mymarketplace;
+package com.example.mymarketplace.Activities;
 
 import android.content.Intent;
 import android.content.res.AssetManager;
@@ -19,9 +19,12 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.example.mymarketplace.Helpers.CustomListViewAdapter;
 import com.example.mymarketplace.Entities.Database;
 import com.example.mymarketplace.Entities.Items;
 import com.example.mymarketplace.Entities.Users;
+import com.example.mymarketplace.Helpers.LoginState;
+import com.example.mymarketplace.R;
 import com.example.mymarketplace.Search.AVLTree;
 import com.example.mymarketplace.Search.Token;
 import com.example.mymarketplace.Search.Tokenizer;

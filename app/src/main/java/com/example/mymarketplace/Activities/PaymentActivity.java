@@ -1,4 +1,4 @@
-package com.example.mymarketplace;
+package com.example.mymarketplace.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mymarketplace.Entities.Items;
+import com.example.mymarketplace.R;
 
 /**
  * This activity creates a payment page where user can choose the preferred payment method to buy the item

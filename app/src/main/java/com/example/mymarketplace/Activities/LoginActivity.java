@@ -1,4 +1,4 @@
-package com.example.mymarketplace;
+package com.example.mymarketplace.Activities;
 
 import android.content.Intent;
 import android.content.res.AssetManager;
@@ -15,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.mymarketplace.Entities.Database;
 import com.example.mymarketplace.Entities.Users;
 import com.example.mymarketplace.Helpers.Hasher;
+import com.example.mymarketplace.Helpers.LoginState;
+import com.example.mymarketplace.R;
 
 import java.io.IOException;
 import java.io.InputStream;

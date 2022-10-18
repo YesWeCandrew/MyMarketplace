@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ItemsViewActivity">
+    tools:context=".Activities.ItemsViewActivity">
 
     <!--    Implements the pull to refresh feature that will update stock and reviews -->
 
