@@ -1,7 +1,8 @@
 package com.example.mymarketplace;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
-import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,59 +11,47 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.mymarketplace.Entities.Database;
-import com.example.mymarketplace.Helpers.CSVReader;
-import com.example.mymarketplace.Entities.Users;
-import com.example.mymarketplace.Helpers.Hasher;
-
-import java.io.IOException;
-import java.io.InputStream;
 /**
- * This activity creates a login screen for the user
- * Only valid users may proceed to the marketplace
- * @author: Vincent Tanumihardja, Andrew Howes
+ * This activity creates a registration screen for the user
+ * Saves the user information for login validation (currently not implemented)
+ * @author: Vincent Tanumihardja
  * References:
  * - Code Structure: Week 7 Lecture Login Activity
  * - Background image: https://wallpaperaccess.com/android-gradient
  */
-public class LoginActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
 
+    private EditText et_gender;
+    private EditText et_title;
+    private EditText et_name;
+    private EditText et_surname;
+    private EditText et_state;
+    private EditText et_zip;
     private EditText et_username;
     private EditText et_password;
-    private Button button_login;
     private Button button_register;
 
-    /**
-     * This method creates the login screen activity
-     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // setting the contents of login
-        setContentView(R.layout.activity_login);
+        // setting the content of the register activity
+        setContentView(R.layout.activity_register);
 
         // get the views by their id
-        EditText et_username = (EditText) findViewById(R.id.username);
-        EditText et_password = (EditText) findViewById(R.id.password);
-        Button button_login = (Button) findViewById(R.id.login);
-        Button button_register = (Button) findViewById(R.id.register);
-        button_login.setOnClickListener(buttonListener);
+        EditText et_gender = (EditText) findViewById(R.id.gender);
+        EditText et_title = (EditText) findViewById(R.id.title);
+        EditText et_name = (EditText) findViewById(R.id.name);
+        EditText et_surname = (EditText) findViewById(R.id.surname);
+        EditText et_state = (EditText) findViewById(R.id.state);
+        EditText et_zip = (EditText) findViewById(R.id.zip);
+        EditText et_username = (EditText) findViewById(R.id.username2);
+        EditText et_password = (EditText) findViewById(R.id.password2);
+        Button button_register = (Button) findViewById(R.id.register2);
         button_register.setOnClickListener(buttonListener);
 
-        Log.i(LoginActivity.class.getName(), "created.");
-
-        // Loads all users
-        AssetManager am = this.getAssets();
-        try {
-            InputStream is = am.open("Users.csv");
-            Database.importData(is, Database.DataType.Users);
-            is.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Log.i(RegisterActivity.class.getName(), "created.");
     }
 
     /**
@@ -73,13 +62,25 @@ public class LoginActivity extends AppCompatActivity {
         super.onStart();
 
         // clear all values in username and password edit text box when the activity starts
-        et_username = findViewById(R.id.username);
-        et_password = findViewById(R.id.password);
-        et_username.requestFocus();
+        EditText et_gender = (EditText) findViewById(R.id.gender);
+        EditText et_title = (EditText) findViewById(R.id.title);
+        EditText et_name = (EditText) findViewById(R.id.name);
+        EditText et_surname = (EditText) findViewById(R.id.surname);
+        EditText et_state = (EditText) findViewById(R.id.state);
+        EditText et_zip = (EditText) findViewById(R.id.zip);
+        EditText et_username = (EditText) findViewById(R.id.username2);
+        EditText et_password = (EditText) findViewById(R.id.password2);
+        et_gender.requestFocus();
+        et_gender.setText("");
+        et_title.setText("");
+        et_name.setText("");
+        et_surname.setText("");
+        et_state.setText("");
+        et_zip.setText("");
         et_username.setText("");
         et_password.setText("");
 
-        Log.i(LoginActivity.class.getName(), "started.");
+        Log.i(RegisterActivity.class.getName(), "started.");
     }
 
     /**
@@ -88,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Log.i(LoginActivity.class.getName(), "resumed.");
+        Log.i(RegisterActivity.class.getName(), "resumed.");
     }
 
     /**
@@ -97,7 +98,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        Log.i(LoginActivity.class.getName(), "restarted.");
+        Log.i(RegisterActivity.class.getName(), "restarted.");
     }
 
     /**
@@ -106,7 +107,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        Log.i(LoginActivity.class.getName(), "paused.");
+        Log.i(RegisterActivity.class.getName(), "paused.");
     }
 
     /**
@@ -115,7 +116,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        Log.i(LoginActivity.class.getName(), "stopped.");
+        Log.i(RegisterActivity.class.getName(), "stopped.");
     }
 
     /**
@@ -124,7 +125,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.i(LoginActivity.class.getName(), "destroyed.");
+        Log.i(RegisterActivity.class.getName(), "destroyed.");
     }
 
     /**
@@ -136,41 +137,31 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         public void onClick (View view) {
 
-            if (view.getId() == R.id.register) {
-                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                startActivity(intent);
+            // get the string text from the text editors
+            String gender = et_gender.getText().toString();
+            String title = et_title.getText().toString();
+            String name = et_name.getText().toString();
+            String surname = et_surname.getText().toString();
+            String state = et_state.getText().toString();
+            String zip = et_zip.getText().toString();
+            String username = et_username.getText().toString();
+            String password = et_password.getText().toString();
+
+            // check the validity of the inputs
+            WarningResult warningResult = checkInputsAndGetWarning(username, password);
+
+            // show a warning message if the inputs are empty.
+            if (warningResult.isInvalid) {
+                showWarning(warningResult.text);
+                return;
             }
-            else {
-                // get the string text from the text editors
-                String username = et_username.getText().toString();
-                String password = et_password.getText().toString();
 
-                // check the validity of the inputs
-                WarningResult warningResult = checkInputsAndGetWarning(username, password);
+            // get the resources object
+            Resources resources = getResources();
 
-                // show a warning message if the inputs are empty.
-                if (warningResult.isInvalid) {
-                    showWarning(warningResult.text);
-                    return;
-                }
-
-                // get the resources object
-                Resources resources = getResources();
-
-                // check the validity of the user credentials. Show a warning message if it is invalid.
-                Users.User user = Users.userLoginValid(username, Hasher.hash(password));
-
-                if (user == null) {
-                    showWarning(resources.getString(R.string.warning_invalid_credential));
-                    return;
-                }
-
-
-                // start a new activity, which is searching through the marketplace, when the credentials are valid.
-                Intent intent = new Intent(LoginActivity.this, ItemsViewActivity.class);
-                intent.putExtra("user", user);
-                startActivity(intent);
-            }
+            // start a new activity, which is searching through the marketplace, when the credentials are valid.
+            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+            startActivity(intent);
         }
     };
 
@@ -202,7 +193,7 @@ public class LoginActivity extends AppCompatActivity {
      * @param password
      * @return a WarningResult when input is empty
      */
-    private WarningResult checkInputsAndGetWarning(String username,  String password) {
+    private RegisterActivity.WarningResult checkInputsAndGetWarning(String username, String password) {
 
         Resources resources = getResources();
         boolean isInvalid = false;
@@ -229,4 +220,3 @@ public class LoginActivity extends AppCompatActivity {
         return text == null || text.length() <= 0;
     }
 }
-

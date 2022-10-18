@@ -16,27 +16,37 @@ collaboration:
 
 # add as many "url+licence+comment" entries as necessary
 # (or remove it altogether if you haven't used any external code)
-code: CSVReader
-  - comment: Creates a list of list from an input stream of a CSV.
+code:
+  - comment: "CSVReader class: Creates a list of list from an input stream of a CSV."
     url: http://www.java2s.com/example/java-utility-method/csv-file-parse/parsecsv-inputstream-csvinput-3765b.html
     licence: Open Source License (GNU)
-
+  - comment: AVL Tree Code Structure
+    url: https://www.baeldung.com/java-avl-trees
+    license: Company Use License (Allowing to copy for personal use)
+  - comment: Login Activity Code Structure
+    url: Week 7 Lecture
+    license: N/A
 
 # add as many "url+licence+comment" entries as necessary
 # (or remove it altogether if you haven't used any external assets)
 assets:
-  # NOTE: "Bliss" is just here as an example, you SHOULD REMOVE IT
-  - comment: "_Bliss_ by Charles O'Rear"
-    url: https://en.wikipedia.org/wiki/Bliss_(image)
-    licence: fair use
+  - comment: "Item and user photos are from Unsplash, whose license allows for use without citing the specific photographer as there are many. Some photos have been edited to better fit the product description"
+    url: https://unsplash.com/license
+    licence: Unsplash license
+  - comment: "Item, User and Seller data have been adapted from Microsoft's and SQL-BI's Contoso dataset"
+      url: https://github.com/sql-bi/Contoso-Data-Generator
+      licence: MIT license
+  - comment: "Android Gradient Wallpapers"
+    url: https://wallpaperaccess.com/android-gradient
+    license: free culture license
 
 # for each member, write your name and uid here
 # remove any empty "name+uid" entries
 members:
-  - name:
-    uid:
-  - name:
-    uid:
+  - name: Vincent Tanumihardja
+    uid: u7145408
+  - name: Andrew Howes
+    uid: u1058852
   - name:
     uid:
   - name:

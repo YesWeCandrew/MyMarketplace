@@ -2,18 +2,19 @@ package com.example.mymarketplace;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 
-import com.example.mymarketplace.Entities.AVLTree;
+import com.example.mymarketplace.Search.AVLTree;
 import com.example.mymarketplace.Entities.Items;
-import com.example.mymarketplace.Entities.Token;
-import com.example.mymarketplace.Entities.Tokenizer;
+import com.example.mymarketplace.Search.Token;
+import com.example.mymarketplace.Search.Tokenizer;
 
 import java.util.ArrayList;
 
@@ -24,6 +25,8 @@ import java.util.ArrayList;
 public class SearchActivity extends AppCompatActivity {
 
     private EditText searchBox;
+    private Button searchButton;
+    private ListView itemsList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,12 @@ public class SearchActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        searchBox = (EditText) findViewById(R.id.editTextTextPersonName2);
+        searchBox.setText("");
+        searchButton = (Button) findViewById(R.id.button);
+        searchButton.setText("Search");
+        searchButton.setOnClickListener(buttonListener);
+        itemsList = (ListView) findViewById(R.id.itemsListView);
         Log.i(LoginActivity.class.getName(), "started.");
     }
 
@@ -83,12 +92,12 @@ public class SearchActivity extends AppCompatActivity {
         @Override
         public void onClick (View view) {
 
-            ArrayList<Items.Item> resultItems = new ArrayList<Items.Item>();
+            ArrayList<Items.Item> resultItems = Items.getItems();
 
             // get the string text from the text editors
             String searchTerm = searchBox.getText().toString();
 
-            ArrayList<Token> searchTokens = new ArrayList<Token>();
+            ArrayList<Token> searchTokens;
             Tokenizer tokenizer = new Tokenizer(searchTerm);
             searchTokens = tokenizer.tokens;
 
@@ -137,12 +146,15 @@ public class SearchActivity extends AppCompatActivity {
                 }
             }
 
-            //the final items are now held in resultItems
+            ArrayList<String> productName = new ArrayList<>();
 
-            // might have to restart the items view activity??
-          //  Intent intent = new Intent(LoginActivity.this, ItemsViewActivity.class);
-          //  intent.putExtra("userID",userID);
-          //  startActivity(intent);
+            for(Items.Item i : resultItems) {
+                String itemVal = i.productName;
+                productName.add(itemVal);
+            }
+
+          //  ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, productName);
+          // itemsList.setAdapter(arrayAdapter);
         }
     };
 }

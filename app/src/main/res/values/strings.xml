@@ -5,8 +5,27 @@
     <string name="password">Password</string>
     <string name="warning_invalid_credential">Invalid username/password</string>
     <string name="warning_empty_credential">%1$s cannot be empty.</string>
-    <string name="listViewText">Hi</string>
+    <string name="listViewText">Welcome back</string>
     <string name="welcomeToMarket">Welcome to MyMarketplace</string>
+    <string name="happybrowsing">! Suggested for you</string>
+
+    <!--    ItemInfo Strings-->
     <string name="singleItem">Display Single Item Info</string>
     <string name="itemImageViewDescription">An image of the item.</string>
+    <string name="CartButton">Add to cart</string>
+    <string name="LearnMoreSeller">Learn more about seller</string>
+    <string name="ItemDescription">About item</string>
+    <string name="ItemPrice">$12.00</string>
+    <string name="ItemStock">5 available</string>
+    <string name="ItemReviews">No reviews yet.</string>
+    <string name="ScamWarningTitle">Warning: Possible scam</string>
+    <string name="ScamWarningMessage">Our systems have flagged this product as a possible scam. Proceed with caution.</string>
+
+    <!--    SellerInfo String-->
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="maps_speakable_text">Map showing the store location</string>
+    <string name="SellerName"></string>
+    <string name="SellerAddress"></string>
+
+
 </resources>

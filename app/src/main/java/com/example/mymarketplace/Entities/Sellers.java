@@ -4,6 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class stores the seller data type
+ * @author: Andrew Howes
+ */
 public class Sellers {
 
     // Singleton instance of Sellers
@@ -40,7 +44,7 @@ public class Sellers {
      * to the sellers instance.
      * @param csvAsListOfLists the output of CSVReader for the Sellers file.
      */
-    public static void sellersFromCSV(List<List<String>> csvAsListOfLists) {
+    static void sellersFromCSV(List<List<String>> csvAsListOfLists) {
         for (List<String> row : csvAsListOfLists) {
             Sellers.addSeller(new Seller(
                     Integer.parseInt(row.get(0)),
@@ -68,11 +72,10 @@ public class Sellers {
     /**
      * Adds an seller to the singleton's seller list
      * @param seller the seller to add
-     * @return if the seller was successfully added
      * @author Andrew Howes
      */
-    public static boolean addSeller(Seller seller) {
-        return getInstance().sellers.add(seller);
+    public static void addSeller(Seller seller) {
+        getInstance().sellers.add(seller);
     }
 
     /**
@@ -88,6 +91,7 @@ public class Sellers {
         public String country;
         public double latitude;
         public double longitude;
+        public String addressAsText;
 
         /**
          * Internal constructor of a seller
@@ -112,6 +116,7 @@ public class Sellers {
             this.country = country;
             this.latitude = latitude;
             this.longitude = longitude;
+            this.addressAsText = address + ", " + suburb + ", " + state;
         }
     }
 }
