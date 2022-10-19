@@ -98,14 +98,14 @@ public class SearchActivity extends AppCompatActivity {
             String searchTerm = searchBox.getText().toString();
 
             ArrayList<Token> searchTokens;
-            Tokenizer tokenizer = new Tokenizer(searchTerm);
+            Tokenizer tokenizer = new Tokenizer();
             searchTokens = tokenizer.tokens;
 
             boolean hasPName = false;
 
             for (Token t : searchTokens) { //look for a product name token first
                 if (t.getType() == Token.Type.PNAME) {
-                    resultItems.add(AVLTree.search(t.getToken()).getItem());
+           //         resultItems.add(avlTree.search(t.getToken()).getItem());
                     hasPName = true;
                 }
             }

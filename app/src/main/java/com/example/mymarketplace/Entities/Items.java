@@ -1,5 +1,9 @@
 package com.example.mymarketplace.Entities;
 
+import android.util.Log;
+
+import com.example.mymarketplace.Search.AVLTree;
+
 import java.io.Serializable;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
@@ -45,8 +49,9 @@ public class Items {
      * Constructor that adds all of the items in the list of list from the csv
      * to the items instance.
      * @param csvAsListOfLists the output of CSVReader for the Items file.
+     * @param tree the tree to add the items to
      */
-    static void itemsFromCSV(List<List<String>> csvAsListOfLists) {
+    static void itemsFromCSV(List<List<String>> csvAsListOfLists, AVLTree tree) {
         for (List<String> row : csvAsListOfLists) {
             addItem(new Item(
                     Integer.parseInt(row.get(0)),
@@ -58,8 +63,9 @@ public class Items {
                     row.get(6),
                     row.get(7),
                     row.get(8)
-            ));
+            ), tree);
         }
+        Log.i("itemsFromCSV", tree.root.toString());
     }
 
     /**
@@ -74,9 +80,15 @@ public class Items {
     /**
      * Adds an item to the singleton's item list
      * @param item the item to add
+     * @param tree the tree to add the item to
      * @author Andrew Howes
      */
-    public static void addItem(Item item) {getInstance().items.add(item);}
+    public static void addItem(Item item, AVLTree tree) {
+        getInstance().items.add(item);
+        Log.i("item name:", item.toString());
+        tree.insert(item);
+        Log.i("tree root:", tree.root.toString());
+    }
 
     /**
      * Reads the currentStock for the item from the Stock singleton and stores it within the class
@@ -161,6 +173,11 @@ public class Items {
             this.priceAsText = "$"+price+".00";
             this.quantityAsText = "Out of stock!";
             this.averageRatingAsText = "No reviews yet.";
+        }
+
+        @Override
+        public String toString(){
+            return productName;
         }
     }
 
