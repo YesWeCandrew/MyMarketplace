@@ -4,54 +4,61 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import com.example.mymarketplace.Entities.Items;
 import com.example.mymarketplace.R;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.List;
 
-public class CustomListViewAdapter extends ArrayAdapter {
+public class CustomListViewAdapter extends ArrayAdapter<Items.Item> {
 
-    int[] images;
-    ArrayList<String> itemName;
-    ArrayList<String> sellerName;
-    ArrayList<String> averageRating;
+    Context context;
 
-    // Constructor
-    public CustomListViewAdapter(Context context, int[] images, ArrayList<String> itemName, ArrayList<String> sellerName, ArrayList<String> averageRating) {
-        super(context, R.layout.individual_list_item, R.id.itemName, itemName);
-        this.images = images;
-        this.itemName = itemName;
-        this.sellerName = sellerName;
-        this.averageRating = averageRating;
+    // View lookup cache
+    private static class ViewHolder {
+        TextView itemName;
+        TextView sellerName;
+        TextView itemRating;
+        ImageView itemImg;
     }
 
-    // Generate View Method
-    @NonNull
+    public CustomListViewAdapter(ArrayList<Items.Item> data, Context mcontext) {
+        super(mcontext, R.layout.individual_list_item, data);
+        this.context=mcontext;
+    }
+
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        LayoutInflater layoutInflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View singleItem = layoutInflater.inflate(R.layout.individual_list_item, parent, false);
+    public View getView(int position, View convertView, ViewGroup parent) {
+        Items.Item item = getItem(position);
+        ViewHolder viewHolder;
 
-        ImageView itemImgIV = singleItem.findViewById(R.id.itemImage);
-        TextView itemNameTV = singleItem.findViewById(R.id.itemName);
-        TextView sellerNameTV = singleItem.findViewById(R.id.sellerName);
-        TextView averageRatingTV = singleItem.findViewById(R.id.averageRating);
+        if (convertView == null) {
 
-        itemImgIV.setImageResource(images[position]);
-        itemNameTV.setText(itemName.get(position));
-        sellerNameTV.setText(sellerName.get(position));
-        averageRatingTV.setText(averageRating.get(position));
+            viewHolder = new ViewHolder();
+            LayoutInflater inflater = LayoutInflater.from(getContext());
+            convertView = inflater.inflate(R.layout.individual_list_item, parent, false);
+            viewHolder.itemName = convertView.findViewById(R.id.itemName);
+            viewHolder.sellerName = convertView.findViewById(R.id.sellerName);
+            viewHolder.itemRating = convertView.findViewById(R.id.averageRating);
+            viewHolder.itemImg = convertView.findViewById(R.id.itemImage);
 
-        return singleItem;
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
+
+        viewHolder.itemName.setText(item.productName);
+        viewHolder.sellerName.setText(item.sellerName);
+        viewHolder.itemRating.setText(item.averageRatingAsText);
+
+        int itemPhotoDir = context.getResources().getIdentifier(item.photoDirectory,"drawable", context.getPackageName());
+        viewHolder.itemImg.setImageResource(itemPhotoDir);
+
+        // Render the view
+        return convertView;
     }
 }

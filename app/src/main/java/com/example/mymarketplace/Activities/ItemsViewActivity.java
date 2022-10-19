@@ -41,8 +41,7 @@ import java.util.Collections;
  */
 public class ItemsViewActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    private SwipeRefreshLayout swiperefresh;
-    private ArrayAdapter myListAdapter;
+    private SwipeRefreshLayout swipeRefresh;
     private EditText searchBox;
     private Button searchButton;
     private ListView itemListView;
@@ -50,15 +49,7 @@ public class ItemsViewActivity extends AppCompatActivity implements AdapterView.
     private String[] sortByTypes = {"Price (Low to High)", "Price (High to Low)", "Name"};
     private Users.User user;
     private ArrayList<Items.Item> currDisplayedItems; //the current list of items the view is displaying
-    private int[] images = {R.drawable.item0, R.drawable.item1, R.drawable.item2, R.drawable.item3, R.drawable.item4, R.drawable.item5,
-            R.drawable.item6, R.drawable.item7, R.drawable.item8, R.drawable.item9, R.drawable.item10, R.drawable.item11,
-            R.drawable.item12, R.drawable.item13,R.drawable.item14, R.drawable.item15, R.drawable.item16, R.drawable.item17,
-            R.drawable.item18, R.drawable.item19, R.drawable.item20, R.drawable.item21, R.drawable.item22, R.drawable.item23,
-            R.drawable.item24, R.drawable.item25, R.drawable.item26, R.drawable.item27, R.drawable.item28, R.drawable.item29,
-            R.drawable.item30, R.drawable.item31, R.drawable.item32, R.drawable.item33, R.drawable.item34, R.drawable.item35,
-            R.drawable.item36, R.drawable.item37, R.drawable.item38, R.drawable.item39, R.drawable.item40, R.drawable.item41,
-            R.drawable.item42, R.drawable.item43, R.drawable.item44, R.drawable.item45, R.drawable.item46, R.drawable.item47,
-            R.drawable.item48, R.drawable.item49};
+    private static CustomListViewAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +57,7 @@ public class ItemsViewActivity extends AppCompatActivity implements AdapterView.
         setContentView(R.layout.activity_items_view);
 
         // Getting the user and ensuring state is successful
-        Users.User user = getIntent().getSerializableExtra("user", Users.User.class);
+        user = getIntent().getSerializableExtra("user", Users.User.class);
         LoginState state = getIntent().getSerializableExtra("state", LoginState.class);
 
         // Checking the application state
@@ -119,7 +110,8 @@ public class ItemsViewActivity extends AppCompatActivity implements AdapterView.
             is = am.open("Reviews.csv");
             Database.importData(is, Database.DataType.Reviews);
 
-            // Getting the first batch of stock data and updating item stock
+            // Getting the first two batches of stock data and updating item stock
+            Database.updateData();
             Database.updateData();
 
             is.close();
@@ -144,41 +136,23 @@ public class ItemsViewActivity extends AppCompatActivity implements AdapterView.
         ArrayList<Items.Item> itemList = Items.getItems(); // List of Items
         //ListView of all the product names
         itemListView = (ListView) findViewById(R.id.itemsListView);
-        swiperefresh = (SwipeRefreshLayout) findViewById(R.id.swiperefresh);
+        swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
         currDisplayedItems = itemList;
-        updateListView(currDisplayedItems);
-    }
 
-    /** Updates the displayed items list to instead display a new list of items
-     * @param items list of items to be displayed
-     */
-    public void updateListView(ArrayList<Items.Item> items){
-        ArrayList<String> productName = new ArrayList<>();
-        ArrayList<String> itemName = new ArrayList<>();
-        ArrayList<String> sellerName = new ArrayList<>();
-        ArrayList<String> averageRating = new ArrayList<>();
+        adapter = new CustomListViewAdapter(currDisplayedItems,getApplicationContext());
 
-        for(Items.Item i : items) {
-            String itemVal = i.productName;
-            productName.add(itemVal);
-        }
-        for(Items.Item i : items) {
-            String itemName2 = i.productName;
-            String sellerName2 = i.sellerName;
-            String averageRating2 = i.averageRatingAsText;
+        itemListView.setAdapter(adapter);
+        itemListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-            itemName.add(itemName2);
-            sellerName.add(sellerName2);
-            averageRating.add(averageRating2);
-        }
+                Items.Item item = currDisplayedItems.get(position);
 
-        ListView itemListView = (ListView) findViewById(R.id.itemsListView);
-
-        CustomListViewAdapter customListViewAdapter = new CustomListViewAdapter(this, images, itemName, sellerName, averageRating);
-        itemListView.setAdapter(customListViewAdapter);
+            }
+        });
 
         // Swipe Refresh
-        swiperefresh = (SwipeRefreshLayout) findViewById(R.id.swiperefresh);
+        swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
 
         itemListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -188,10 +162,10 @@ public class ItemsViewActivity extends AppCompatActivity implements AdapterView.
                 startActivity(intent);
             }
         });
-        swiperefresh.setOnRefreshListener(() -> {
+        swipeRefresh.setOnRefreshListener(() -> {
             Database.updateData();
-            myListAdapter.notifyDataSetChanged();
-            swiperefresh.setRefreshing(false);
+            adapter.notifyDataSetChanged();
+            swipeRefresh.setRefreshing(false);
         });
     }
 
@@ -258,7 +232,7 @@ public class ItemsViewActivity extends AppCompatActivity implements AdapterView.
                 }
             }
             currDisplayedItems = resultItems;
-            updateListView(currDisplayedItems);
+            adapter.notifyDataSetChanged();
         }
     };
 
@@ -270,14 +244,14 @@ public class ItemsViewActivity extends AppCompatActivity implements AdapterView.
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if (position == 0) { //by price, low to high
             currDisplayedItems = Items.getInstance().sortByPrice(currDisplayedItems);
-            updateListView(currDisplayedItems);
+            adapter.notifyDataSetChanged();
         } else if (position == 1) { //by price, high to low
             currDisplayedItems = Items.getInstance().sortByPrice(currDisplayedItems);
             Collections.reverse(currDisplayedItems);
-            updateListView(currDisplayedItems);
+            adapter.notifyDataSetChanged();
         } else if (position == 2) { //by name
             currDisplayedItems = Items.getInstance().sortByName(currDisplayedItems);
-            updateListView(currDisplayedItems);
+            adapter.notifyDataSetChanged();
         }
     }
 
