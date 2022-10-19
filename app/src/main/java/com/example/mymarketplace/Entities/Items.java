@@ -163,11 +163,7 @@ public class Items {
             this.averageRatingAsText = "No reviews yet.";
         }
     }
-    public ArrayList<Items.Item> sortByPrice (ArrayList<Items.Item> items){
-        return items;
-    }
 
-    public ArrayList<Items.Item> sortByName (ArrayList<Items.Item> items){
-        return items;
-    }
+
+
 }

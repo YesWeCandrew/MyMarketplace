@@ -33,23 +33,24 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * This activity creates a list of items sold on the marketplace for the user
  * This class implements state design pattern where only logged in users may proceed to view item details
  * @author: Andrew Howes, Vincent Tanumihardja, Matthew Cawley, Long Vu
  */
-public class ItemsViewActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class ItemsViewActivity extends AppCompatActivity {
 
     private SwipeRefreshLayout swipeRefresh;
     private EditText searchBox;
     private Button searchButton;
     private ListView itemListView;
     private Spinner sortByMenu;
-    private String[] sortByTypes = {"Price (Low to High)", "Price (High to Low)", "Name"};
+    private final String[] sortByTypes = {"Price (Low to High)", "Price (High to Low)", "Reviews (High to Low)", "Name"};
     private Users.User user;
     private ArrayList<Items.Item> currDisplayedItems; //the current list of items the view is displaying
-    private static CustomListViewAdapter adapter;
+    private CustomListViewAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,18 +79,18 @@ public class ItemsViewActivity extends AppCompatActivity implements AdapterView.
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(this.getResources().getColor(R.color.ocean));
 
-        searchBox = (EditText) findViewById(R.id.editTextSearch);
+        searchBox = findViewById(R.id.editTextSearch);
         searchBox.setText("");
-        searchButton = (Button) findViewById(R.id.button);
+        searchButton = findViewById(R.id.button);
         searchButton.setOnClickListener(searchButtonPress);
         user = getIntent().getSerializableExtra("user", Users.User.class);
 
         //setup spinner (the drop down menu for sort type)
-        sortByMenu = (Spinner) findViewById(R.id.spinner);
-        ArrayAdapter aa = new ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, sortByTypes);
-        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sortByMenu.setAdapter(aa);
-//        sortByMenu.setOnItemClickListener((AdapterView.OnItemClickListener) this);
+        sortByMenu = findViewById(R.id.spinner);
+        ArrayAdapter sortByAdapter = new ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, sortByTypes);
+        sortByAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sortByMenu.setAdapter(sortByAdapter);
+        sortByMenu.setOnItemSelectedListener(sortByClicked);
 
         // Load all assets to the correct classes
         AssetManager am = this.getAssets();
@@ -128,51 +129,73 @@ public class ItemsViewActivity extends AppCompatActivity implements AdapterView.
         // Set the user image
         sellerImageView.setImageResource(userPhotoDir);
 
-
-        /**
-         * Displaying Products in ListView
-         */
-
         ArrayList<Items.Item> itemList = Items.getItems(); // List of Items
         //ListView of all the product names
-        itemListView = (ListView) findViewById(R.id.itemsListView);
-        swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
+        itemListView =  findViewById(R.id.itemsListView);
+        swipeRefresh = findViewById(R.id.swipeRefresh);
+
         currDisplayedItems = itemList;
+        // Sort by price high to low by default
+        currDisplayedItems.sort((Comparator.comparingInt(item1 -> item1.price)));
+        Collections.reverse(currDisplayedItems);
 
         adapter = new CustomListViewAdapter(currDisplayedItems,getApplicationContext());
 
         itemListView.setAdapter(adapter);
-        itemListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        itemListView.setOnItemClickListener(itemClicked);
 
-                Items.Item item = currDisplayedItems.get(position);
-
-            }
-        });
-
-        // Swipe Refresh
         swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
-
-        itemListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(ItemsViewActivity.this, ItemInfo.class);
-                intent.putExtra("item", Items.getItems().get(position));
-                startActivity(intent);
-            }
-        });
         swipeRefresh.setOnRefreshListener(() -> {
             Database.updateData();
             adapter.notifyDataSetChanged();
             swipeRefresh.setRefreshing(false);
         });
+
     }
+
+
+
+    private final AdapterView.OnItemClickListener itemClicked = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Intent intent = new Intent(ItemsViewActivity.this, ItemInfo.class);
+            intent.putExtra("item", currDisplayedItems.get(position));
+            startActivity(intent);
+        }
+    };
+
+
+    private final AdapterView.OnItemSelectedListener sortByClicked = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            if (position == 0) { //by price, low to high
+                currDisplayedItems.sort((Comparator.comparingInt(item1 -> item1.price)));
+                adapter.notifyDataSetChanged();
+            } else if (position == 1) { //by price, high to low
+                currDisplayedItems.sort((Comparator.comparingInt(item1 -> item1.price)));
+                Collections.reverse(currDisplayedItems);
+                adapter.notifyDataSetChanged();
+            } else if (position == 2) { //by reviews, high to low
+                currDisplayedItems.sort((Comparator.comparingDouble(item1 -> item1.averageRating)));
+                Collections.reverse(currDisplayedItems);
+                adapter.notifyDataSetChanged();
+            }
+            else { //by name
+                currDisplayedItems.sort((Comparator.comparing(item1 -> item1.productName)));
+                adapter.notifyDataSetChanged();
+            }
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> adapterView) {
+
+        }
+    };
 
     /**
      * Called when the search button is pressed
      */
-    private View.OnClickListener searchButtonPress = new View.OnClickListener() {
+    private final View.OnClickListener searchButtonPress = new View.OnClickListener() {
         @Override
         public void onClick (View view) {
             ArrayList<Items.Item> resultItems = Items.getItems();
@@ -200,63 +223,19 @@ public class ItemsViewActivity extends AppCompatActivity implements AdapterView.
             }
             for (Token t : searchTokens){ //then go through the rest of the tokens
                 if(t.getType() == Token.Type.SNAME){
-                    for(Items.Item i : resultItems){
-                        if(!i.sellerName.equals(t.getToken())){
-                            resultItems.remove(i);
-                        }
-                    }
+                    resultItems.removeIf(i -> !i.sellerName.equals(t.getToken()));
                 }if(t.getType() == Token.Type.CAT){
-                    for(Items.Item i : resultItems){
-                        if(!i.category.equals(t.getToken())){
-                            resultItems.remove(i);
-                        }
-                    }
+                    resultItems.removeIf(i -> !i.category.equals(t.getToken()));
                 }if(t.getType() == Token.Type.SUBCAT){
-                    for(Items.Item i : resultItems){
-                        if(!i.subcategory.equals(t.getToken())){
-                            resultItems.remove(i);
-                        }
-                    }
+                    resultItems.removeIf(i -> !i.subcategory.equals(t.getToken()));
                 }if(t.getType() == Token.Type.PRICEMAX){
-                    for(Items.Item i : resultItems){
-                        if(i.price >= Integer.parseInt(t.getToken())){
-                            resultItems.remove(i);
-                        }
-                    }
+                    resultItems.removeIf(i -> i.price >= Integer.parseInt(t.getToken()));
                 }if(t.getType() == Token.Type.PRICEMIN){
-                    for(Items.Item i : resultItems){
-                        if(i.price <= Integer.parseInt(t.getToken())){
-                            resultItems.remove(i);
-                        }
-                    }
+                    resultItems.removeIf(i -> i.price <= Integer.parseInt(t.getToken()));
                 }
             }
             currDisplayedItems = resultItems;
             adapter.notifyDataSetChanged();
         }
     };
-
-    /**
-     * Called when one of the options in the drop-down menu for the sort by button is pressed.
-     * @param position the button that was pressed
-     */
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        if (position == 0) { //by price, low to high
-            currDisplayedItems = Items.getInstance().sortByPrice(currDisplayedItems);
-            adapter.notifyDataSetChanged();
-        } else if (position == 1) { //by price, high to low
-            currDisplayedItems = Items.getInstance().sortByPrice(currDisplayedItems);
-            Collections.reverse(currDisplayedItems);
-            adapter.notifyDataSetChanged();
-        } else if (position == 2) { //by name
-            currDisplayedItems = Items.getInstance().sortByName(currDisplayedItems);
-            adapter.notifyDataSetChanged();
-        }
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
 }
