@@ -14,28 +14,28 @@
         android:theme="@style/Theme.MyMarketplace"
         tools:targetApi="31">
         <activity
-            android:name=".OrderConfirmationActivity"
+            android:name=".Activities.OrderConfirmationActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".PaymentActivity"
+            android:name=".Activities.PaymentActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".RegisterActivity"
+            android:name=".Activities.RegisterActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".SellerInfo"
+            android:name=".Activities.SellerInfo"
             android:exported="false" />
 
         <meta-data
@@ -46,20 +46,20 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".ItemInfo"
+            android:name=".Activities.ItemInfo"
             android:exported="false" />
         <activity
-            android:name=".ItemsViewActivity"
+            android:name=".Activities.ItemsViewActivity"
             android:exported="true" />
         <activity
-            android:name=".SearchActivity"
+            android:name=".Activities.SearchActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".Activities.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -5,7 +5,7 @@
     <string name="password">Password</string>
     <string name="warning_invalid_credential">Invalid username/password</string>
     <string name="warning_empty_credential">%1$s cannot be empty.</string>
-    <string name="listViewText">Welcome back</string>
+    <string name="listViewText">Hi, </string>
     <string name="welcomeToMarket">Welcome to MyMarketplace</string>
     <string name="happybrowsing">! Suggested for you</string>
 
@@ -20,6 +20,13 @@
     <string name="ItemReviews">No reviews yet.</string>
     <string name="ScamWarningTitle">Warning: Possible scam</string>
     <string name="ScamWarningMessage">Our systems have flagged this product as a possible scam. Proceed with caution.</string>
+    <string name="Spinnerdescription">Select the filter</string>
+    <string name="SearchAutofill">Search</string>
+    <string name="SpinnerText">Sort by</string>
+    <string name="SearchButtonText">Search</string>
+    <string name="UserImageDescription">The users profile photo</string>
+
+
 
     <!--    SellerInfo String-->
     <string name="title_activity_maps">MapsActivity</string>

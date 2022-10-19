@@ -1,4 +1,4 @@
-package com.example.mymarketplace;
+package com.example.mymarketplace.Activities;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import com.example.mymarketplace.Entities.Items;
 import com.example.mymarketplace.Entities.Sellers;
+import com.example.mymarketplace.R;
+import com.example.mymarketplace.Helpers.ScamChecker;
 
 /**
  * This activity creates a page with specific item descriptions for the selected item

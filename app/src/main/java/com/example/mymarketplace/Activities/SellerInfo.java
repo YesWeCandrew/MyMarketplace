@@ -1,4 +1,4 @@
-package com.example.mymarketplace;
+package com.example.mymarketplace.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.example.mymarketplace.Entities.Sellers;
+import com.example.mymarketplace.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
