@@ -1,5 +1,7 @@
 package com.example.mymarketplace.Search;
 
+import android.util.Log;
+
 import com.example.mymarketplace.Entities.Items;
 
 /**
@@ -11,7 +13,11 @@ import com.example.mymarketplace.Entities.Items;
  */
 public class AVLTree {
 
-    public static Node root;
+    public Node root;
+
+    public AVLTree(){
+        root = new Node();
+    }
 
     // updates the height of the tree
     void updateHeight(Node node) {
@@ -82,25 +88,31 @@ public class AVLTree {
         return node;
     }
 
+    public void insert(Items.Item item){
+        insert2(root, item);
+    }
+
     // insert a new node if there is no matching price, insert on the left of the node if price is lower,
     // insert on right of the node if price is higher and only insert the attributes when price is similar
     // You are supposed to call this function with the root node originally, it will recurse down the tree
-    Node insert(Node node, Items.Item item) {
-        if (node == null) {
-            return new Node(item);
-        }
-        else if (node.getProductName().compareTo(item.productName) < 0) {
-            node.left = insert(node.left, item);
-        }
-        else if (node.getProductName().compareTo(item.productName) > 0) {
-            node.right = insert(node.right, item);
+    Node insert2(Node node, Items.Item item) {
+        if (node.item == null) {
+            node = new Node(item);
+        }else{
+            if (node.getProductName().compareTo(item.productName) < 0) {
+                node.left = insert2(node.left, item);
+            } else if (node.getProductName().compareTo(item.productName) > 0) {
+                node.right = insert2(node.right, item);
+            }
         }
         return balance(node);
     }
 
     // return a list of items with the searched name, null if there is none
-    public static Node search(String name) {
+    public Node search(String name) {
+        Log.i("h","h");
         Node current = root;
+        Log.i("LOGPART2", current.toString());
         while (current != null) {
             if (current.item.productName.equals(name)) {
                 break;

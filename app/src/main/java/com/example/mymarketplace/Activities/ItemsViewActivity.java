@@ -51,11 +51,13 @@ public class ItemsViewActivity extends AppCompatActivity {
     private Users.User user;
     private ArrayList<Items.Item> currDisplayedItems; //the current list of items the view is displaying
     private CustomListViewAdapter adapter;
+    private AVLTree avlTree;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_items_view);
+        avlTree = new AVLTree();
 
         // Getting the user and ensuring state is successful
         user = getIntent().getSerializableExtra("user", Users.User.class);
@@ -97,19 +99,19 @@ public class ItemsViewActivity extends AppCompatActivity {
         try {
             // Inputting items
             InputStream is = am.open("Items.csv");
-            Database.importData(is, Database.DataType.Items);
+            Database.importData(is, Database.DataType.Items, avlTree);
 
             // Inputting sellers
             is = am.open("Sellers.csv");
-            Database.importData(is, Database.DataType.Sellers);
+            Database.importData(is, Database.DataType.Sellers, avlTree);
 
             // Inputting stock
             is = am.open("Stock.csv");
-            Database.importData(is, Database.DataType.Stock);
+            Database.importData(is, Database.DataType.Stock, avlTree);
 
             // Inputting
             is = am.open("Reviews.csv");
-            Database.importData(is, Database.DataType.Reviews);
+            Database.importData(is, Database.DataType.Reviews, avlTree);
 
             // Getting the first two batches of stock data and updating item stock
             Database.updateData();
@@ -203,26 +205,42 @@ public class ItemsViewActivity extends AppCompatActivity {
             String searchTerm = searchBox.getText().toString();
 
             ArrayList<Token> searchTokens;
-            Tokenizer tokenizer = new Tokenizer(searchTerm);
-            searchTokens = tokenizer.getTokens();
+            Tokenizer tokenizer = new Tokenizer();
+            searchTokens = tokenizer.Tokenize(searchTerm);
 
             boolean hasPName = false;
 
-            if(searchTokens.size() < 1){
+            if(searchTokens.get(0).getType() == Token.Type.NULL){
+                if(searchTokens.get(0).getToken() == "noColonError"){
+                    Toast toast = Toast.makeText(getApplicationContext(), "Missing colon in search term", Toast.LENGTH_LONG);
+                    toast.show();
+                }
+                else if(searchTokens.get(0).getToken() == "incorrectSearchType"){
+                    Toast toast = Toast.makeText(getApplicationContext(), "Invalid Search Term", Toast.LENGTH_LONG);
+                    toast.show();
+                }
                 return;
             }
 
-            for (Token t : searchTokens) { //look for a product name token first
+            if(searchTokens.size() < 1){
+                Toast toast = Toast.makeText(getApplicationContext(), "No valid search terms found", Toast.LENGTH_LONG);
+                toast.show();
+                return;
+            }
+
+           /* for (Token t : searchTokens) { //look for a product name token first
                 if (t.getType() == Token.Type.PNAME) {
-                    resultItems.add(AVLTree.search(t.getToken()).getItem());
+                    resultItems.add(avlTree.search(t.getToken()).getItem());
                     hasPName = true;
                 }
-            }
-            if(!hasPName) {
+            } */
+       //     if(!hasPName) {
                 resultItems = Items.getItems(); //if they don't provide a product name, have to search through all
-            }
+       //     }
             for (Token t : searchTokens){ //then go through the rest of the tokens
-                if(t.getType() == Token.Type.SNAME){
+                if(t.getType() == Token.Type.PNAME){
+                    resultItems.removeIf(i -> !i.productName.equals(t.getToken()));
+                }if(t.getType() == Token.Type.SNAME){
                     resultItems.removeIf(i -> !i.sellerName.equals(t.getToken()));
                 }if(t.getType() == Token.Type.CAT){
                     resultItems.removeIf(i -> !i.category.equals(t.getToken()));

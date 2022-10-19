@@ -16,7 +16,18 @@ public class Node {
         this.item = item;
     }
 
+    public Node() {}
+
     public String getProductName(){return item.productName;}
 
     public Items.Item getItem(){return item;}
+
+    @Override
+    public String toString(){
+        if(item == null){
+            return "item null";
+        }else {
+            return item.toString();
+        }
+    }
 }

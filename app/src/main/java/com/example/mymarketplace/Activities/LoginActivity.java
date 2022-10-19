@@ -65,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
         AssetManager am = this.getAssets();
         try {
             InputStream is = am.open("Users.csv");
-            Database.importData(is, Database.DataType.Users);
+            Database.importData(is, Database.DataType.Users, null);
             is.close();
         } catch (IOException e) {
             e.printStackTrace();

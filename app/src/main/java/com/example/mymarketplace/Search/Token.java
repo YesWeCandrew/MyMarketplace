@@ -8,8 +8,7 @@ import java.util.Objects;
  * @author Matthew Cawley
  */
 public class Token {
-    // The following enum defines different types of tokens. Example of accessing these: Token.Type.INT
-    public enum Type {PNAME, SNAME, CAT, SUBCAT, PRICEMAX, PRICEMIN}
+    public enum Type {PNAME, SNAME, CAT, SUBCAT, PRICEMAX, PRICEMIN, NULL}
 
     public static class IllegalTokenException extends IllegalArgumentException {
         public IllegalTokenException(String errorMessage) {
@@ -32,5 +31,28 @@ public class Token {
 
     public Type getType() {
         return type;
+    }
+
+    public String toString(){
+        return token + typeToString();
+    }
+
+    public String typeToString(){
+        if(type == Type.PNAME){
+            return "PNAME";
+        }else if (type == Type.SNAME){
+            return "SNAME";
+        }else if (type == Type.CAT){
+            return "CAT";
+        }else if (type == Type.SUBCAT){
+            return "SUBCAT";
+        }else if (type == Type.PRICEMAX){
+            return "PRICEMAX";
+        }else if (type == Type.PRICEMIN){
+            return "PRICEMIN";
+        }else if (type == Type.NULL){
+            return "NULL";
+        }
+        return null;
     }
 }
