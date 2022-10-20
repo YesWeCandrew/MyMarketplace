@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -26,6 +27,7 @@ import com.example.mymarketplace.Entities.Users;
 import com.example.mymarketplace.Helpers.LoginState;
 import com.example.mymarketplace.R;
 import com.example.mymarketplace.Search.AVLTree;
+import com.example.mymarketplace.Search.Node;
 import com.example.mymarketplace.Search.Token;
 import com.example.mymarketplace.Search.Tokenizer;
 
@@ -200,15 +202,15 @@ public class ItemsViewActivity extends AppCompatActivity {
     private final View.OnClickListener searchButtonPress = new View.OnClickListener() {
         @Override
         public void onClick (View view) {
-            ArrayList<Items.Item> resultItems = Items.getItems();
-
+            ArrayList<Items.Item> resultItems = new ArrayList<>();
+            for(Items.Item i : Items.getItems()){
+                resultItems.add(i);
+            }
             String searchTerm = searchBox.getText().toString();
 
             ArrayList<Token> searchTokens;
             Tokenizer tokenizer = new Tokenizer();
             searchTokens = tokenizer.Tokenize(searchTerm);
-
-            boolean hasPName = false;
 
             if(searchTokens.get(0).getType() == Token.Type.NULL){
                 if(searchTokens.get(0).getToken() == "noColonError"){
@@ -221,22 +223,24 @@ public class ItemsViewActivity extends AppCompatActivity {
                 }
                 return;
             }
-
             if(searchTokens.size() < 1){
                 Toast toast = Toast.makeText(getApplicationContext(), "No valid search terms found", Toast.LENGTH_LONG);
                 toast.show();
                 return;
             }
 
-           /* for (Token t : searchTokens) { //look for a product name token first
+            for (Token t : searchTokens) { //look for a product name token first
                 if (t.getType() == Token.Type.PNAME) {
-                    resultItems.add(avlTree.search(t.getToken()).getItem());
-                    hasPName = true;
+                    resultItems.clear();
+                    Node result = avlTree.search(t.getToken());
+                    if(result == null){
+                        Toast toast = Toast.makeText(getApplicationContext(), "No results found", Toast.LENGTH_LONG);
+                        toast.show();
+                    }else {
+                        resultItems.add(avlTree.search(t.getToken()).getItem());
+                    }
                 }
-            } */
-       //     if(!hasPName) {
-                resultItems = Items.getItems(); //if they don't provide a product name, have to search through all
-       //     }
+            }
             for (Token t : searchTokens){ //then go through the rest of the tokens
                 if(t.getType() == Token.Type.PNAME){
                     resultItems.removeIf(i -> !i.productName.equals(t.getToken()));
@@ -253,6 +257,7 @@ public class ItemsViewActivity extends AppCompatActivity {
                 }
             }
             currDisplayedItems = resultItems;
+            Log.i("number of result items", String.valueOf(currDisplayedItems.size()));
             adapter.notifyDataSetChanged();
         }
     };

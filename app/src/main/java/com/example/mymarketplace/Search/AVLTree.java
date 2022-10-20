@@ -16,7 +16,7 @@ public class AVLTree {
     public Node root;
 
     public AVLTree(){
-        root = new Node();
+        root = null;
     }
 
     // updates the height of the tree
@@ -38,7 +38,7 @@ public class AVLTree {
         if (node == null) {
             return 0;
         }
-        return height(node.right) - height(node.left);
+        return height(node.left) - height(node.right);
     }
 
     // do a right rotate
@@ -65,39 +65,31 @@ public class AVLTree {
 
     // adjust the nodes so that the tree is balance by rotating the tree
     Node balance(Node node) {
-        updateHeight(node);
         int balanceFactor = getBalanceFactor(node);
         if (balanceFactor > 1) {
-            if (height(node.right.right) > height(node.right.left)) {
-                node = rotateLeft(node);
+            if (getBalanceFactor(node.left) < 0) {
+                node.left = rotateLeft(node.left);
             }
-            else {
+            return rotateRight(node);
+        }else if (balanceFactor < -1) {
+            if (getBalanceFactor(node.right) > 0){
                 node.right = rotateRight(node.right);
-                node = rotateLeft(node);
             }
-        }
-        else if (balanceFactor < -1) {
-            if (height(node.left.left) > height(node.left.right)) {
-                node= rotateLeft(node);
-            }
-            else {
-                node.left = rotateRight(node.left);
-                node = rotateRight(node);
-            }
+            return rotateLeft(node);
         }
         return node;
     }
 
     public void insert(Items.Item item){
-        insert2(root, item);
+        root = insert2(root, item);
     }
 
     // insert a new node if there is no matching price, insert on the left of the node if price is lower,
     // insert on right of the node if price is higher and only insert the attributes when price is similar
     // You are supposed to call this function with the root node originally, it will recurse down the tree
     Node insert2(Node node, Items.Item item) {
-        if (node.item == null) {
-            node = new Node(item);
+        if (node == null) {
+            return new Node(item);
         }else{
             if (node.getProductName().compareTo(item.productName) < 0) {
                 node.left = insert2(node.left, item);
@@ -105,23 +97,28 @@ public class AVLTree {
                 node.right = insert2(node.right, item);
             }
         }
+        updateHeight(node);
         return balance(node);
     }
 
     // return a list of items with the searched name, null if there is none
     public Node search(String name) {
-        Log.i("h","h");
         Node current = root;
-        Log.i("LOGPART2", current.toString());
-        while (current != null) {
+        while (true) {
             if (current.item.productName.equals(name)) {
                 break;
             }
-            if (current.getProductName().compareTo(name) < 0){
-                current = current.right;
+            if (current.getProductName().compareTo(name) > 0){
+                if(current.right != null) {
+                    current = current.right;
+                }
+                else{ break; }
             }
-            else if (current.getProductName().compareTo(name) > 0){
-                current = current.left;
+            else if (current.getProductName().compareTo(name) < 0){
+                if(current.left != null) {
+                    current = current.left;
+                }
+                else{ break; }
             }
         }
         if (!current.item.productName.equals(name)) {
