@@ -4,9 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -41,6 +44,13 @@ public class RegisterActivity extends AppCompatActivity {
         // setting the content of the register activity
         setContentView(R.layout.activity_register);
 
+        // Change Colour of Action Bar & Status Bar
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.ocean)));
+        Window window = this.getWindow();
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(this.getResources().getColor(R.color.ocean));
+
         // get the views by their id
         EditText et_gender = (EditText) findViewById(R.id.gender);
         EditText et_title = (EditText) findViewById(R.id.title);
@@ -52,6 +62,9 @@ public class RegisterActivity extends AppCompatActivity {
         EditText et_password = (EditText) findViewById(R.id.password2);
         Button button_register = (Button) findViewById(R.id.register2);
         button_register.setOnClickListener(buttonListener);
+
+        // Setting Button Colors
+        button_register.setBackgroundColor(getResources().getColor(R.color.darkgrey));
 
         Log.i(RegisterActivity.class.getName(), "created.");
     }

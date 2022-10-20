@@ -3,9 +3,12 @@ package com.example.mymarketplace.Activities;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -44,6 +47,13 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Change Colour of Action Bar & Status Bar
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.ocean)));
+        Window window = this.getWindow();
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(this.getResources().getColor(R.color.ocean));
+
         // setting the contents of login
         setContentView(R.layout.activity_login);
 
@@ -54,6 +64,10 @@ public class LoginActivity extends AppCompatActivity {
         button_register = findViewById(R.id.register);
         button_login.setOnClickListener(buttonListener);
         button_register.setOnClickListener(buttonListener);
+
+        // Setting Button Colors
+        button_login.setBackgroundColor(getResources().getColor(R.color.darkgrey));
+        button_register.setBackgroundColor(getResources().getColor(R.color.darkgrey));
 
         // Setting initial STATE and number of log in attempts
         state = LoginState.BEFORE;
