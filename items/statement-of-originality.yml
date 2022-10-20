@@ -6,14 +6,6 @@ declaration: >-
   I declare that everything I have submitted in this assignment is entirely our
   own work, with the following exceptions:
 
-
-# add as many "name+comment" entries as necessary
-# (or remove it altogether if you haven't collaborated with anyone outside your group)
-collaboration:
-  - name:
-    comment: >-
-
-
 # add as many "url+licence+comment" entries as necessary
 # (or remove it altogether if you haven't used any external code)
 code:
@@ -47,7 +39,7 @@ members:
     uid: u7145408
   - name: Andrew Howes
     uid: u1058852
-  - name:
-    uid:
-  - name:
-    uid:
+  - name: Long Vu
+    uid: u6699146
+  - name: Matthew Cawley
+    uid: u7313113
