@@ -85,9 +85,7 @@ public class Items {
      */
     public static void addItem(Item item, AVLTree tree) {
         getInstance().items.add(item);
-        Log.i("item name:", item.toString());
         tree.insert(item);
-        Log.i("tree root:", tree.root.toString());
     }
 
     /**

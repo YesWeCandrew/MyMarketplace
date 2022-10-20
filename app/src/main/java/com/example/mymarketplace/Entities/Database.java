@@ -34,7 +34,6 @@ public class Database {
         List<List<String>> csvAsListOfLists = CSVReader.parseCsv(is);
 
         if (type == DataType.Items) {
-            Log.i("database importing", tree.root.toString());
             Items.itemsFromCSV(csvAsListOfLists, tree);
         } else if (type == DataType.Sellers) {
             Sellers.sellersFromCSV(csvAsListOfLists);
