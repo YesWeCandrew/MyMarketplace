@@ -3,7 +3,7 @@ The following markdown document is a checklist of items you **should** complete 
 
 ## Git & Project Access
 - [x] **GitLab**: Commits (as shown in the Git commit history) using your own account. Failing to do this may result in zero marks.
-- [ ] **GitLab**: Have the relevant marking tutors as 'maintainers' for your repository.
+- [x] **GitLab**: Have the relevant marking tutors as 'maintainers' for your repository.
 - [x] The markers will be able to login to your **App** via the APK using either of the 2 sets of accounts in the assignment specification.
 - [x] If **Firebase** has been used, you have added the Marker's email to your Firebase project, and included the link to your Firebase project in your report.
 
@@ -12,8 +12,8 @@ The following markdown document is a checklist of items you **should** complete 
 - [ ] All Team Meeting Minutes (with links in the report). There must be at least 4 meetings among the team. See the [meeting template](./meeting0.md) for guidance on how to structure these if you have never done this before.
 - [x] A working standalone **APK**, i.e., an APK that can be loaded and execute correctly on an AVD.
 - [x] Have a markdown report document titled 'report.md'.
-- [ ] **Statement of Originality**: All members have read and signed the [statement of originality](./statement-of-originality.yml). Failure to do so will result in zero marks.
-- [ ] All external code, assets or help received outside the group is documented in the [statement of originality](./statement-of-originality.yml) and relevant parts in the code.
+- [x] **Statement of Originality**: All members have read and signed the [statement of originality](./statement-of-originality.yml). Failure to do so will result in zero marks.
+- [x] All external code, assets or help received outside the group is documented in the [statement of originality](./statement-of-originality.yml) and relevant parts in the code.
 
 ## Report Checklist
 We advise you to use the provided template when writing your report (it will help you cover everything necessary).
