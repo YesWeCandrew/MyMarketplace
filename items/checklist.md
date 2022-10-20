@@ -2,18 +2,18 @@
 The following markdown document is a checklist of items you **should** complete before submission of your assignment. This exists to help you keep track of all the requirements you must fulfil.
 
 ## Git & Project Access
-- [ ] **GitLab**: Commits (as shown in the Git commit history) using your own account. Failing to do this may result in zero marks.
-- [ ] **GitLab**: Have the relevant marking tutors as 'maintainers' for your repository.
-- [ ] The markers will be able to login to your **App** via the APK using either of the 2 sets of accounts in the assignment specification.
-- [ ] If **Firebase** has been used, you have added the Marker's email to your Firebase project, and included the link to your Firebase project in your report.
+- [x] **GitLab**: Commits (as shown in the Git commit history) using your own account. Failing to do this may result in zero marks.
+- [x] **GitLab**: Have the relevant marking tutors as 'maintainers' for your repository.
+- [x] The markers will be able to login to your **App** via the APK using either of the 2 sets of accounts in the assignment specification.
+- [x] If **Firebase** has been used, you have added the Marker's email to your Firebase project, and included the link to your Firebase project in your report.
 
 ## Documents (all non-android files) located in a folder named `items`
-- [ ] A conflict resolution protocol is documented and well-defined.
+- [x] A conflict resolution protocol is documented and well-defined.
 - [ ] All Team Meeting Minutes (with links in the report). There must be at least 4 meetings among the team. See the [meeting template](./meeting0.md) for guidance on how to structure these if you have never done this before.
-- [ ] A working standalone **APK**, i.e., an APK that can be loaded and execute correctly on an AVD.
-- [ ] Have a markdown report document titled 'report.md'.
-- [ ] **Statement of Originality**: All members have read and signed the [statement of originality](./statement-of-originality.yml). Failure to do so will result in zero marks.
-- [ ] All external code, assets or help received outside the group is documented in the [statement of originality](./statement-of-originality.yml) and relevant parts in the code.
+- [x] A working standalone **APK**, i.e., an APK that can be loaded and execute correctly on an AVD.
+- [x] Have a markdown report document titled 'report.md'.
+- [x] **Statement of Originality**: All members have read and signed the [statement of originality](./statement-of-originality.yml). Failure to do so will result in zero marks.
+- [x] All external code, assets or help received outside the group is documented in the [statement of originality](./statement-of-originality.yml) and relevant parts in the code.
 
 ## Report Checklist
 We advise you to use the provided template when writing your report (it will help you cover everything necessary).
@@ -39,10 +39,10 @@ Please note that each member must complete their individual submissions for the 
 
 ## Helpful (Optional)
 The following are some optional items that are conducive to your final marks. These are not necessary for your final submission but will assist in achieving a higher overall mark. Feel free to add additional items here for your own team to keep track of!
-- [ ] Each team member understands how the whole application (including sections they may not have worked on) operate.
-- [ ] The project files are well categorised and structured in different packages based on their functionalities.
-- [ ] The code is well commented, with @author annotations in ALL java files at minimum.
-- [ ] Make meaningful names of the variables and methods.
-- [ ] Attempt modular design of your methods and classes. Follow the code reusability and single responsibility principles.
-- [ ] Variety of tests are used which cover the majority of the code.
-- [ ] Good commit messages.
+- [x] Each team member understands how the whole application (including sections they may not have worked on) operate.
+- [x] The project files are well categorised and structured in different packages based on their functionalities.
+- [x] The code is well commented, with @author annotations in ALL java files at minimum.
+- [x] Make meaningful names of the variables and methods.
+- [x] Attempt modular design of your methods and classes. Follow the code reusability and single responsibility principles.
+- [x] Variety of tests are used which cover the majority of the code.
+- [x] Good commit messages.
