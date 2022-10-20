@@ -20,6 +20,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.example.mymarketplace.Entities.Sellers;
 import com.example.mymarketplace.Helpers.CustomListViewAdapter;
 import com.example.mymarketplace.Entities.Database;
 import com.example.mymarketplace.Entities.Items;
@@ -47,13 +48,16 @@ public class ItemsViewActivity extends AppCompatActivity {
     private SwipeRefreshLayout swipeRefresh;
     private EditText searchBox;
     private Button searchButton;
+    private Button clearButton;
     private ListView itemListView;
     private Spinner sortByMenu;
     private final String[] sortByTypes = {"Price (Low to High)", "Price (High to Low)", "Reviews (High to Low)", "Name"};
     private Users.User user;
     private ArrayList<Items.Item> currDisplayedItems; //the current list of items the view is displaying
+    private ArrayList<Items.Item> allItems; //the list of all items the view is displaying
     private CustomListViewAdapter adapter;
     private AVLTree avlTree;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,29 +87,20 @@ public class ItemsViewActivity extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(this.getResources().getColor(R.color.ocean));
 
-        searchBox = findViewById(R.id.editTextSearch);
-        searchBox.setText("");
-        searchButton = findViewById(R.id.button);
-        searchButton.setOnClickListener(searchButtonPress);
-        user = getIntent().getSerializableExtra("user", Users.User.class);
-
-        //setup spinner (the drop down menu for sort type)
-        sortByMenu = findViewById(R.id.spinner);
-        ArrayAdapter sortByAdapter = new ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, sortByTypes);
-        sortByAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sortByMenu.setAdapter(sortByAdapter);
-        sortByMenu.setOnItemSelectedListener(sortByClicked);
-
         // Load all assets to the correct classes
         AssetManager am = this.getAssets();
         try {
             // Inputting items
             InputStream is = am.open("Items.csv");
-            Database.importData(is, Database.DataType.Items, avlTree);
+            if (Items.getItems().size() == 0) {
+                Database.importData(is, Database.DataType.Items, avlTree);
+            }
 
             // Inputting sellers
             is = am.open("Sellers.csv");
-            Database.importData(is, Database.DataType.Sellers, avlTree);
+            if (Sellers.getSellers().size() == 0) {
+                Database.importData(is, Database.DataType.Sellers, avlTree);
+            }
 
             // Inputting stock
             is = am.open("Stock.csv");
@@ -124,31 +119,47 @@ public class ItemsViewActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        // Getting ImageView for the user profile picture
+        // Finding by ID
+        searchBox = findViewById(R.id.editTextSearch);
+        searchButton = findViewById(R.id.button);
+        clearButton = findViewById(R.id.clearButton);
+        sortByMenu = findViewById(R.id.spinner);
+        swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
         ImageView sellerImageView = findViewById(R.id.userImageView);
+        itemListView =  findViewById(R.id.itemsListView);
 
-        // Getting photo directory of the user
+        // Setting initial values
+        searchBox.setText("");
+
+        // Setting on click listeners
+        searchButton.setOnClickListener(searchButtonPress);
+        clearButton.setOnClickListener(clearButtonPress);
+
+        //setup spinner (the drop down menu for sort type)
+        ArrayAdapter sortByAdapter = new ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, sortByTypes);
+        sortByAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sortByMenu.setAdapter(sortByAdapter);
+        sortByMenu.setOnItemSelectedListener(sortByClicked);
+
+        // Setting the user image
         int userPhotoDir = getResources().getIdentifier(user.photoDirectory,"drawable", getPackageName());
-
-        // Set the user image
         sellerImageView.setImageResource(userPhotoDir);
 
-        ArrayList<Items.Item> itemList = Items.getItems(); // List of Items
-        //ListView of all the product names
-        itemListView =  findViewById(R.id.itemsListView);
-        swipeRefresh = findViewById(R.id.swipeRefresh);
+        // Displaying items
+        allItems = new ArrayList<Items.Item>();
+        allItems.addAll(Items.getItems());
 
-        currDisplayedItems = itemList;
+        currDisplayedItems = new ArrayList<Items.Item>();
+        currDisplayedItems.addAll(Items.getItems());
+
         // Sort by price high to low by default
         currDisplayedItems.sort((Comparator.comparingInt(item1 -> item1.price)));
         Collections.reverse(currDisplayedItems);
 
         adapter = new CustomListViewAdapter(currDisplayedItems,getApplicationContext());
-
         itemListView.setAdapter(adapter);
         itemListView.setOnItemClickListener(itemClicked);
 
-        swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
         swipeRefresh.setOnRefreshListener(() -> {
             Database.updateData();
             adapter.notifyDataSetChanged();
@@ -202,10 +213,6 @@ public class ItemsViewActivity extends AppCompatActivity {
     private final View.OnClickListener searchButtonPress = new View.OnClickListener() {
         @Override
         public void onClick (View view) {
-            ArrayList<Items.Item> resultItems = new ArrayList<>();
-            for(Items.Item i : Items.getItems()){
-                resultItems.add(i);
-            }
             String searchTerm = searchBox.getText().toString();
 
             ArrayList<Token> searchTokens;
@@ -231,34 +238,47 @@ public class ItemsViewActivity extends AppCompatActivity {
 
             for (Token t : searchTokens) { //look for a product name token first
                 if (t.getType() == Token.Type.PNAME) {
-                    resultItems.clear();
+                    currDisplayedItems.clear();
                     Node result = avlTree.search(t.getToken());
                     if(result == null){
                         Toast toast = Toast.makeText(getApplicationContext(), "No results found", Toast.LENGTH_LONG);
                         toast.show();
                     }else {
-                        resultItems.add(avlTree.search(t.getToken()).getItem());
+                        currDisplayedItems.add(avlTree.search(t.getToken()).getItem());
                     }
                 }
             }
             for (Token t : searchTokens){ //then go through the rest of the tokens
                 if(t.getType() == Token.Type.PNAME){
-                    resultItems.removeIf(i -> !i.productName.equals(t.getToken()));
+                    currDisplayedItems.removeIf(i -> !i.productName.equals(t.getToken()));
                 }if(t.getType() == Token.Type.SNAME){
-                    resultItems.removeIf(i -> !i.sellerName.equals(t.getToken()));
+                    currDisplayedItems.removeIf(i -> !i.sellerName.equals(t.getToken()));
                 }if(t.getType() == Token.Type.CAT){
-                    resultItems.removeIf(i -> !i.category.equals(t.getToken()));
+                    currDisplayedItems.removeIf(i -> !i.category.equals(t.getToken()));
                 }if(t.getType() == Token.Type.SUBCAT){
-                    resultItems.removeIf(i -> !i.subcategory.equals(t.getToken()));
+                    currDisplayedItems.removeIf(i -> !i.subcategory.equals(t.getToken()));
                 }if(t.getType() == Token.Type.PRICEMAX){
-                    resultItems.removeIf(i -> i.price >= Integer.parseInt(t.getToken()));
+                    currDisplayedItems.removeIf(i -> i.price >= Integer.parseInt(t.getToken()));
                 }if(t.getType() == Token.Type.PRICEMIN){
-                    resultItems.removeIf(i -> i.price <= Integer.parseInt(t.getToken()));
+                    currDisplayedItems.removeIf(i -> i.price <= Integer.parseInt(t.getToken()));
                 }
             }
-            currDisplayedItems = resultItems;
             Log.i("number of result items", String.valueOf(currDisplayedItems.size()));
             adapter.notifyDataSetChanged();
+        }
+    };
+
+    /**
+     * Called when the clear button is pressed. sets currDisplayedItems back to all items.
+     */
+    private final View.OnClickListener clearButtonPress = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            currDisplayedItems = new ArrayList<>();
+            currDisplayedItems.addAll(allItems);
+            adapter = new CustomListViewAdapter(currDisplayedItems,getApplicationContext());
+            itemListView.setAdapter(adapter);
+            searchBox.setText("");
         }
     };
 }

@@ -24,6 +24,7 @@
     <string name="SearchAutofill">Search</string>
     <string name="SpinnerText">Sort by</string>
     <string name="SearchButtonText">Search</string>
+    <string name="ClearButtonText">Clear</string>
     <string name="UserImageDescription">The users profile photo</string>
 
 
