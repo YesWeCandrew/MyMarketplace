@@ -128,10 +128,6 @@ public class ItemsViewActivity extends AppCompatActivity {
         ImageView sellerImageView = findViewById(R.id.userImageView);
         itemListView =  findViewById(R.id.itemsListView);
 
-        // Setting Button Colors
-        searchButton.setBackgroundColor(getResources().getColor(R.color.darkgrey));
-        clearButton.setBackgroundColor(getResources().getColor(R.color.darkgrey));
-
         // Setting initial values
         searchBox.setText("");
 
