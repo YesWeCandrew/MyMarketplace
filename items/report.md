@@ -1,6 +1,5 @@
 # HD-Believers Report
 
-
 ## Table of Contents
 
 1. [Team Members and Roles](#team-members-and-roles)
@@ -56,7 +55,7 @@ I prepared the slides for our presentation.
 ----------
 u7313113, Matthew Cawley
 
-I contributed about 20% of the code. Here are the classes that I contributed:
+I contributed about 25% of the code. Here are the classes that I contributed:
 * Tokenizer
 * Token
 * AVLTree: search(), insert(), insert2()
@@ -74,7 +73,7 @@ I added the grammar/tokenizer section, 50% of the feature list, and the use case
 ---------
 u6699146, Long Vu
 
-I contributed about 15-20% of the code. Here are the classes that I contributed:
+I contributed about 20% of the code. Here are the classes that I contributed:
 * ItemsViewActivity
 * ItemInfo
 * CustomListViewAdapter
@@ -103,7 +102,7 @@ I was responsible setting up the project.
 
 I implemented and designed all of the activities above except for ItemViewActivity. 
 
-I was responsible to create a working AVL Tree which was then modified by Matthew so that it works with the correct class type.
+I was responsible to create a working AVL Tree which was then modified by Matthew so that it works with the correct class type. I was also responsible for the State design pattern.
 
 I drew the UML diagram for the application.
 
@@ -113,9 +112,18 @@ I wrote the team meeting section of this report.
 
 ## Conflict Resolution Protocol
 
-If a member fails to meet a deadline for a task – someone (including possibly said member) takes the task who can complete it as soon as possible.
-If there is a disagreement – Vote on it as a group. If this is a 2v2 tie and the nobody wants to budge to the other side then whoever’s job it was to make that part gets final say. 
-If a member gets sick and is unable to complete their work, then the other members will have to be distributed their tasks, if possible with later deadlines than originally. 
+If a member fails to meet a deadline for a task:
+
+Someone (including possibly said member) takes the task who can complete it as soon as possible.
+
+
+If there is a disagreement:
+
+Vote on it as a group. If this is a 2v2 tie and the nobody wants to budge to the other side then whoever’s job it was to make that part gets final say. 
+
+If a member gets sick and is unable to complete their work:
+
+The other members will have to be distributed their tasks, if possible with later deadlines than originally. 
 
 ## Application Description
 
@@ -169,9 +177,9 @@ Although the above UML captures most of the application classes and relations, s
 
 **Data Structures**
 
-Our group used local CSV files to load the data into memory from. This was chosen for their easily processable format and editing. While JSON or XML provide more flexibility, CSV worked well for our very structured data format.
+Our group used local CSV files to load the data into memory. This was chosen for their flat format, which is easily processable editing. While JSON or XML provide more flexibility, CSV worked well for our very structured data.
 
-The data was then read into the app and stored as Singleton objects in Users, Sellers and Items. Additional media, like photos, were stored in the drawable file. 
+The data was then read into the app and stored as Singleton objects in Users, Sellers and Items. Streaming data, including the >2500 records of stock changes are imported at the start and are added into the application live when the user refreshes by swiping down on the list of items. Additional media, like photos, are stored in the drawable file. 
 
 **Tree**
 
@@ -219,25 +227,26 @@ The advantage of this design is that it is simple both in the backend and for th
 
 **Surprise Item**
 
-We successfully implemented the surprise item.
-* We created a ScamChecker class that runs a series of tests over an object to produce a ScamScore. This scam score takes into account the following:
-   * If an item has very poor reviews it receives a higher ScamScore
-   * If an item has no reviews it receives a higher ScamScore
-   * If the Items has a seller name that is not the same as the seller name associated with the seller's ID it receives a higher ScamScore. This could prevent people pretending to be reputable brands
-* If the ScamScore is above an arbitrary threshold, it marks the item as potential scam and notifies the user, as shown below.
+We successfully implemented the surprise item. The ScamChecker class runs a series of tests over an object to produce a ScamScore. This scam score takes into account the following:
+* If an item has very poor reviews it receives a higher ScamScore
+* If an item has no reviews it receives a higher ScamScore
+* If the Items has a seller name that is not the same as the seller name associated with the seller's ID it receives a higher ScamScore. This could prevent people pretending to be reputable brands
+
+If the resulting ScamScore is above an arbitrary threshold, it marks the item as potential scam and notifies the user, as shown below.
 
 ## Summary of Known Errors and Bugs
 
 1. *Bug 1:*
 
-- *A space bar (' ') in the sign in email will crash the application.*
+- The login lockout service that activates when the wrong password is entered 5 times can be bypassed by force closing the app. The user can then attempt to login. A better implementation would put time limits on longing in to slow down any attempt bypassing of the login
+
 
 2. *Bug 2:*
-- *Sometimes when the app is first run and the buy again button is pressed, the app crashes.*
+- Sometimes when the app is first run and the buy again button is pressed, the app crashes.
 
 ## Testing Summary
 
-We have done extensive testing to accomplish a high quality app. Unit tests have been created to test the implementation of the backend logic of the app.
+We have done testing to accomplish a high quality app. Unit tests have been created to test the implementation of the backend logic of the app.
 
 * Testing covers the Entities directory with 100% method coverage. This ensures that the data is rendered from the CSV files correctly
 * User login tests ensure that the hashing function works correctly and that users can login successfully
@@ -250,23 +259,23 @@ We have done extensive testing to accomplish a high quality app. Unit tests have
 
 **Feature Category:** Search-related <br>
 
-1. Feature 1. **Search functionality can handle partially valid and invalid search queries (medium)**
+1. **Search functionality can handle partially valid and invalid search queries (medium)**
    * ItemsViewActivity, lines 222-237
    * Tokenizer, lines 46-56 and lines 88-92
    * There is an additional type of token called the null token, and when the search term is invalid, the tokenizer instead returns a null token    with the value of this token explaining why it was invalid. When the items view activity receives this token, it does nothing but display a toast with the value of the null token – so explaining what was invalid about the search term. Importantly, this does not crash the app.
 
-2. Feature 2. **Sort a list of products returned from a search based on price, popularity, rating, availability, etc. (easy)**
+2. **Sort a list of products returned from a search based on price, popularity, rating, availability, etc. (easy)**
    * ItemsViewActivity, sortByClicked() (lines 183-202)
    * The user selects a method of sorting (price, reviews, or name) from a dropdown menu, and the items currently being displayed are sorted.
 
-3. Feature 3. **Filter a list of products returned from a search based on their categories (easy)**
+3. **Filter a list of products returned from a search based on their categories (easy)**
    * Every item has a category and subcategory, and these are simply two of the parameters by which you can search by.
 
 <br>
 
 **Feature Category:** Greater Data Usage, Handling and Sophistication <br>
 
-1. Feature 1. **Use GPS Information**
+4. **Use GPS Information**
    * SellerInfo Class
    * The user can click on a company from one of their products, and the app will display where they are located on an interactable map. Their address is also given as text.
 
@@ -274,27 +283,26 @@ We have done extensive testing to accomplish a high quality app. Unit tests have
 
 **Feature Category:** Creating Processes
 
-1. Feature 1. **Payment Process (easy)**
+5. **Payment Process (easy)**
    * The user have three payment options; they can either pay by Cash, Card or Paypal.
    * Users also have the option to buy the item again using a button the Order Confirmation activity.
    * PaymentActivity: Lines 23-82
 
-2. Feature 2. **Micro Interactions (easy)**
+6. **Micro Interactions (easy)**
    * The user have the option of adding the selected item to cart.
    * ItemInfo
 
-3. Feature 3. **User Registration**
+3. **User Registration**
    * This feature is partially working as the edit texts and button are working as intended. However, the data entered cannot be saved.
    * New users can register to My Marketplace to start browsing through the marketplace.
    * RegisterActivity
 
 **Feature Category:** Greater Data Usage, Handling and Sophistication
 
-1. Feature 1. **User profile activity containing a media file (image, animation, video) (easy).**
+8. **User profile activity containing a media file (image, animation, video) (easy).**
    * Display profile picture.
    * ItemsViewActivity: Lines 128, 145-146.
 
-<br>
 
 ## Team Meetings
 
