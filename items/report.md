@@ -52,6 +52,23 @@ I assisted with the UI design of ItemView and ItemListView. For ItemListView I i
 
 I prepared the slides for our presentation.
 
+----------
+u7313113, Matthew Cawley
+
+I contributed about 20% of the code. Here are the classes that I contributed:
+* Tokenizer
+* Token
+* AVLTree: search(), insert(), insert2()
+* Node: originally written by Vincent but edited by me to work with the item datatype
+* ItemsViewActivity: sortByClicked(), searchButtonPress(), and some parts of onCreate() related to setting up the search bar and dropdown sort menu.
+
+Originally we were going to sort the AVLTree by price, but I proposed we sort it by product name instead. This was because I thought users would be more likely to search by product name, and because this avoids the issue of having multiple products with the same price and how to store that in the tree.
+
+I wasn't a big part of the UI - all I added was the search bar and dropdown search menu.
+
+I wrote the conflict resolution protocol.
+
+I added the grammar/tokenizer section and explained many of the implemented features in the report.
 ---------
 
 *[Summarise the contributions made by each member to the project, e.g. code implementation, code design, UI design, report writing, etc.]*
