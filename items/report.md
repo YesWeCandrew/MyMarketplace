@@ -71,6 +71,22 @@ I wrote the conflict resolution protocol.
 I added the grammar/tokenizer section and explained many of the implemented features in the report.
 
 ---------
+u6699146, Long Vu
+
+I contributed about 15-20% of the code. Here are the classes that I contributed:
+* ItemsViewActivity
+* ItemInfo
+* CustomListViewAdapter
+
+I edited all the layouts of the application to create a cohesive theme. 
+
+I was responsible for making a ListView and add specific details of every items.
+
+I wrote 50% of the features list in the report.
+
+I wrote the app descrition as well as provide the screenshots of the app in the report.
+
+---------
 
 *[Summarise the contributions made by each member to the project, e.g. code implementation, code design, UI design, report writing, etc.]*
 
@@ -103,11 +119,23 @@ If a member gets sick and is unable to complete their work, then the other membe
 
 ## Application Description
 
-*[What is your application, what does it do? Include photos or diagrams if necessary]*
+*MyMarketplace is an application that allows users to browse and buy products. This app specialise in selling tech products and is mainly targeting the gearheads and gadget nerds audience. This app allows users to purchase products of their liking at just a few finger taps away.*
 
-*Here is a pet specific application example*
 
-*PetBook is a social media application specifically targetting pet owners... it provides... certified practitioners, such as veterians are indicated by a label next to their profile...*
+*Screenshots of MyMarketplace:*
+
+| Login Page | Registration Page | View of Items |
+|:-----------|:------------------|:--------------|
+<img src="./images/Login.png" width="75%"> | <img src="./images/Register.png" width="65%"> | <img src="./images/Marketplace Items.png" width="75%">
+
+| Individual Item | Item Summary | Order Confirmation |
+|:----------------|:-------------|:-------------------|
+<img src="./images/Individual Item.png" width="75%"> | <img src="./images/Item Summary.png" width="75%"> | <img src="./images/Order Confimation.png" width="70%">
+
+| Seller Information | Scam Detection | Pulldown To Refresh |
+|:-------------------|:---------------|:--------------------|
+<img src="./images/Seller Info.png" width="60%"> | <img src="./images/Scam Detection.png" width="60%"> | <img src="./images/Refresh2.png" width="600px">
+
 
 **Application Use Cases and or Examples**
 
@@ -242,7 +270,7 @@ We have done extensive testing to accomplish a high quality app. Unit tests have
 
 ## Implemented Features
 
-Feature Category: Search-related <br>
+**Feature Category:** Search-related <br>
 *Implemented Features:*
 1. Feature 1. **Search functionality can handle partially valid and invalid search queries (medium)**
    * ItemsViewActivity, lines 222-237
@@ -256,12 +284,34 @@ Feature Category: Search-related <br>
 3. Feature 3. **Filter a list of products returned from a search based on their categories (easy)**
    * Every item has a category and subcategory, and these are simply two of the parameters by which you can search by.
 
-Feature Category: Greater Data Usage, Handling and Sophistication <br>
+<br>
+
+**Feature Category:** Greater Data Usage, Handling and Sophistication <br>
 
 1. Feature 1. **Use GPS Information**
    * SellerInfo Class
    * The user can click on a company from one of their products, and the app will display where they are located on an interactable map. Their address is also given as text.
 
+<br>
+
+**Feature Category:** Creating Processes
+
+1. Feature 1. **Payment Process (easy)**
+   * The user have three payment options; they can either pay by Cash, Card or Paypal.
+   * Users also have the option to buy the item again using a button the Order Confirmation activity.
+   * PaymentActivity: Lines 23-82
+
+2. Feature 2. **Micro Interactions (easy)**
+   * The user have the option of adding the selected item to cart.
+   * ItemInfo
+
+**Feature Category:** Greater Data Usage, Handling and Sophistication
+
+1. Feature 1. **User profile activity containing a media file (image, animation, video) (easy).**
+   * Display profile picture.
+   * ItemsViewActivity: Lines 128, 145-146.
+
+<br>
 
 ## Team Meetings
 
