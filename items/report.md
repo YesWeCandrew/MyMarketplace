@@ -69,7 +69,7 @@ I wasn't a big part of the UI - all I added was the search bar and dropdown sear
 
 I wrote the conflict resolution protocol.
 
-I added the grammar/tokenizer section and explained many of the implemented features in the report.
+I added the grammar/tokenizer section, 50% of the feature list, and the use cases and target audience in the report.
 
 ---------
 u6699146, Long Vu
@@ -144,7 +144,7 @@ If a member gets sick and is unable to complete their work, then the other membe
 2. Based on the reviews and pricing, he makes a choice and adds a certain pair to the cart.
 3. He then selects his preferred shipping option and confirms the order.
 
-*Mary wants to buy a new TV, but she is wary of scams and would rather pick-up the item in-store to get a closer look.
+*Mary wants to buy a new TV, but she is wary of scams and would rather pick-up the item in-store to get a closer look.*
 1. Mary logs into the app and searches "cat:Televisions" to find all the TVs.
 2. She ignores any of the options that the spam checker flags as a likely scam.
 3. After choosing one, instead of adding to cart, she clicks on the company that sells it.
@@ -249,7 +249,7 @@ We have done extensive testing to accomplish a high quality app. Unit tests have
 ## Implemented Features
 
 **Feature Category:** Search-related <br>
-*Implemented Features:*
+
 1. Feature 1. **Search functionality can handle partially valid and invalid search queries (medium)**
    * ItemsViewActivity, lines 222-237
    * Tokenizer, lines 46-56 and lines 88-92
