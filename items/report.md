@@ -162,16 +162,25 @@ The singleton design pattern was used to ensure that the there was only ever one
 
 Production Rules:
     
-    <Non-Terminal> ::= <some output>
-    <Non-Terminal> ::= <some output>
+    <A> ::= <A+B | B>
+    <B> ::= <pname:s | sname:s | cat:s | subcat:s | pricemin:n | pricemax:n>
+    <s> :: string (terminal)
+    <n> :: integer (terminal)
 
-*[How do you design the grammar? What are the advantages of your designs?]*
+(with starting symbol A)
 
-*If there are several grammars, list them all under this section and what they relate to.*
+The grammar was designed to be simple for the user: they can input the search terms in any order that they want, as all types of search terms are an OR in the production rule from B, and these B's can be contatenated an arbitrary number of times.
+Additionally, designing the grammar like this simplifies the tokenizer, as it knows to look for a finite number of B-type strings until it encounters the end.
 
 **Tokenizer and Parsers**
 
-*[Where do you use tokenisers and parsers? How are they built? What are the advantages of the designs?]*
+The tokens that the tokenizer uses hold an enum type (such as "pname" for product name) and a string value. (integers are stored as strings). There is also a null enum type to represent invalid search terms.
+
+When the user searches, the tokenizer is called to parse the search into a series of tokens. As explained above, this works by looking for a B-type string such as "pname:MP3 Player" and turning that into a token. If there is a '+' afterwards, look for more tokens after that, and if there is not, finish. If the input is malformed in any way the tokenizer returns a "null" type token, which other parts of the program can understand to be the result of an invalid search term.
+
+Upon receiving the list of tokens, the searcher simply filters the list of all items by recursing through the tokens, except where there is a product name token, in which case it uses the AVLTree first to locate the one (potential) result.
+
+The advantage of this design is that it is simple both in the backend and for the user, and that it can handle invalid search terms.
 
 **Surprise Item**
 
