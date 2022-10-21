@@ -69,6 +69,7 @@ I wasn't a big part of the UI - all I added was the search bar and dropdown sear
 I wrote the conflict resolution protocol.
 
 I added the grammar/tokenizer section and explained many of the implemented features in the report.
+
 ---------
 
 *[Summarise the contributions made by each member to the project, e.g. code implementation, code design, UI design, report writing, etc.]*
