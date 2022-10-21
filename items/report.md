@@ -99,6 +99,8 @@ I contributed about 25% of the code. Here are the classes that I contributed:
 * PaymentActivity
 * OrderConfirmationActivity
 
+I was responsible setting up the project.
+
 I implemented and designed all of the activities above except for ItemViewActivity. 
 
 I was responsible to create a working AVL Tree which was then modified by Matthew so that it works with the correct class type.
@@ -107,7 +109,7 @@ I drew the UML diagram for the application.
 
 I added the UML section of this report. 
 
-I  wrote the "Summary of Known Errors and Bugs" in this report.
+I wrote the "Summary of Known Errors and Bugs" in this report.
 
 ---------
 
@@ -142,7 +144,7 @@ If a member gets sick and is unable to complete their work, then the other membe
 
 ## Application Description
 
-*MyMarketplace is an application that allows users to browse and buy products. This app specialise in selling tech products and is mainly targeting the gearheads and gadget nerds audience. This app allows users to purchase products of their liking at just a few finger taps away.*
+*MyMarketplace is an application that allows users to browse and buy products. This app specialise in selling tech products and is mainly targeting the gear-heads and gadget nerds audience. This app allows users to purchase products of their liking at just a few finger taps away.*
 
 
 *Screenshots of MyMarketplace:*
@@ -190,8 +192,13 @@ If a member gets sick and is unable to complete their work, then the other membe
 
 ## Application UML
 
-![ClassDiagramExample](./images/ClassDiagramExample.png) <br>
-*[Replace the above with a class diagram. You can look at how we have linked an image here as an example of how you can do it too.]*
+![UML](./images/UML.png) <br>
+
+The picture above is the UML Class diagram of the application. Some methods, such as onCreate(), etc. and attributes such as editText, etc. are omitted from the class diagram as it is repetitive. 
+The attributes and methods that are present on the diagram above are the significant ones that critically affects the interaction between classes and the whole application.
+Although the above UML captures most of the application classes and relations, some classes or relations may not be captured in the UML as it will make the UML very complicated and difficult to read.
+
+[For a clearer view of the UML diagram, click here.](https://gitlab.cecs.anu.edu.au/u7145408/ga-22s2-comp2100-6442/-/blob/main/items/images/UML.png)
 
 ## Application Design and Decisions
 
@@ -253,11 +260,11 @@ The advantage of this design is that it is simple both in the backend and for th
 
 **Surprise Item**
 
-We succesfully implemented the surprise item.
+We successfully implemented the surprise item.
 * We created a ScamChecker class that runs a series of tests over an object to produce a ScamScore. This scam score takes into account the following:
-   * If an item has very poor reviews it recieves a higher ScamScore
-   * If an item has no reviews it recieves a higher ScamScore
-   * If the Items has a seller name that is not the same as the seller name associated with the seller's ID it recieves a higher ScamScore. This could prevent people pretending to be reputable brands
+   * If an item has very poor reviews it receives a higher ScamScore
+   * If an item has no reviews it receives a higher ScamScore
+   * If the Items has a seller name that is not the same as the seller name associated with the seller's ID it receives a higher ScamScore. This could prevent people pretending to be reputable brands
 * If the ScamScore is above an arbitrary threshold, it marks the item as potential scam and notifies the user, as shown below.
 
 **Other**
@@ -273,14 +280,9 @@ We succesfully implemented the surprise item.
 1. *Bug 1:*
 
 - *A space bar (' ') in the sign in email will crash the application.*
-- ...
 
 2. *Bug 2:*
 - *Sometimes when the app is first run and the buy again button is pressed, the app crashes.*
-- ...
-3. ...
-
-*List all the known errors and bugs here. If we find bugs/errors that your team does not know of, it shows that your testing is not thorough.*
 
 ## Testing Summary
 
@@ -340,12 +342,11 @@ We have done extensive testing to accomplish a high quality app. Unit tests have
 
 ## Team Meetings
 
-*Here is an example (you could start numbering your meetings from 1):*
+- *[Team Meeting 1](./meeting minutes/meeting1.md)*
+- *[Team Meeting 2](./meeting minutes/meeting2.md)*
+- *[Team Meeting 3](./meeting minutes/meeting3.md)*
+- *[Team Meeting 4](./meeting minutes/meeting4.md)*
+- *[Team Meeting 5](./meeting minutes/meeting5.md)*
 
-- *[Team Meeting 0](./meeting0.md)*
-- ...
 
-* Link to the minutes of your meetings as above. There must be at least 4 team meetings. 
-Note that you must commit your minute meetings shortly after your meeting has taken place (e.g., within 24h), otherwise your meeting minute will not be accepted.
-Uour meetings should also have a reasonable date span across Week 6 to 11.*
  
