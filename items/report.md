@@ -85,7 +85,7 @@ I was responsible for making a ListView and add specific details of every items.
 
 I wrote 50% of the features list in the report.
 
-I wrote the app descrition as well as provided the screenshots of the app in the report.
+I wrote the app description as well as provided the screenshots of the app in the report.
 
 ---------
 u7145408, Vincent Tanumihardja
@@ -109,7 +109,7 @@ I drew the UML diagram for the application.
 
 I added the UML section of this report. 
 
-I wrote the "Summary of Known Errors and Bugs" in this report.
+I wrote the team meeting section of this report.
 
 ---------
 
@@ -198,7 +198,7 @@ The picture above is the UML Class diagram of the application. Some methods, suc
 The attributes and methods that are present on the diagram above are the significant ones that critically affects the interaction between classes and the whole application.
 Although the above UML captures most of the application classes and relations, some classes or relations may not be captured in the UML as it will make the UML very complicated and difficult to read.
 
-[For a clearer view of the UML diagram, click here.](https://gitlab.cecs.anu.edu.au/u7145408/ga-22s2-comp2100-6442/-/blob/main/items/images/UML.png)
+[For a clearer view of the UML diagram, click here.](https://lucid.app/lucidchart/a92eeacf-b02d-4aaa-99c8-eb6d099858fa/edit?beaconFlowId=A6CED3D347379FD9&invitationId=inv_2984cdd2-f023-4abe-b91f-1f017d5ad0c6&page=HWEp-vi-RSFO#)
 
 ## Application Design and Decisions
 
@@ -224,15 +224,29 @@ Although the above UML captures most of the application classes and relations, s
 
 **Data Structures**
 
-Our group used local CSV files to load the data into memory from. This was chosen for their easily processable format and editing. While JSON or XML provide more flexibility, CSV worked well for our very strucuted data format.
+Our group used local CSV files to load the data into memory from. This was chosen for their easily processable format and editing. While JSON or XML provide more flexibility, CSV worked well for our very structured data format.
 
 The data was then read into the app and stored as Singleton objects in Users, Sellers and Items. Additional media, like photos, were stored in the drawable file. 
+
+**Tree**
+
+Our group decided to use the AVL Tree to optimize searching items in the marketplace. AVL Tree was chosen as it is one of the simpler tree that is balanced. 
+
+A tree that is easy to manage and also balanced greatly improves time efficiency.
 
 **Design Patterns**
 
 1. Singleton
 
 The singleton design pattern was used to ensure that the there was only ever one instance of the data objects of Users, Items and Sellers. This ensures that there were not multiple representations of these objects which is vital to ensuring that the app was not working on different data.
+
+2. State 
+
+The state design pattern helps to identify the login state of the user. The state design pattern is crucial as only users that are logged can proceed to the marketplace.
+
+3. Facade
+
+The facade design pattern helps to implement the entities so that they are easily accessible. This is important as it makes the entities simpler and more accessible for the other classes.
 
 **Grammar(s)**
 
@@ -331,6 +345,11 @@ We have done extensive testing to accomplish a high quality app. Unit tests have
 2. Feature 2. **Micro Interactions (easy)**
    * The user have the option of adding the selected item to cart.
    * ItemInfo
+
+3. Feature 3. **User Registration**
+   * This feature is partially working as the edit texts and button are working as intended. However, the data entered cannot be saved.
+   * New users can register to My Marketplace to start browsing through the marketplace.
+   * RegisterActivity
 
 **Feature Category:** Greater Data Usage, Handling and Sophistication
 
