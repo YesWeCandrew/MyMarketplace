@@ -83,7 +83,6 @@ If a member fails to meet a deadline for a task – someone (including possibly 
 If there is a disagreement – Vote on it as a group. If this is a 2v2 tie and the nobody wants to budge to the other side then whoever’s job it was to make that part gets final say. 
 If a member gets sick and is unable to complete their work, then the other members will have to be distributed their tasks, if possible with later deadlines than originally. 
 
-
 ## Application Description
 
 *[What is your application, what does it do? Include photos or diagrams if necessary]*
@@ -216,27 +215,26 @@ We have done extensive testing to accomplish a high quality app. Unit tests have
 
 ## Implemented Features
 
-*[What features have you implemented?]*
+Feature Category: Search-related <br>
+*Implemented Features:*
+1. Feature 1. **Search functionality can handle partially valid and invalid search queries (medium)**
+   * ItemsViewActivity, lines 222-237
+   * Tokenizer, lines 46-56 and lines 88-92
+   * There is an additional type of token called the null token, and when the search term is invalid, the tokenizer instead returns a null token    with the value of this token explaining why it was invalid. When the items view activity receives this token, it does nothing but display a toast with the value of the null token – so explaining what was invalid about the search term. Importantly, this does not crash the app.
 
-*Here are some examples:*
+2. Feature 2. **Sort a list of products returned from a search based on price, popularity, rating, availability, etc. (easy)**
+   * ItemsViewActivity, sortByClicked() (lines 183-202)
+   * The user selects a method of sorting (price, reviews, or name) from a dropdown menu, and the items currently being displayed are sorted.
 
-Feature Category: Privacy <br>
-*Implemented features:*
-1. Feature 1: **Users may ... . (easy)**
-   * Class X, methods Z, Y, Lines of code: 10-100
-   * Class Y, methods K, L, M, Lines of code: 35-150
-   * Your description: ...
-<br>
-2. Feature 2: **A user can only ... . (medium)**
-<br>
+3. Feature 3. **Filter a list of products returned from a search based on their categories (easy)**
+   * Every item has a category and subcategory, and these are simply two of the parameters by which you can search by.
 
-Feature Category: Firebase Integration <br>
-*Implemented features:* <br>
-1. **Use Firebase to implement user Authentication/Authorisation. (easy)**
-   * Class A: methods A, B, C, lines of code: whole file
-   * …
+Feature Category: Greater Data Usage, Handling and Sophistication <br>
 
-*List all features you have completed in their separate categories with their difficulty classification. If they are features that are suggested and approved, please state this somewhere as well.*
+1. Feature 1. **Use GPS Information**
+   * SellerInfo Class
+   * The user can click on a company from one of their products, and the app will display where they are located on an interactable map. Their address is also given as text.
+
 
 ## Team Meetings
 
