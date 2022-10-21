@@ -198,7 +198,7 @@ The picture above is the UML Class diagram of the application. Some methods, suc
 The attributes and methods that are present on the diagram above are the significant ones that critically affects the interaction between classes and the whole application.
 Although the above UML captures most of the application classes and relations, some classes or relations may not be captured in the UML as it will make the UML very complicated and difficult to read.
 
-[For a clearer view of the UML diagram, click here.](https://lucid.app/lucidchart/a92eeacf-b02d-4aaa-99c8-eb6d099858fa/edit?beaconFlowId=A6CED3D347379FD9&invitationId=inv_2984cdd2-f023-4abe-b91f-1f017d5ad0c6&page=HWEp-vi-RSFO#)
+[For a clearer view of the UML diagram, click here.](https://lucid.app/lucidchart/a92eeacf-b02d-4aaa-99c8-eb6d099858fa/edit?viewport_loc=-22%2C2082%2C4768%2C2382%2CHWEp-vi-RSFO&invitationId=inv_2984cdd2-f023-4abe-b91f-1f017d5ad0c6)
 
 ## Application Design and Decisions
 
