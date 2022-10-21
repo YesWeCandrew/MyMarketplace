@@ -84,7 +84,7 @@ I was responsible for making a ListView and add specific details of every items.
 
 I wrote 50% of the features list in the report.
 
-I wrote the app descrition as well as provide the screenshots of the app in the report.
+I wrote the app descrition as well as provided the screenshots of the app in the report.
 
 ---------
 
