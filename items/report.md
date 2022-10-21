@@ -79,8 +79,9 @@ I prepared the slides for our presentation.
 
 ## Conflict Resolution Protocol
 
-*[Write a well defined protocol your team can use to handle conflicts. That is, if your group has problems, what is the procedure for reaching consensus or solving a problem?
-(If you choose to make this an external document, link to it here)]*
+If a member fails to meet a deadline for a task – someone (including possibly said member) takes the task who can complete it as soon as possible.
+If there is a disagreement – Vote on it as a group. If this is a 2v2 tie and the nobody wants to budge to the other side then whoever’s job it was to make that part gets final say. 
+If a member gets sick and is unable to complete their work, then the other members will have to be distributed their tasks, if possible with later deadlines than originally. 
 
 
 ## Application Description
