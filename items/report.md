@@ -44,11 +44,12 @@ I contributed about 30% of the code. Here are the classes that I contributed:
 * UserLoginTests
 
 In addition, I also created the data that runs the system, based off of a open source data mining dataset. I generated the stock and review dataset from scratch.
+
 I also collated and edited the photos to match the items.
 
 I proposed and implemented the Singleton design pattern and the Facade design pattern. These were implemented in classes that I created, (Database, Users, Sellers, Items, Stock, Reviews). I proposed the streaming dataset functionality that refreshes when the user triggers a refresh. I also proposed storing data in CSV files and treating it as a Relational Database within Java using IDs to reference other objects.
 
-I assisted with the UI design of ItemView and ItemListView. For ItemListView I implemented the refresh functionality I created ItemView.
+I assisted with the UI design of ItemView and ItemListView. For ItemListView, I implemented the refresh functionality I created ItemView.
 
 I prepared the slides for our presentation.
 
@@ -85,6 +86,28 @@ I was responsible for making a ListView and add specific details of every items.
 I wrote 50% of the features list in the report.
 
 I wrote the app descrition as well as provided the screenshots of the app in the report.
+
+---------
+u7145408, Vincent Tanumihardja
+
+I contributed about 25% of the code. Here are the classes that I contributed:
+* loginActivity
+* registerActivity
+* AVLTree: most of the basic implementation of the tree
+* Node: most
+* ItemViewActivity: payment button and user profile picture
+* PaymentActivity
+* OrderConfirmationActivity
+
+I implemented and designed all of the activities above except for ItemViewActivity. 
+
+I was responsible to create a working AVL Tree which was then modified by Matthew so that it works with the correct class type.
+
+I drew the UML diagram for the application.
+
+I added the UML section of this report. 
+
+I  wrote the "Summary of Known Errors and Bugs" in this report.
 
 ---------
 
@@ -253,6 +276,8 @@ We succesfully implemented the surprise item.
 - ...
 
 2. *Bug 2:*
+- *Sometimes when the app is first run and the buy again button is pressed, the app crashes.*
+- ...
 3. ...
 
 *List all the known errors and bugs here. If we find bugs/errors that your team does not know of, it shows that your testing is not thorough.*
