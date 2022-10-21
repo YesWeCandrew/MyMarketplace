@@ -111,31 +111,6 @@ I added the UML section of this report.
 
 I wrote the team meeting section of this report.
 
----------
-
-*[Summarise the contributions made by each member to the project, e.g. code implementation, code design, UI design, report writing, etc.]*
-
-*[Code Implementation. Which features did you implement? Which classes or methods was each member involved in? Provide an approximate proportion in pecentage of the contribution of each member to the whole code implementation, e.g. 30%.]*
-
-*Here is an example:*
-
-*UID1, Name1, I contribute 30% of the code. Here are my contributions:*
-* A.class
-* B.class: function1(), function2(), ...
-* ....
-
-*you should ALSO provide links to the specified classes and/or functions*
-
-*[Code Design. What design patterns, data structures, did the involved member propose?]*
-
-*[UI Design. Specify what design did the involved member propose? What tools were used for the design?]*
-
-*[Report Writing. Which part of the report did the involved member write?]*
-
-*[Slide preparation. Were you responsible for the slides?]*
-
-*[Miscellaneous contributions. You are welcome to provide anything that you consider as a contribution to the project or team.]*
-
 ## Conflict Resolution Protocol
 
 If a member fails to meet a deadline for a task – someone (including possibly said member) takes the task who can complete it as soon as possible.
@@ -162,33 +137,23 @@ If a member gets sick and is unable to complete their work, then the other membe
 <img src="./images/Seller Info.png" width="60%"> | <img src="./images/Scam Detection.png" width="60%"> | <img src="./images/Refresh2.png" width="600px">
 
 
-**Application Use Cases and or Examples**
+## Application Use Cases and or Examples
 
-*[Provide use cases and examples of people using your application. Who are the target users of your application? How do the users use your application?]*
+*Brandon wants to quickly buy a pair of Bluetooth Headphones online for his friend's birthday*
+1. Brandon logs into the app and searches "cat:Bluetooth Headphones" to find all the Bluetooth headphones.
+2. Based on the reviews and pricing, he makes a choice and adds a certain pair to the cart.
+3. He then selects his preferred shipping option and confirms the order.
 
-*Here is a pet training application example*
+*Mary wants to buy a new TV, but she is wary of scams and would rather pick-up the item in-store to get a closer look.
+1. Mary logs into the app and searches "cat:Televisions" to find all the TVs.
+2. She ignores any of the options that the spam checker flags as a likely scam.
+3. After choosing one, instead of adding to cart, she clicks on the company that sells it.
+4. She notes down their location, then drives there to buy the TV.
 
-*Molly wants to inquiry about her cat, McPurr's recent troublesome behaviour*
-1. *Molly notices that McPurr has been hostile since...*
-2. *She makes a post about... with the tag...*
-3. *Lachlan, a vet, writes a reply to Molly's post...*
-4. ...
-5. *Molly gives Lachlan's reply a 'tick' response*
-
-*Here is a map navigation application example*
-
-*Targets Users: Drivers*
-
-* *Users can use it to navigate in order to reach the destinations.*
-* *Users can learn the traffic conditions*
-* ...
-
-*Target Users: Those who want to find some good restaurants*
-
-* *Users can find nearby restaurants and the application can give recommendations*
-* ...
-
-*List all the use cases in text descriptions or create use case diagrams. Please refer to https://www.visual-paradigm.com/guide/uml-unified-modeling-language/what-is-use-case-diagram/ for use case diagram.*
+*Target Users: Those who want to shop online while ensuring they are getting a quality product.*
+   * The searching and sorting features make it easier for users to find what they are after more quickly.
+   * The scam filter warns users when a product is likely a scam, so they can avoid it.
+   * Users can see reviews for each product, giving them more information about their quality.
 
 ## Application UML
 
@@ -201,26 +166,6 @@ Although the above UML captures most of the application classes and relations, s
 [For a clearer view of the UML diagram, click here.](https://lucid.app/lucidchart/a92eeacf-b02d-4aaa-99c8-eb6d099858fa/edit?viewport_loc=-22%2C2082%2C4768%2C2382%2CHWEp-vi-RSFO&invitationId=inv_2984cdd2-f023-4abe-b91f-1f017d5ad0c6)
 
 ## Application Design and Decisions
-
-*Please give clear and concise descriptions for each subsections of this part. It would be better to list all the concrete items for each subsection and give no more than `5` concise, crucial reasons of your design. Here is an example for the subsection `Data Structures`:*
-
-*I used the following data structures in my project:*
-
-1. *LinkedList*
-
-   * *Objective: It is used for storing xxxx for xxx feature.*
-
-   * *Locations: line xxx in XXX.java, ..., etc.*
-
-   * *Reasons:*
-
-     * *It is more efficient than Arraylist for insertion with a time complexity O(1)*
-
-     * *We don't need to access the item by index for this feature*
-
-2. ...
-
-3. ...
 
 **Data Structures**
 
@@ -281,15 +226,7 @@ We successfully implemented the surprise item.
    * If the Items has a seller name that is not the same as the seller name associated with the seller's ID it receives a higher ScamScore. This could prevent people pretending to be reputable brands
 * If the ScamScore is above an arbitrary threshold, it marks the item as potential scam and notifies the user, as shown below.
 
-**Other**
-
-*[What other design decisions have you made which you feel are relevant? Feel free to separate these into their own subheadings.]*
-
 ## Summary of Known Errors and Bugs
-
-*[Where are the known errors and bugs? What consequences might they lead to?]*
-
-*Here is an example:*
 
 1. *Bug 1:*
 
