@@ -1,4 +1,15 @@
-# Instructions
+#MyMarketplace
+
+MyMarketplace is a demo Android app, created for a group assignment in Software Engineering. The app has a number of features:
+
+- Design Patterns including singleton and state
+- A refreshable demo data feed
+- Stock management
+- Reviews
+
+More information is available in the [report](/items/report.md).
+
+## Instructions
 **To use the APK please open myMarketplace.APK in the root directory.**
 
 _Note: Android APK 33 is required for this app._
