@@ -1,4 +1,4 @@
-#MyMarketplace
+# MyMarketplace
 
 MyMarketplace is a demo Android app, created for a group assignment in Software Engineering. The app has a number of features:
 
